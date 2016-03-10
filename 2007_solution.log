@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.20)  10 MAR 2016 17:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2015.5.25)  11 MAR 2016 01:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**solution.tex
-(./solution.tex
+**2007_solution.tex
+(./2007_solution.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/exam/exam.cls
@@ -497,8 +497,8 @@ File: lstlang1.sty 2014/03/04 1.5c listings language file
 \c@scolium=\count148
 \c@definition=\count149
 
-(./solution.aux)
-\openout1 = `solution.aux'.
+(./2007_solution.aux)
+\openout1 = `2007_solution.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
 LaTeX Font Info:    ... okay on input line 84.
@@ -664,37 +664,43 @@ my insertion and my current dilemma will both disappear.
 [1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-[2] [3]
-This exam contains 2 questions with 0 parts, 0 subparts, and 0 subsubparts.
-(./solution.aux) ) 
+[2]
+Underfull \vbox (badness 10000) detected at line 187
+ []
+
+[3] [4] [5]
+This exam contains 3 questions with 0 parts, 0 subparts, and 0 subsubparts.
+(./2007_solution.aux) ) 
 Here is how much of TeX's memory you used:
- 4578 strings out of 493117
- 59964 string characters out of 6135433
- 167748 words of memory out of 5000000
- 7982 multiletter control sequences out of 15000+600000
+ 4584 strings out of 493117
+ 60093 string characters out of 6135433
+ 172748 words of memory out of 5000000
+ 7988 multiletter control sequences out of 15000+600000
  35877 words of font info for 37 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 29i,12n,32p,815b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.
-enc}{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/loca
-l/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/
-2014/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2014/texmf
--dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2014/texmf-dist/font
-s/type1/public/lm/lmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pu
-blic/lm/lmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lm
-ex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><
-/usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/local/
-texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/201
-4/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2014/texmf-dis
-t/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2014/texmf-dist/fonts/type
-1/public/lm/lmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/
-lmri10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
-></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/loca
-l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on solution.pdf (3 pages, 169178 bytes).
+ 29i,19n,32p,820b,396s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/l
+m-ec.enc}{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr
+/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/tex
+live/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2014/
+texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2014/texmf-dist
+/fonts/type1/public/amsfonts/latxfont/line10.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2014/texmf-dist/font
+s/type1/public/lm/lmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/pu
+blic/lm/lmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lm
+mi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2014
+/texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/local/texlive/2014/texmf-dist/
+fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/
+public/lm/lmri10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/
+lmsy10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.
+pfb>
+Output written on 2007_solution.pdf (5 pages, 183019 bytes).
 PDF statistics:
- 75 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 85 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -83,8 +83,8 @@
 
 \begin{document}
 \newpage
-\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School}
-\runningheader{Daeyoung Lim}{Graduate school pre-exam}{10th of March}
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2007, early}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2007 early}
 \begin{questions}
    \question
    \textbf{(1)} $X_{1}, X_{2}, \ldots , X_{n}$ are a random sample whose p.m.f. is $\mathbb{P}\left(X = x\right) = \left(1-\theta\right)^{x}\theta, \; x = 0, 1, 2, \cdots$. What is the distribution of $\min \left(X_{1}, X_{2}, \ldots , X_{N}\right)$?\\
@@ -125,7 +125,7 @@
 \end{solution}
    \question
    Let $X_{1}, X_{2}, \ldots , X_{n}$ be a random sample from $\mathcal{N}\left(\mu, \sigma^{2}\right)$.\\
-   \textbf{(1)} If $\mu, \sigma^{2}$ are unknown, explain the MLE method for $\mu, \sigma^{2}$.
+   \textbf{(1)} If $\mu, \sigma^{2}$ are unknown, explain the MLE method for $\mu, \sigma^{2}$.\\
    \textbf{(2)} Is the MLE for $\sigma^{2}$ the MVUE?
    \begin{solution}
       \textbf{(1)} The method of maximum likelihood attempts to find the optimal point in the domain that maximizes the likelihood function. According to optimization theory, we can find the optimal point of a function by differentiating it and equating it with 0 if the function is differentiable within the given domain. It is possible to take the derivative with respect to the parameter of interest directly to the function. However, for computational convenience, it is more commonplace to take the logarithm before differentiation on the ground that a logarithmic function is a monotically increasing function. Finally, to check whether the calculated optimum is a minimum or a maximum, we take the second derivative and see if it is positive or negative in the given region.\par
@@ -133,16 +133,75 @@
       \begin{align*}
          L\left(\mu, \sigma^{2}\right) &= \left(2\pi \sigma^{2} \right)^{-n/2}\exp \left\{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2} \right\}\\
          \ln L\left(\mu, \sigma^{2}\right) &= -\frac{n}{2}\ln \left(2\pi\sigma^{2}\right) - \frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2}\\
-         \frac{\partial}{\partial \mu}\ln L\left(\mu, \sigma^{2}\right) &= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu\right) = 0 \qquad (1)\\
-         \frac{\partial}{\partial \sigma^{2}}\ln L\left(\mu, \sigma^{2}\right) &= -\frac{n}{2\sigma^{2}} +\frac{1}{2\left(\sigma^{2}\right)^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2} = 0 \qquad (2)
+         \frac{\partial}{\partial \mu}\ln L\left(\mu, \sigma^{2}\right) &= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu\right) = 0 \qquad \cdots (1)\\
+         \frac{\partial}{\partial \sigma^{2}}\ln L\left(\mu, \sigma^{2}\right) &= -\frac{n}{2\sigma^{2}} +\frac{1}{2\left(\sigma^{2}\right)^{2}}\sum_{i=1}^{n}\left(x_{i}-\mu\right)^{2} = 0 \qquad \cdots (2)
       \end{align*}
       From eqn (1), we can immediately find out that $\hat{\mu}^{\text{MLE}} = n^{-1}\sum_{i=1}^{n}X_{i}$, which is the sample mean. Further, from eqn (2), it is obvious that $\widehat{\sigma^{2}}^{\text{MLE}}=n^{-1}\sum_{i=1}^{n}\left(X_{i}-\mu\right)^{2}$. Since this is a two-dimensional parameter space, we can plug in the MLE for $\mu$ to the second result thereby yielding $n^{-1}\sum_{i=1}^{n}\left(X_{i} - \hat{\mu}^{\text{MLE}}\right)^{2}$. (We will not go through the second derivatives.)
    \end{solution}
    \begin{solution}
-      \textbf{(2)} \emph{MVUE} stands for the \emph{minimum variance unbiased estimator}. It is a term that describes an estimator in the class of all unbiased estimators that have the smallest variance. Recall the \emph{bias-variance trade-off}. If we drop the `unbiasedness' requirement , then apparently, the variance becomes smaller; there is no point in comparing an unbiased estimator and a biased one due to this nature. It is a well-known fact that an uncorrected sample variance has a Let us write $\overline{X}_{n}$ for $\hat{\mu}^{\text{MLE}}$.
+      \textbf{(2)} \emph{MVUE} stands for the \emph{minimum variance unbiased estimator}. It is a term that describes an estimator in the class of all unbiased estimators that have the smallest variance. Recall the \emph{bias-variance trade-off}. If we drop the `unbiasedness' requirement , then apparently, the variance becomes smaller; there is no point in comparing an unbiased estimator and a biased one due to this nature. It is a well-known fact that an uncorrected sample variance is biased with an expected value of $n^{-1}\left(n-1\right)\sigma^{2}$ regardless of what distribution each random variable follows. Let us write $\overline{X}_{n}$ for $\hat{\mu}^{\text{MLE}}$.
       \begin{align*}
-         \mathbb{E}\left[\widehat{\sigma^{2}}\right] &= \mathbb{E}\left[\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2} \right]\\
-         &= \frac{1}{n}\mathbb{E}\left[\sum_{i=1}^{n}\left(X_{i}^{2} - 2X_{i}\overline{X}_{n} + \overline{X}_{n}^{2} \right) \right]
+         \mathbb{E}\left[\widehat{\sigma}^{2}\right] &= \mathbb{E}\left[\frac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2} \right]\\
+         &= \frac{1}{n}\sum_{i=1}^{n}\mathbb{E}\left[X_{i}^{2} - 2X_{i}\overline{X}_{n} + \overline{X}_{n}^{2}  \right]\\
+         &= \frac{1}{n}\left(\sum_{i=1}^{n}\left(\mu^{2}+\sigma^{2}\right) - 2n\mathbb{E}\left[\overline{X}_{n}^{2}\right] + n\mathbb{E}\left[\overline{X}_{n}^{2}\right]\right)\\
+         &= \frac{1}{n}\left(n\left(\mu^{2}+\sigma^{2}\right)-n\mathbb{E}\left[\overline{X}_{n}^{2}\right] \right)\\
+         &= \frac{1}{n}\left(n\left(\mu^{2}+\sigma^{2}\right) - n\left(\mu^{2}+\frac{\sigma^{2}}{n}\right) \right)\\
+         &= \frac{n-1}{n}\sigma^{2}
+      \end{align*}
+      Therefore, the MLE of $\sigma^{2}$ does not even count as a candidate to be compared its variance as it failed to become an unbiased estimator.
+   \end{solution}
+   \question
+   Independent random variables $Y_{i}\,\left(i=1,2,\ldots , n\right)$ each follows $\mathcal{N}\left(\beta_{0}+\beta_{1}x_{i}, \sigma^{2}\right)$.\par
+   \textbf{(1)} Derive the maximum likelihood estimator(MLE) of the parameter $\sigma^{2}$.\\
+   \textbf{(2)} Show whether the estimator derived in \textbf{(1)} is biased or not.
+   \begin{solution}
+      \textbf{(1)} This is not very different from a linear regression setting. Let us first write down the likelihood function of $Y_{i}$.
+      $$
+         L\left(\beta_{0}, \beta_{1}, \sigma^{2}\right) = \left(2\pi\sigma^{2}\right)^{-n/2}\exp\left\{-\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\beta_{1}x_{i}\right)^{2} \right\}
+      $$
+      As described in the previous answer, we will take the logarithm of the likelihood function and for simplicity, it will be denoted with $\ell\left(\beta_{0},\beta_{1},\sigma^{2}\right)$.
+      \begin{align*}
+         \ell\left(\beta_{0}, \beta_{1},\sigma^{2}\right) &= -\frac{n}{2}\ln\left(2\pi\sigma^{2}\right) -\frac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\beta_{1}x_{i}\right)^{2}\\
+         \frac{\partial}{\partial \beta_{0}}\ell\left(\beta_{0},\beta_{1},\sigma^{2}\right) &= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\beta_{1}x_{i}\right)=0 \qquad \cdots (1)\\
+         \frac{\partial}{\partial \beta_{1}}\ell\left(\beta_{0},\beta_{1},\sigma^{2}\right) &= \frac{1}{\sigma^{2}}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\beta_{1}x_{i}\right)x_{i}=0 \qquad \cdots (2)\\
+         \frac{\partial}{\partial \sigma^{2}}\ell\left(\beta_{0},\beta_{1},\sigma^{2}\right) &= -\frac{n}{2\sigma^{2}} + \frac{1}{2\left(\sigma^{2}\right)^{2}}\sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\beta_{1}x_{i}\right)^{2} =0 \qquad \cdots (3)
+      \end{align*}
+      Rearranging eqn \textbf{(1)} with respect to $\beta_{0}$,
+      $$
+         \hat{\beta_{0}} = \overline{y}_{n} - \hat{\beta_{1}}\overline{x}_{n}.
+      $$
+      Likewise with eqns \textbf{(2)}, \textbf{(3)},
+      \begin{align*}
+         \hat{\beta_{1}} &= \frac{\sum_{i=1}^{n}x_{i}y_{i}-\hat{\beta_{0}}\sum_{i=1}^{n}x_{i}}{\sum_{i=1}^{n}x_{i}^{2}}\\
+         \widehat{\sigma}^{2} &= \frac{1}{n}\sum_{i=1}^{n}\left(y_{i}-\hat{\beta_{0}}-\hat{\beta_{1}}x_{i}\right)^{2}
+      \end{align*}
+      Since $\hat{\beta_{0}}, \hat{\beta_{1}}$ depend on each other, we can use the two equations which produces
+      \begin{align*}
+         \hat{\beta_{1}} &= \frac{\sum_{i=1}^{n}x_{i}y_{i} - \hat{\beta_{0}}\sum_{i=1}^{n}x_{i}}{\sum_{i=1}^{n}x_{i}^{2}}\\
+         &= \frac{\sum_{i=1}^{n}x_{i}y_{i} - \left(\overline{y}_{n}-\hat{\beta_{1}}\overline{x}_{n} \right)\sum_{i=1}^{n}x_{i}}{\sum_{i=1}^{n}x_{i}^{2}}\\
+         \left(1-\frac{\frac{1}{n}\left(\sum_{i=1}^{n}x_{i}\right)^{2}}{\sum_{i=1}^{n}x_{i}^{2}} \right)\hat{\beta_{1}} &= \frac{\sum_{i=1}^{n}x_{i}y_{i} - \overline{y}_{n}\sum_{i=1}^{n}x_{i}}{\sum_{i=1}^{n}x_{i}^{2}}\\
+         \hat{\beta_{1}} &= \frac{\sum_{i=1}^{n}x_{i}y_{i} - \overline{y}_{n}\sum_{i=1}^{n}x_{i}}{\sum_{i=1}^{n}x_{i}^{2}-\frac{1}{n}\left(\sum_{i=1}^{n}x_{i}\right)^{2}}\\
+         &= \frac{\frac{1}{n}\sum_{i=1}^{n}x_{i}y_{i} - \left(\frac{1}{n}\sum_{i=1}^{n}x_{i}\right)\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}\right)}{\frac{1}{n}\sum_{i=1}^{n}x_{i}^{2}-\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}\right)^{2}}
+      \end{align*}
+      We have just rediscovered that the least square estimator and the maximum likelihood estimator are identical under a linear regression. With these estimators for $\beta_{0}, \beta_{1}$, the MLE of $\sigma^{2}$ is $n^{-1}\sum_{i=1}^{n}\left(y_{i}-\hat{\beta_{0}}-\hat{\beta_{1}}x_{i}\right)^{2}$.
+   \end{solution}
+   \begin{solution}
+      \textbf{(2)} We all know the answer is a resounding \emph{NO!} but since it is a problem, we will try to mathematically prove that it is a biased estimator. For convenience, we will introduce a matrix notation. A random variable with no subscript will from now on denote a random vector. For example, $y = \begin{bmatrix} y_{1} & y_{2} & \cdots & y_{n}\end{bmatrix}^{T}$. Then
+      \begin{align*}
+         X &= \begin{bmatrix} 1  & x_{1} \\ 1 & x_{2}\\ \vdots & \vdots \\ 1 & x_{n} \end{bmatrix}\\
+         \hat{\beta} &= \begin{bmatrix} \hat{\beta_{0}} & \hat{\beta_{1}} \end{bmatrix}^{T}\\
+         \widehat{\sigma}^{2} &= \frac{1}{n}\left(y-X\hat{\beta}\right)^{T}\left(y-X\hat{\beta}\right)
+      \end{align*}
+      The estimator $\hat{\beta}$ has the relation $\hat{\beta} = \left(X^{T}X\right)^{-1}X^{T}y$. Furthermore, $y \sim \mathcal{N}\left(X\beta, \sigma^{2}I_{n}\right)$. Therefore,
+      \begin{align*}
+         \mathbb{E}\left[\hat{\beta}\right] &= \mathbb{E}\left[\left(X^{T}X\right)^{-1}X^{T}y\right]\\
+         &= \left(X^{T}X\right)^{-1}X^{T}\mathbb{E}\left[y\right]\\
+         &= \cancel{\left(X^{T}X\right)^{-1}}\cancel{X^{T}X}\beta\\
+         &= \beta
+      \end{align*}
+      It is easy to show that the MLE for $\beta$ is an unbiased one. That being said,
+      \begin{align*}
+         \mathbb{E}\left[\widehat{\sigma}^{2} \right] &= \frac{1}{n}\mathbb{E}\left[\left(y-X\hat{\beta}\right)^{T}\left(y-X\hat{\beta}\right)\right]
       \end{align*}
    \end{solution}
 \end{questions}
