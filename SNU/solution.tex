@@ -1,0 +1,243 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage[usenames, dvipsnames]{color}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ SNU}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{SNU}
+\begin{questions}
+   \question
+   (5 points) Consider the regression model with usual assumptions of the errors
+   $$
+   \bs{y} = \bs{X\beta} + \bs{\epsilon}.
+   $$
+   \begin{enumerate}[label=(\alph*)]
+   \item Suppose that the observation $y_{i}$ falls directly on the fitted regression line (i.e., $y_{i}=\hat{y}_{i}$). If this case is deleted, would the least squares estimators with the remaining $n-1$ cases be changed? 
+   \item Suppose that we have fit the straight-line regression model $\hat{y}=\hat{\beta}_{0}+\hat{\beta}_{1}x_{1}$, but the true regression function is
+   $$
+      \mathbb{E}\left[y\right] = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2}.
+   $$
+   Is the estimator $\hat{\beta}_{1}$ biased?
+   \item Show that $\hat{\bs{\beta}}$ and $\bs{e}$ are statistically independent, where $\hat{\bs{\beta}}$ is the least squares estimator of $\bs{\beta}$ and $\bs{e}$ is the corresponding residuals.
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \begin{solution}
+
+   \end{solution}
+   \begin{solution}
+   The least squares estimator of $\bs{\beta}$ can be written as follows:
+   $$
+      \hat{\bs{\beta}} = \left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'\bs{y}.
+   $$
+   And for notational conveniece, let $\bs{H}=\bs{X}\left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'$, called the \emph{hat matrix} in linear regression terminology, or \emph{projection matrix} in linear algebra literature. Then
+   \begin{align*}
+      \hat{\bs{\beta}} &= \left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'\bs{y}\\
+      &= \left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'\left(\bs{X\beta}+\bs{\epsilon}\right)\\
+      &= \bs{\beta} + \left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'\bs{\epsilon}\\
+      \bs{e} &= \bs{y} -\bs{X}\hat{\bs{\beta}}\\
+      &= \left(\bs{I} -\bs{H}\right)\bs{y}\\
+      &= \left(\bs{I}-\bs{H}\right)\left(\bs{X\beta}+\bs{\epsilon}\right)\\
+      &= \left(\bs{I}-\bs{H}\right)\bs{X\beta} -\left(\bs{I}-\bs{H}\right)\bs{\epsilon}.
+   \end{align*}
+   Since both $\hat{\bs{\beta}}$ and $\bs{e}$ are linear combinations of normal variates, they also follow normal distributions. For normal distributions, having no correlation is the same as being independent.
+   \begin{align*}
+      \opn{Cov}\left[\hat{\bs{\beta}}, \bs{e}\right] &= \opn{Cov}\left[\left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'\bs{\epsilon}, \left(\bs{H}-\bs{I}\right)\bs{\epsilon} \right]\\
+      &= \sigma^{2}\cancel{\left(\bs{X}'\bs{X} \right)}^{-1}\cancel{\bs{X}'\bs{X}}\left(\bs{X}'\bs{X} \right)^{-1}\bs{X}' - \sigma^{2}\left(\bs{X}'\bs{X}\right)^{-1}\bs{X}'\\
+      &= \bs{0}
+   \end{align*}
+   Therefore, they are independent.
+   \end{solution}
+   \question
+   (5 points) Consider the regression model with $k$ regressor variables, $\bs{y}=\bs{X\beta} + \bs{\epsilon}$, where $\bs{\epsilon} \sim \mathcal{N}\left(\bs{0},\sigma^{2}\bs{V}\right), \; \bs{V}\neq \bs{I}$.
+   \begin{enumerate}[label=(\alph*)]
+      \item Obtain the generalized least squares estimator of $\bs{\beta}$.
+      \item Find the expected value and variance of $\hat{\bs{\beta}}_{\text{GLS}}$ in the part (a).
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (5 points) Consider the model
+   $$
+      \bs{y} = \bs{X\beta} + \bs{\epsilon},
+   $$
+   where $\bs{\epsilon}$ are i.i.d. normally distributed with mean $\bs{0}$ and variance $\sigma^{2}\bs{I}$. Assume that we have a multicollinearity problem.
+   \begin{enumerate}[label=(\alph*)]
+      \item Define the ridge estimator of $\bs{\beta}$.
+      \item Show that the ridge estimator is the solution to the problem
+      $$
+      \text{Minimize }\left(\bs{\beta} - \hat{\bs{\beta}}\right)'\bs{X}'\bs{X}\left(\bs{\beta}-\hat{\bs{\beta}}\right)\;\; \text{subject to } \bs{\beta}'\bs{\beta} \leq c
+      $$
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (4 points) Let $S$ denote the sample space. Suppose that $C \subset S$ and $\mathbb{P}\left(C\right) >0$ and define $Q\left(A\right) = \mathbb{P}\left(A|C\right)$. Show that $Q$ satisfies the axiom of probability.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (3 points) Construct an example where $X_{n} \xrightarrow{d} X$ and $Y_{n} \xrightarrow{d} Y$ but $X_{n} + Y_{n}$ does not converge in distribution to $X+Y$.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (6 points) Suppose that we observe $X_{1}, \ldots , X_{n}$ from $\mathcal{N}\left(\mu, \sigma^{2}\right)$. Find the uniformly minimum variance unbiased estimator (UMVUE) of $\eta = \mu/\sigma^{2}$.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (4 points) Let $X \sim \opn{Exp}\left(1\right)$, and define $Y$ to be the integer part of $X+1$, that is
+   $$
+   Y = i + 1 \text{ if and only if } i \leq X < i+1, \quad i = 0, 1, 2, \ldots
+   $$
+   Find the conditional distirbution of $X-4$ given $Y\leq 5$.
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (6 points) Let $Y \sim \opn{Poisson}\left(\lambda\right)$ and $X|Y=y \sim \opn{Bin}\left(y,p\right)$.
+   \begin{enumerate}[label=(\alph*)]
+   \item Determine the distribution of $X$.
+   \item Find the conditional pdf of $Y$ given $X=x$.
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (6 points) Suppose that we observe $X$ having a distribution $P \in \left\{P_{0}, P_{1} \right\}$, and that we wish to test the hypothesis $H_{0}: P= P_{0}$ versus $H_{1}: P=P_{1}$, based on an observation of $X$. Let $P_{0}$ and $P_{1}$ be given by
+   \begin{table}[!htbp]
+      \centering
+        \begin{tabular}{*5c}
+          \toprule
+          $x$ & 0 & 1 & 2 & 3\\
+          \midrule
+          $P_{0}$ & 0.03 & 0.05 & 0.12 & 0.80\\
+          $P_{1}$ & 0.15 & 0.10 & 0.30 & 0.45\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+   \begin{enumerate}[label=(\alph*)]
+      \item Find \underline{non-randomized} most powerful test(s) at level $\alpha = 0.05$.
+      \item Find \underline{randomized} most powerful test(s) at level $\alpha=0.05$.
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   (6 points) Let $X_{n}$ be a random variable with $\mathbb{P}\left(X_{n}=i/n\right) = 1/n, 1\leq i \leq n$. Find the limit distribution of $X_{n}$ as $n \to \infty$.
+   \begin{solution}
+   
+   \end{solution}
+\end{questions}
+\end{document}
