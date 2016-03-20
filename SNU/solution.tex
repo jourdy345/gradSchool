@@ -116,10 +116,29 @@
    \item Show that $\hat{\bs{\beta}}$ and $\bs{e}$ are statistically independent, where $\hat{\bs{\beta}}$ is the least squares estimator of $\bs{\beta}$ and $\bs{e}$ is the corresponding residuals.
    \end{enumerate}
    \begin{solution}
-
+   The key relation is
+   $$
+   \hat{\beta} - \hat{\beta}_{\left(i\right)} = \frac{1}{1-h_{ii}}\left(X'X\right)^{-1}x_{i}e_{i},
+   $$
+   where $h_{ii}$ is the $i^{\text{th}}$ diagonal element of the hat matrix, $x_{i}$ is the $i^{\text{th}}$ row of the design matrix $X$, and $e_{i}$ is the residual of the $i^{\text{th}}$ observation. If the observation fell directly on the fitted regression, then the residual $e_{i} = 0$. Therefore, the least squares estimators remain unchanged.
    \end{solution}
    \begin{solution}
-
+   If the researcher mistakenly omitted a variable that should not have been omitted, then the estimators are biased. We call this the \emph{omitted variable bias}. Recall the estimate for $\beta_{1}$ in a simple regression setting:
+   $$
+   \hat{\beta}_{1} = \frac{\opn{Cov}\left(x_{1},y\right)}{\opn{Var}\left(x_{1}\right)}.
+   $$
+   Now plug in the true model instead of $y$,
+   $$
+      \frac{\opn{Cov}\left(x_{1},\beta_{0}+\beta_{1}x_{1}+\beta_{2}x_{2}+\epsilon \right)}{\opn{Var}\left(x_{1}\right)}.
+   $$
+   By the bilinearity of the covariance operator, it becomes
+   $$
+   \frac{1}{\opn{Var}\left(x_{1}\right)}\left\{\opn{Cov}\left(x_{1}, \beta_{0}\right)+\beta_{1}\opn{Var}\left(x_{1}\right)+\beta_{2}\opn{Cov}\left(x_{1},x_{2}\right)+\opn{Cov}\left(x_{1},\epsilon\right) \right\}.
+   $$
+   Covariance with a constant is always zero and regressor variables and the error terms are uncorrelated according to the usual assumptions. Therefore,
+   $$
+   \mathbb{E}\left[\hat{\beta}_{1}\right] = \beta_{1} +\underbrace{\beta_{2}\frac{\opn{Cov}\left(x_{1},x_{2}\right)}{\opn{Var}\left(x_{1}\right)}}_{\text{Bias}}.
+   $$
    \end{solution}
    \begin{solution}
    The least squares estimator of $\bs{\beta}$ can be written as follows:
@@ -151,10 +170,37 @@
       \item Find the expected value and variance of $\hat{\bs{\beta}}_{\text{GLS}}$ in the part (a).
    \end{enumerate}
    \begin{solution}
-
+      When homoskedasticity and uncorrelated observations assumptions don't hold, the ordinary least squares estimators are not appropriate. We take another approach for these situations by transforming the model. Since the covariance matrix is an $n\times n$ nonsingular \& positive definite matrix, there must be a square root matrix of $V$ such that $K^{2} = K'K = V$. Therefore, if we let $z = K^{-1}y$, $B = K^{-1}X$, and $g = K^{-1}\epsilon$, the model can be recast as
+      \begin{align*}
+         K^{-1}y &= K^{-1}X\beta + K^{-1}\epsilon\\
+         z &= B\beta + g.
+      \end{align*}
+      Now we apply the least squares method on the transformed model.
+      $$
+         \hat{\beta} = \argmin\limits_{\beta} g'g = \argmin\limits_{\beta} \epsilon'V^{-1}\epsilon.
+      $$
+      Proceeding,
+      \begin{align}
+         \epsilon'V^{-1}\epsilon &= \left(y-X\beta\right)'V^{-1}\left(y-X\beta\right)\\
+         \frac{\partial}{\partial \beta} \left( y'y -2\beta'X'V^{-1}y + \beta'X'V^{-1}X\beta\right) &= -2X'V^{-1}y + 2X'V^{-1}X\beta.
+      \end{align}
+      Setting eqn (2) to zero, we obtain $\hat{\bs{\beta}}_{\text{GLS}} = \left(X'V^{-1}X\right)^{-1}X'V^{-1}y$. This is not the only way to achieve the generalized least squares estimators. We can also use the fact that the maximum likelihood estimators are equal to least squares estimators and obtain the same result.
    \end{solution}
    \begin{solution}
-
+      We can plug in the original model for $y$ in $\hat{\bs{\beta}}_{\text{GLS}}$.
+      $$
+         \hat{\bs{\beta}}_{\text{GLS}} = \left(X'V^{-1}X\right)^{-1}X'V^{-1}\left(X\beta + \epsilon\right).
+      $$
+      Therefore,
+      \begin{align*}
+         \mathbb{E}\left[\hat{\bs{\beta}}_{\text{GLS}}\right] &= \mathbb{E}\left[\left(X'V^{-1}X\right)^{-1}X'V^{-1}X\beta\right] +\mathbb{E}\left[\left(X'V^{-1}X\right)^{-1}X'V^{-1}\epsilon\right]\\
+         &= \beta\\
+         \opn{Var}\left[\hat{\bs{\beta}}_{\text{GLS}}\right] &= \opn{Var}\left[\left(X'V^{-1}X\right)^{-1}X'V^{-1}X\beta + \left(X'V^{-1}X\right)^{-1}X'V^{-1}\epsilon\right]\\
+         &= \left(X'V^{-1}X\right)^{-1}X'V^{-1}\opn{Var}\left[\epsilon\right]V^{-1}X\left(X'V^{-1}X\right)^{-1}\\
+         &= \left(X'V^{-1}X\right)^{-1}X'V^{-1}\sigma^{2}\cancel{VV^{-1}}X\left(X'V^{-1}X\right)^{-1} \\
+         &=\sigma^{2}\cancel{\left(X'V^{-1}X\right)^{-1}}\cancel{X'V^{-1}X}\left(X'V^{-1}X\right)^{-1} \\
+         &= \sigma^{2}\left(X'V^{-1}X\right)^{-1}.
+      \end{align*}
    \end{solution}
    \question
    (5 points) Consider the model
@@ -170,7 +216,14 @@
       $$
    \end{enumerate}
    \begin{solution}
-
+      Assume that multicollinearity is present and we need to render $\left(X'X\right)^{-1}$ invertible somehow. We can drop the unbiasedness requirement and obtain a better estimators by adding \emph{Tikhonov} regularization defined as follows:
+      $$
+         \hat{\bs{\beta}}_{\text{RIDGE}} = \argmin\limits_{\beta} \left(y-X\beta\right)'\left(y-X\beta\right) + \lambda\beta'\beta.
+      $$
+      By differentiating with respect to $\beta$ and setting it to zero, we obtain
+      $$
+      \hat{\beta}_{\text{RIDGE}} = \left(X'X+\lambda I_{n}\right)^{-1}X'y.
+      $$
    \end{solution}
    \begin{solution}
 
@@ -178,17 +231,73 @@
    \question
    (4 points) Let $S$ denote the sample space. Suppose that $C \subset S$ and $\mathbb{P}\left(C\right) >0$ and define $Q\left(A\right) = \mathbb{P}\left(A|C\right)$. Show that $Q$ satisfies the axiom of probability.
    \begin{solution}
-
+   First, there are 3 axioms to probability so please add an `s'. Those three are as follows:
+   \begin{itemize}
+      \item $Q\left(S\right) = 1$. (Unitarity)
+      \item $Q\left(E\right) \geq 0$. (Nonnegativity)
+      \item $Q\left(\bigcup_{i=1}^{\infty} A_{i}\right) = \sum_{i=1}^{\infty}Q\left(A_{i}\right)$ if $A_{i}$ are disjoint. (Countable additivity)
+   \end{itemize}
+   Let's prove.
+   \begin{enumerate}
+      \item For unitarity, we will use the definition.
+      $$
+      Q\left(S\right) = \mathbb{P}\left(S|C\right)= \frac{\mathbb{P}\left(S,C\right)}{\mathbb{P}\left(C\right)} = \frac{\mathbb{P}\left(C\right)}{\mathbb{P}\left(C\right)} = 1.
+      $$
+      \item For nonnegativity, if $E$ is an empty set, by definition,
+      $$
+      Q\left(E\right) = \frac{\mathbb{P}\left(\emptyset\right)}{\mathbb{P}\left(C\right)} = 0.
+      $$
+      If $E$ is a nonempty set, by definition,
+      $$
+      Q\left(E\right) = \frac{\mathbb{P}\left(E,C\right)}{\mathbb{P}\left(C\right)} = \begin{cases} 0, & E\cap C=\emptyset\\ > 0, & E\cap C \neq \emptyset \end{cases}.
+      $$
+      \item For countable additivity, by definition, we should consider the set relation
+      $$
+      \left(\bigcup_{i=1}^{\infty} A_{i}\right) \cap C = \bigcup_{i=1}^{\infty} \left(A_{i}\cap C\right).
+      $$
+      If $A_{i}$ are disjoint, then $A_{i} \cap C$ should also be disjoint. Therefore,
+      $$
+      Q\left(\bigcup_{i=1}^{\infty}A_{i}\right) = \frac{\mathbb{P}\left(\bigcup_{i=1}\left(A_{i}\cap C\right) \right)}{\mathbb{P}\left(C\right)} = \sum_{i=1}^{\infty}\frac{\mathbb{P}\left(A_{i}\cap C\right)}{\mathbb{P}\left(C\right)} = \sum_{i=1}^{\infty}Q\left(A_{i}\right).
+      $$
+   \end{enumerate}
    \end{solution}
    \question
    (3 points) Construct an example where $X_{n} \xrightarrow{d} X$ and $Y_{n} \xrightarrow{d} Y$ but $X_{n} + Y_{n}$ does not converge in distribution to $X+Y$.
    \begin{solution}
-
+      Let
+      $$
+         X_{n} = \begin{cases} Z, & n\text{ is even}\\ -Z, & n\text{ is odd}\end{cases}, \qquad Y_{n} = \begin{cases} -Z, & n\text{ is even}\\ Z, & n\text{ is odd}\end{cases},
+      $$
+      where $Z$ is a continuous random variable symmetric about zero. Then both $X_{n}, Y_{n}$ will converge in distribution to $Z$ but $X_{n}+Y_{n}$ will converge in probability to zero.
    \end{solution}
    \question
    (6 points) Suppose that we observe $X_{1}, \ldots , X_{n}$ from $\mathcal{N}\left(\mu, \sigma^{2}\right)$. Find the uniformly minimum variance unbiased estimator (UMVUE) of $\eta = \mu/\sigma^{2}$.
    \begin{solution}
-
+   By Lehmann-Scheffé theorem, if $\eta$ is estimable, then there is a unique unbiased estimator of $\eta$ that is of the form $h\left(T\right)$ where $T$ is the sufficient \& complete statistic for $P\in\mathcal{P}$. Since all $X_{i}$ are normal, jointly sufficient \& complete statistics are $\left(\overline{X}, S^{2}\right)$. We only need to find an unbiased estimator $\hat{\eta}$ that is a function $h\left(\overline{X}, S^{2}\right)$. Since
+   $$
+   \overline{X} \xrightarrow{p} \mu, \qquad S \xrightarrow{p} \sigma,
+   $$
+   we shall start with $\overline{X}/S$ and compute $\mathbb{E}\left[\overline{X}/S\right]$. By Basu's theorem, $\overline{X}$ and $S$ are independent; therefore $\mathbb{E}\left[\overline{X}/S\right]=\mathbb{E}\left[\overline{X}\right]\mathbb{E}\left[1/S\right]$.
+   $$
+      \mathbb{E}\left[\frac{\overline{X}}{S}\right] = \mu\mathbb{E}\left[\frac{1}{S}\right]
+   $$
+   Since $\left(n-1\right)S^{2}/\sigma^{2} \sim \chi^{2}\left(n-1\right)$,
+   $$
+   S^{2}\sim \opn{Gamma}\left(\frac{n-1}{2}, \frac{n-1}{2\sigma^{2}}\right).
+   $$
+   Therefore,
+   \begin{align*}
+   \mathbb{E}\left[\frac{1}{S}\right] &= \int_{0}^{\infty}y^{-1/2}\left(\frac{n-1}{2\sigma^{2}}\right)^{\left(n-1\right)/2}\left(\Gamma\left(\frac{n-1}{2}\right)\right)^{-1}y^{\left(n-1\right)/2 -1}e^{-\left(n-1\right)y/\left(2\sigma^{2}\right)}\, dy\\
+   &= \Gamma\left(\frac{n-2}{2}\right)\left\{\Gamma\left(\frac{n-1}{2}\right) \right\}^{-1}\left\{\frac{n-1}{2} \right\}^{1/2}\frac{1}{\sigma}\\
+   \end{align*}
+   Therefore,
+   $$
+   \mathbb{E}\left[\frac{\overline{X}}{S}\right] = \Gamma\left(\frac{n-2}{2}\right)\left\{\Gamma\left(\frac{n-1}{2}\right) \right\}^{-1}\left\{\frac{n-1}{2} \right\}^{1/2}\frac{\mu}{\sigma}.
+   $$
+   To make this unbiased, we should multiply it by a constant:
+   $$
+   \hat{\eta}_{\text{UMVUE}} = C\frac{\overline{X}}{S}, \qquad C = \Gamma\left(\frac{n-1}{2}\right)\left\{\Gamma\left(\frac{n-2}{2}\right) \right\}^{-1}\left\{\frac{n-1}{2} \right\}^{-1/2}.
+   $$
    \end{solution}
    \question
    (4 points) Let $X \sim \opn{Exp}\left(1\right)$, and define $Y$ to be the integer part of $X+1$, that is
@@ -197,7 +306,23 @@
    $$
    Find the conditional distirbution of $X-4$ given $Y\leq 5$.
    \begin{solution}
-
+   This is a very sly way of stating $Y = \left\lceil X \right \rceil$. Then the condition $Y \leq 5$ is equivalent to $X \leq 5$. Therefore, we should start with the c.d.f. of $Z = X-4|Y\leq 5$.
+   \begin{align*}
+   F_{Z}\left(z\right) &= \frac{\mathbb{P}\left(X-4\leq z , X\leq 5\right)}{\mathbb{P}\left(X \leq 5\right)}\\
+   &= \frac{\mathbb{P}\left(X \leq 4+z, X\leq 5\right)}{\mathbb{P}\left(X \leq 5\right)}
+   \end{align*}
+   This now divides into
+   $$
+   \frac{\mathbb{P}\left(X \leq 4+z, X\leq 5\right)}{\mathbb{P}\left(X \leq 5\right)} = \begin{cases} 1, & \text{if $k \geq 1$}\\ \dfrac{\mathbb{P}\left(X \leq 4+z\right)}{\mathbb{P}\left(X\leq 5\right)}, & \text{if $-4<k<1$} \end{cases}.
+   $$
+   Since we all know that the c.d.f. of an exponential distribution with parameter 1 is $F_{X}\left(x\right) = 1-e^{-x}$,
+   $$
+   \frac{\mathbb{P}\left(X \leq 4+z\right)}{\mathbb{P}\left(X\leq 5\right)} = \frac{1-e^{-\left(4+z\right)}}{1-e^{5}}.
+   $$
+   To get the p.d.f., differentiate it with respect to $z$, which yields
+   $$
+   f_{Z}\left(z\right) = \frac{e^{-\left(4+z\right)}}{1-e^{-5}},\quad -4<z<1.
+   $$
    \end{solution}
    \question
    (6 points) Let $Y \sim \opn{Poisson}\left(\lambda\right)$ and $X|Y=y \sim \opn{Bin}\left(y,p\right)$.
@@ -206,10 +331,20 @@
    \item Find the conditional pdf of $Y$ given $X=x$.
    \end{enumerate}
    \begin{solution}
-
+   Marginalizing out $Y$,
+   \begin{align*}
+   f_{X}\left(x\right) &= \sum_{y=x}^{\infty}f_{X|Y}\left(x|y\right)f_{Y}\left(y\right)\\
+   &= \sum_{y=x}^{\infty}\frac{\cancel{y!}}{x!\left(y-x\right)!}p^{x}\left(1-p\right)^{y-x}\frac{e^{-\lambda}\lambda^{y}}{\cancel{y!}}\\
+   &= \frac{\left(\lambda p\right)^{x}e^{-\lambda}}{x!}\sum_{y=x}^{\infty} \frac{\left\{\lambda\left(1-p\right)\right\}^{y-x}}{\left(y-x\right)!}\\
+   &= \frac{e^{-\lambda p} \left(\lambda p\right)^{x}}{x!}.
+   \end{align*}
+   Therefore, $X \sim \opn{Poisson}\left(\lambda p\right)$.
    \end{solution}
    \begin{solution}
-
+   \begin{align*}
+      f_{Y|X}\left(y|x\right) &= \frac{e^{-\lambda}\lambda^{y}}{\cancel{y!}} \frac{\cancel{y!}}{\cancel{x!}\left(y-x\right)!}p^{x}\left(1-p\right)^{y-x} \frac{\cancel{x!}}{e^{-\lambda p}\left(\lambda p\right)^{x}}\\
+      &= \frac{e^{-\lambda}\lambda^{y}p^{x}\left(1-p\right)^{y-x}e^{\lambda p}\left(\lambda p\right)^{-x}}{\left(y-x\right)!}
+   \end{align*}
    \end{solution}
    \question
    (6 points) Suppose that we observe $X$ having a distribution $P \in \left\{P_{0}, P_{1} \right\}$, and that we wish to test the hypothesis $H_{0}: P= P_{0}$ versus $H_{1}: P=P_{1}$, based on an observation of $X$. Let $P_{0}$ and $P_{1}$ be given by
@@ -237,7 +372,15 @@
    \question
    (6 points) Let $X_{n}$ be a random variable with $\mathbb{P}\left(X_{n}=i/n\right) = 1/n, 1\leq i \leq n$. Find the limit distribution of $X_{n}$ as $n \to \infty$.
    \begin{solution}
-   
+      To get the limit distribution we should start with the c.d.f.
+      $$
+      F_{X_{n}}\left(x\right) = \frac{\left\lfloor nx \right\rfloor}{n}.
+      $$
+      By constructing consecutive inequalities, $nx -1 \leq \left\lfloor nx \right\rfloor \leq nx$, we can get the limit $\lim_{n\to\infty} F_{X_{n}}$.
+      $$
+      \lim_{n\to\infty}\frac{nx-1}{n}\leq \lim_{n\to\infty}\frac{\left\lfloor nx \right \rfloor}{n}\leq \lim_{n\to\infty}\frac{nx}{n}.
+      $$
+      Therefore, $F_{X_{n}} \xrightarrow{n\to\infty} F_{X}$ where $F_{X} = x$. This is the c.d.f. of a continuous uniform distribution on $(0,1)$.
    \end{solution}
 \end{questions}
 \end{document}
