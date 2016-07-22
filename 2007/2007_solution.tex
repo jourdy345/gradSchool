@@ -110,14 +110,14 @@
       \mathbb{P}\left(X_{\left(1\right)} \leq x\right) &= 1 - \mathbb{P}\left(X_{1}>x, X_{2}>x, \ldots, X_{n}>x\right)\\
       &= 1-\left(1-\sum_{i=0}^{x}\left(1-\theta\right)^{i}\theta \right)^{n}\\
       &= 1 - \left(1-\theta \frac{1-\left(1-\theta\right)^{x+1}}{1-\left(1-\theta\right)}\right)^{n}\\
-      &= 1- \left\{1-\theta \right\}^{n\left(x+1\right)}
+      &= 1- \left(1-\theta \right)^{n\left(x+1\right)}
    \end{align*}
    Recall we are dealing with a discrete distribution. To get the p.m.f. from the c.d.f., we subtract the $\left(x-1\right)^{\text{th}}$ term from the $x^{\text{th}}$ term.
    \begin{align*}
       F\left(x\right) - F\left(x-1\right) &= 1- \left(1-\theta\right)^{n\left(x+1\right)} - 1 + \left(1-\theta\right)^{nx}\\
       &= \left(1-\theta\right)^{nx} - \left(1-\theta\right)^{n\left(x+1\right)}\\
-      &= \left(1-\theta\right)^{nx}\left\{1 - \left(1-\theta\right)^{n} \right\}\\
-      &\sim \opn{Geo}\left(1-\left(1-\theta\right)^{n})
+      &= \left(1-\theta\right)^{nx}\left(1 - \left(1-\theta\right)^{n} \right)\\
+      &\sim \opn{Geo}\left(1-\left(1-\theta\right)^{n}\right)
    \end{align*}
    It turned out to be the geometric distribution whose random variable $X$ indicates the number of failures before observing the first success.
 \end{solution}
@@ -127,16 +127,16 @@
       \mathbb{P}\left(X_{\left(1\right)}\leq x\right) &= 1-\mathbb{P}\left(X_{1}>x\right)\mathbb{P}\left(X_{2}>x\right)\cdots \mathbb{P}\left(X_{n}>x\right)\\
       &= 1-\prod_{i=1}^{n}\int_{x}^{\infty}\frac{1}{\mu_{i}}e^{-x_{i}/\mu_{i}}\,dx_{i}\\
       &= 1-\prod_{i=1}^{n} e^{-x/\mu_{i}}\\
-      &= 1-\exp\left\{-\left(\frac{x}{\mu_{1}}+\frac{x}{\mu_{2}} + \cdots + \frac{x}{\mu_{n}} \right)\right\}\\
-      &= 1 - \exp\left\{-x\sum_{i=1}^{n}\frac{1}{\mu_{i}}\right\}
+      &= 1-\exp\left(-\left(\frac{x}{\mu_{1}}+\frac{x}{\mu_{2}} + \cdots + \frac{x}{\mu_{n}} \right)\right)\\
+      &= 1 - \exp\left(-x\sum_{i=1}^{n}\frac{1}{\mu_{i}}\right)
    \end{align*}
    Since the distribution is continuous, we can differentiate the c.d.f. to compute the p.d.f..
    \begin{align*}
       \frac{d}{dx}\mathbb{P}\left(X_{\left(1\right)}\leq x \right) &= f_{X_{\left(1\right)}}\left(x\right)\\
-      &= \left(\sum_{i=1}^{n} \frac{1}{\mu_{i}}\right) \exp \left\{-x\sum_{i=1}^{n}\frac{1}{\mu_{i}} \right\}\\
+      &= \left(\sum_{i=1}^{n} \frac{1}{\mu_{i}}\right) \exp \left(-x\sum_{i=1}^{n}\frac{1}{\mu_{i}} \right)\\
       &\sim \opn{Exp}\left(\sum_{i=1}^{n}\frac{1}{\mu_{i}} \right)
    \end{align*}
-   The minimum follows an exponential distribution whose mean is $1/\left(\sum_{i=1}^{n}\frac{1}{\mu_{i}} \right)$.
+   The minimum follows an exponential distribution whose mean is $\left(\sum_{i=1}^{n}\mu_{i}^{-1} \right)^{-1}$.
 \end{solution}
    \question
    Let $X_{1}, X_{2}, \ldots , X_{n}$ be a random sample from $\mathcal{N}\left(\mu, \sigma^{2}\right)$.\\
@@ -257,7 +257,54 @@
          \item For the hypotheses given in the previous problem, compute the likelihood ratio test at 0.05 significance level and explain what optimal properties the method of testing has.
       \end{enumerate}
       \begin{solution}
-         \textbf{(1)} 
+         \textbf{(1)} Denote the rejection region (or equivalently the critical region) by $\mathrm{RR}$. Then at 0.05 significance level, there are two rejection regions whose probabilities add up 0.05: $\mathrm{RR}_{1}=\left\{1, 2, 3\right\},\; \mathrm{RR}_{2}=\left\{4\right\}$.
+         \begin{align}
+            \mathrm{Pr}\left(\mathrm{RR}_{1}|H_{0}\right) &= \mathrm{Pr}\left(\mathrm{RR}_{2}|H_{0}\right) = 0.05.
+         \end{align}
+         The power of each test is as follows:
+         \begin{align}
+            \mathrm{Pr}\left(\mathrm{RR}_{1}|H_{1}\right) &= 0.13\\
+            \mathrm{Pr}\left(\mathrm{RR}_{2}|H_{1}\right) &= 0.1.
+         \end{align}
+         Therefore, the most powerful test is rejecting $H_{0}$ when $\mathrm{RR}=\left\{1,2,3\right\}$.
+      \end{solution}
+      \begin{solution}
+         \textbf{(2)}
+         \begin{itemize}
+            \item $H_{0}:\mu=1\quad H_{1}:\mu=2$. By Neyman-Pearson lemma, the most powerful test is derived by the likelihood ratio $\Lambda=L_{0}/L_{1}$.
+            \begin{align}
+              \Lambda &= \dfrac{\exp\left(-\dfrac{1}{2}\sum_{i=1}^{n}\left(x_{i}-1\right)^{2}\right)}{\exp\left(-\dfrac{1}{2}\sum_{i=1}^{n}\left(x_{i}-2\right)^{2}\right)}\\
+              &= \exp\left(\dfrac{1}{2}\left(\sum_{i=1}^{n}x_{i}^{2}-4\sum_{i=1}^{2}x_{i}+4n\right)-\dfrac{1}{2}\left(\sum_{i=1}^{n}x_{i}^{2}-2\sum_{i=1}^{n}x_{i}+n\right) \right)\\
+              &= \exp\left(-\sum_{i=1}^{n}x_{i}+\dfrac{3}{2}n\right)
+            \end{align}
+            Therefore, reject $H_{0}$ when $\exp\left(-\displaystyle\sum_{i=1}^{n}x_{i}+\dfrac{3}{2}n\right) \leq k$.\par
+            We see that the rejection region is when $\overline{X}_{n}\geq c$ for some constant $c$. Since $\sqrt{n}\left(\overline{X}_{n}-\mu\right) \sim \mathcal{N}\left(0,1\right)$, we can use the identity with the significance level to get the critical value.
+            \begin{align}
+              \alpha &= \mathrm{Pr}\left(\mathrm{RR}|H_{0}\right) \\
+              &= \mathrm{Pr}\left(\sqrt{n}\left(\overline{X}_{n}-1\right) \geq z_{1-\alpha}\right)\\
+              &= \mathrm{Pr}\left(\overline{X}_{n} \geq \dfrac{z_{1-\alpha}}{\sqrt{n}}+1\right)
+            \end{align}
+            where $z_{1-\alpha}$ is the $(1-\alpha)^{\text{th}}$ quantile of standard normal. So $\overline{X}_{n}\geq n^{-1/2}z_{1-\alpha}+1$ is the rejection region. To get the power,
+            \begin{equation}
+              \mathrm{Pr}\left(\mathrm{RR}|H_{1}\right) = \mathrm{Pr}\left(\sqrt{n}\left(\overline{X}_{n}-2\right)\geq z_{1-\alpha}-\sqrt{n}\right).
+            \end{equation}
+            \item The likelihood ratio is as follows:
+            \begin{equation}
+              \dfrac{L_{0}}{L_{1}} = \exp\left(\left(1-\mu_{1}\right)\sum_{i=1}^{n}x_{i} + \dfrac{1}{2}\left(\mu_{1}^{2}-n\right) \right)\leq k
+            \end{equation}
+            So when $\mu_{1}>1$, the rejection region becomes $\overline{X}_{n}\geq c_{1}$ and when $\mu_{1}<1$ then the rejection region is $\overline{X}_{n}\leq c_{2}$. Therefore, most powerfull tests exist for both cases but because the rejection regions depend on the parameter of the alternative hypothesis, uniformly powerful test does not exist.
+            \item $\hat{\mu}^{\text{MLE}}=\overline{X}_{n}$. Therefore,
+            \begin{align}
+              \dfrac{\sup L_{0}}{\sup L}&= \exp\left(-\dfrac{n}{2}\left(\overline{X}_{n}^{2}-2\overline{X}_{n}+1\right)\right)\\
+              &= \exp\left(-\dfrac{n}{2}\left(\overline{X}_{n}-1\right)^{2}\right) \leq k.
+            \end{align}
+            $\mathrm{RR} = \left\{\overline{X}_{n}\leq c_{1}\text{ or } \overline{X}_{n}\geq c_{2} \right\}$ which becomes 
+            \begin{align}
+              \alpha &= \mathrm{Pr}\left(\mathrm{RR}|H_{0}\right)\\
+              &= \mathrm{Pr}\left(\left|\sqrt{n}\left(\overline{X}_{n}-1\right)\right|\geq z_{\alpha/2}\right)
+            \end{align}
+            
+         \end{itemize}
       \end{solution}
 \end{questions}
 \end{document}
