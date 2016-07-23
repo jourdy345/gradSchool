@@ -1,0 +1,238 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2010, early}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2010 early}
+\begin{questions}
+   \question
+   \begin{enumerate}
+    \item 확률변수 $X$의 적률생성함수 $M\left(t\right)$가 존재한다고 가정할 때, 다음을 보이시오.
+    $$
+      \begin{cases}\mathrm{Pr}\left(X\geq a\right)\leq e^{-ta}M\left(t\right), & t>0\\ \mathrm{Pr}\left(X \leq a\right)\leq e^{-ta}M\left(t\right) \end{cases}
+    $$
+    \item $X_{1},\ldots,X_{n}$이 $\mathrm{Pr}\left(X_{i}=1\right)=\mathrm{Pr}\left(X_{i}=-1\right)=\dfrac{1}{2}$를 만족하는 분포에서 나온 임의표본일 때, $S_{n}=\sum_{i=1}^{n}X_{i}$에 대하여 다음이 성립함을 1을 이용하여 보이시오.
+    $$
+      \mathrm{Pr}\left(S_{n}\geq a\right)\leq e^{-ta}e^{nt^{2}/2}, \quad t>0
+    $$
+    \item 어떤 도박꾼이 매 배팅에서 같은 확률로 1원을 따거나 잃는 게임을 하려고 한다고 하자. 매 배팅에서의 결과는 서로 독립이라 할 때, 처음 10번의 배팅에서 적어도 8번 이상 이기는 확률의 상한을 2를 이용하여 구하시오. 또, 이 확률의 정확한 값도 계산하시오.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}
+      \item 이를 \emph{Chernoff's bound}라고 한다. 마코프 부등식(Markov inequality)로부터 간단하게 도출할 수 있다.
+      \begin{align}
+        \mathrm{Pr}\left(X\geq a\right) &=\begin{cases} \mathrm{Pr}\left(tX\geq at\right)=\mathrm{Pr}\left(e^{tX}\geq e^{at}\right), & t>0\\\mathrm{Pr}\left(tX \leq at\right)= \mathrm{Pr}\left(e^{tX} \leq e^{at}\right), & t<0 \end{cases}\\
+        &= \begin{cases}\mathrm{Pr}\left(X\geq a\right)\leq e^{-ta}\mathrm{E}\left(e^{tX}\right),& t>0\\\mathrm{Pr}\left(X\leq a\right)\leq e^{-ta}\mathrm{E}\left(e^{tX}\right), & t<0  \end{cases}
+      \end{align}
+      (1)에서 (2)로 넘어가는 것은 마코프 부등식이다.
+      \item 이 문제는 표준정규분포를 가정하는 것보다 정확한 분포를 알고 그 분포의 적률생성함수를 이용하는 것이 더 \emph{tight}한 bound를 준다는 것을 증명하는 것이다. 왜냐하면 표준정규확률변수 $n$개를 더한 변수의 적률생성함수가 $e^{nt^{2}/2}$이기 때문이다.
+      \begin{align}
+        X\;\;&|\;\; 1 \quad -1\\
+        e^{tX}\;\;&|\;\;e^{t}\quad e^{-t}\\
+        \mathrm{Pr}\left(X=x\right)\;\;&\Big|\;\; \dfrac{1}{2}\quad \dfrac{1}{2}
+      \end{align}
+      이로서 다음과 같은 사실을 얻을 수 있다.
+      \begin{equation}
+        \mathrm{E}\left(e^{tX}\right)= \dfrac{1}{2}\left(e^{t}+e^{-t}\right) \;\;\implies\;\; \mathrm{E}\left(e^{tS_{n}}\right)=\left(\dfrac{e^{t}+e^{-t}}{2}\right)^{n}
+      \end{equation}
+      따라서 $2^{-n}\left(e^{t}+e^{-t}\right)^{n}\leq e^{nt^{2}/2}$임을 보이면 된다.
+      \begin{align}
+        e^{t} &= \sum_{k=0}^{\infty}\dfrac{t^{k}}{k!}\\
+        e^{-t} &= \sum_{k=0}^{\infty}\dfrac{\left(-t\right)^{k}}{k!}\\
+        e^{t^{2}/2}&= \sum_{k=0}^{\infty}\dfrac{1}{k!}\left(\dfrac{t^{2}}{2}\right)^{k} = \sum_{k=0}^{\infty}\dfrac{t^{2k}}{k!\times 2^{k}}
+      \end{align}
+      (7)과 (8)을 더하면 $k$가 홀수인 부분은 소거되고 짝수인 부분만 두 배가 된다. 따라서
+      \begin{equation}
+        \dfrac{1}{2}\left(e^{t}+e^{-t}\right) = \sum_{k=0}^{\infty}\dfrac{t^{2k}}{\left(2k\right)!}
+      \end{equation}
+      분모를 비교하면 $k!\times 2^{k}<\left(2k\right)!$이므로 증명끝.
+      \item 8번 이기면 2번은 진 것이므로 $S_{n}=6$이고 9번 이기면 1번은 진 것이므로 $S_{n}=8$, 10번 모두 이기면 $S_{n}=10$이다. 2번을 이용하면
+      \begin{equation}
+        \mathrm{Pr}\left(S_{n}\geq 6\right)\leq e^{5t^{2}-6t}
+      \end{equation}
+      이므로 최대값은
+      \begin{equation}
+        5\left(t^{2}-\dfrac{6}{5}t+\dfrac{9}{25}\right)-\dfrac{9}{5} = 5\left(t-\dfrac{3}{5}\right)^{2}-\dfrac{9}{5}
+      \end{equation}
+      $t=3/5$에서 $e^{-9/5}$가 된다. 정확한 확률값은
+      \begin{align}
+        \mathrm{Pr}\left(S_{n}=6\right)+\mathrm{Pr}\left(S_{n}=8\right)+\mathrm{Pr}\left(S_{n}=10\right) &= \left({{10}\choose{8}}+{{10}\choose{9}}+{{10}\choose{10}}\right) \left(\dfrac{1}{2}\right)^{10}\\
+        &= \dfrac{7}{128}
+      \end{align}
+    \end{enumerate}
+   \end{solution}
+   \question
+   Let $X_{1},X_{2},\ldots, X_{n}$ be a random sample from a uniform distribution on $\left(\mu-\sqrt{3}\sigma,\mu+\sqrt{3}\sigma\right)$. Here the unknown parameters are $\mu$ and $\sigma$, which are the population mean and standard deviation.
+   \begin{enumerate}
+    \item Obtain the probability density function of $X_{i}$.
+    \item Obtain the likelihood function of $\mu$ and $\sigma$.
+    \item Obtain the maximum-likelihood estimators (MLEs) of $\mu$ and $\sigma$.
+    \item Obtain the method-of-moments estimators of $\mu$ and $\sigma$.
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   Let $X_{1},X_{2},\ldots,X_{n}$ be a random sample from a Poisson distribution with density
+   $$
+    f\left(x\right)=\dfrac{e^{-\lambda}\lambda^{x}}{x!},
+   $$
+   where $\lambda \geq 0$ and $x=0,1,2,\ldots$. Let $T=\displaystyle \sum_{i=1}^{n}X_{i}$.
+   \begin{enumerate}
+    \item Show that $T$ is complete and sufficient for $\lambda$.
+    \item Show that $T/n$ is the uniformly minimum variance estimator (UMVUE) of $\lambda$.
+    \item Show that $T\left(T-1\right)\cdots \left(T-k+1\right)/n^{k}$ is the UMVUE of $\lambda^{k}$ for any positive $k$.
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   세 변수에 대한 $n$개의 관찰값 $\left(x_{i1},x_{i2},Y_{i}\right)$, ($i=1,\ldots,n$)에 대하여
+   $$
+    \mathrm{E}\left(Y_{i}\;|\;x_{i1},x_{i2}\right)=\beta_{0}+\beta_{1}x_{i1}+\beta_{2}x_{i2},\text{ 그리고 } \mathrm{Var}\left(Y_{i}\;|\;x_{i1},x_{i2}\right)=\sigma^{2}
+   $$
+   이라 하자.
+   \begin{enumerate}
+    \item 모수 $\beta_{0}, \beta_{1},\beta_{2}$의 최소제곱추정량 $\widehat{\beta}_{0},\widehat{\beta}_{1},\widehat{\beta}_{2}$을 유도하시오.
+    \item $s^{2}=\dfrac{1}{n-3}\displaystyle\sum_{i=1}^{n}\left(Y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{i1}-\widehat{\beta}_{2}x_{i2}\right)^{2}$이 $\sigma^{2}$에 대한 불편추정량이 됨을 보이시오.
+   \end{enumerate}
+   \begin{solution}
+
+   \end{solution}
+   \question
+   $X_{n}$이 자유도가 $n$인 카이제곱분포를 따른다고 한다. 이 때
+   $$
+    Z_{n}=\dfrac{X_{n}-n}{\sqrt{2n}}
+   $$
+   이라고 하자. $n$이 무한대로 접근함에 따라 $Z_{n}$의 분포가 어느 분포에 수렴하는지를 자세히 보아라. (힌트: 자유도가 $n$인 카이제곱확률변수는 자유도가 1인 서로 독립인 카이제곱확률변수의 합으로 표현될 수 있다.)
+\end{questions}
+\end{document}
