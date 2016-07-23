@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  23 JUL 2016 17:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  23 JUL 2016 20:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -785,19 +785,27 @@ n/10/b4 ä\LUC/nanummj/m/n/10/c5 ´ $\OML/lmm/m/it/10 X[]; [] ; X[] \OMS/lmsy/m/n
 Overfull \vbox (9.70757pt too high) detected at line 211
  []
 
-[3] [4] [5]
+[3]
+Underfull \vbox (badness 2229) detected at line 265
+ []
+
+[4] [5]
+Overfull \vbox (1.92058pt too high) detected at line 293
+ []
+
+[6] [7]
 This exam contains 5 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (./2009_late.aux) ) 
 Here is how much of TeX's memory you used:
- 6634 strings out of 493089
- 90435 string characters out of 6134842
- 205272 words of memory out of 5000000
- 9949 multiletter control sequences out of 15000+600000
- 48035 words of font info for 79 fonts, out of 8000000 for 9000
+ 6641 strings out of 493089
+ 90511 string characters out of 6134842
+ 208272 words of memory out of 5000000
+ 9953 multiletter control sequences out of 15000+600000
+ 56856 words of font info for 82 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,13n,32p,630b,506s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ma
-thit.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm
+.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr
 /local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive
 /2015/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/texm
 f-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2015/texmf-dist/fon
@@ -854,10 +862,10 @@ texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd4.pfb></usr/loca
 l/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd5.pfb></usr/lo
 cal/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd6.pfb></usr/
 local/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd7.pfb>
-Output written on 2009_late.pdf (5 pages, 2025025 bytes).
+Output written on 2009_late.pdf (7 pages, 2057277 bytes).
 PDF statistics:
- 244 PDF objects out of 1000 (max. 8388607)
- 181 compressed objects within 2 object streams
+ 254 PDF objects out of 1000 (max. 8388607)
+ 189 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -102,8 +102,8 @@
 \begin{document}
 \setstretch{1.5} %줄간격 조정
 \newpage
-\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2009, early}
-\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2009 early}
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2009, late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2009 late}
 \begin{questions}
    \question
    $X$는 평균 $\mu_{1}$과 분산 $\sigma^{2}$을 가지는 정규 확률 변수이고 $Y$는 평균 $\mu_{2}$와 분산 $\sigma^{2}$을 가지는 정규 확률 변수이며 $X$와 $Y$는 서로 독립이라 가정하자. 이때 $U=X+Y$, $V=X-Y$로 정의하자.
@@ -223,22 +223,73 @@
     \item $n=10$, $\alpha=0.05$일 때 2의 UMP 기각역을 $\chi^{2}$ critical value를 이용하여 나타내어라.
    \end{enumerate}
    \begin{solution}
-
+    \begin{enumerate}
+      \item 로그가능도비를 미분하자.
+      \begin{align}
+        \ln L\left(\theta;x_{1},\ldots,x_{n}\right) &= n\ln \theta + \left(\theta-1\right)\sum_{i=1}^{n}\ln x_{i}\\
+        \dfrac{\partial\ln L\left(\theta;x_{1},\ldots,x_{n}\right)}{\partial \theta} &= \dfrac{n}{\theta}+\sum_{i=1}^{n}\ln x_{i}\\
+        \widehat{\theta} &= \dfrac{n}{-\sum_{i=1}^{n}\ln x_{i}}
+      \end{align}
+      \item 가능도비를 구하면
+      $$
+        \dfrac{L_{1}}{L_{0}} = \left(\dfrac{\theta_{1}}{\theta_{0}}\right)^{n}\left(\prod_{i=1}^{n}x_{i}\right)^{\theta_{1}-\theta_{0}} <k
+      $$
+      이 되고 이를 정리하면 기각역은
+      $$
+        \dfrac{n}{-\sum_{i=1}^{n}\ln X_{i}} < c \;\;\implies \;\; c'<-\sum_{i=1}^{n}\ln X_{i}
+      $$
+      가 된다. 기각역에 있는 통계량의 분포를 알기 위해서는 분포 간의 관계를 이용해야 한다.
+      \begin{itemize}
+        \item $X_{i}\sim \mathrm{Be}\left(\theta,1\right)$
+        \item 베타 확률 변수는 범위가 $[0,1]$이기 때문에 로그를 취하면 $(-\infty,0]$이 범위다. 따라서 이를 뒤집기 위해서는 마이너스를 붙여야 한다. 이러한 이유로 기각역의 통계량에 마이너스가 붙어있다. 베타 변수에 마이너스 로그를 취하면 지수 분포를 따르는 변수가 된다. 즉 $X \sim \mathrm{Be}\left(\theta,1\right)$이고 $Y=-\ln X$라 하면 자코비언은 $\exp\left(-y\right)$이 되므로
+        $$
+          f_{Y}\left(y\right) = \theta e^{-y\left(\theta-1\right)}\cdot e^{-y} = \theta e^{-\theta y}
+        $$
+        따라서 $Y \sim \mathrm{Exp}\left(\theta\right)$이다. 
+        \item $E_{1},\ldots,E_{n}\overset{iid}{\sim} \mathrm{Exp}\left(\theta\right) \equiv \mathrm{Ga}\left(1,\theta\right)$이므로
+        $$
+          \sum_{i=1}^{n}E_{i} \sim \mathrm{Ga}\left(n,\theta\right)
+        $$
+        이다. 고로 $-\sum_{i=1}^{n}\ln X_{i} \sim \mathrm{Ga}\left(n,\theta\right)$이다.
+        \item 감마 확률 변수에 적당한 값을 곱해 카이제곱 변수로 만들어주자.
+        $$
+          -2\theta\sum_{i=1}^{n}\ln X_{i} \sim \mathrm{Ga}\left(n,\dfrac{1}{2}\right) \equiv \chi^{2}\left(2n\right)
+        $$
+      \end{itemize}
+      상수 $c'$를 구하기 위해 신뢰수준을 이용하면
+      $$
+        \mathrm{Pr}\left(-\sum_{i=1}^{10}\ln X_{i} > c'\;\middle|\;H_{0}\right) = 0.05
+      $$
+      이므로 $c' = \chi_{20}^{2}\left(0.95\right)$이다. 여기서 $\chi_{20}^{2}\left(0.95\right)$는 자유도 20인 카이제곱분포의 95\% 백분위(percentile)를 뜻한다.
+    \end{enumerate}
    \end{solution}
    \question
    A regression analysis (involving 45 observations) relating a dependent variable (Y) and two independent variables resulted in the following information.
-   $$
+   \begin{equation}
     \hat{y} = 0.408+1.3387x_{1}+2x_{2}
-   $$
+   \end{equation}
    The SSE for the above model is 49.\par
    When two other independent variables were added to the model, the following information was provided.
-   $$
+   \begin{equation}
     \hat{y} = 1.2+3.0x_{1}+12x_{2}+4.0x_{3}+8x_{4}
-   $$
+   \end{equation}
    This latter model's SSE is 40.\par
    At 95\% confidence test to determine if the two added independent variables contribute significantly to the model. 
    \begin{solution}
-
+    As explained in the exam of 2009 early, the equation (17) is the model with two restrictions
+    \begin{align}
+      \beta_{3} &= 0\\
+      \beta_{4} &= 0
+    \end{align}
+    which translates into a matrix form of
+    $$
+      \mathbf{A}\beta = \begin{bmatrix}0 & 0 & 0 & 1 & 0\\ 0 & 0 & 0 & 0 & 1\end{bmatrix}\begin{bmatrix}\beta_{0}\\ \beta_{1}\\ \beta_{2} \\ \beta_{3} \\ \beta_{4}\end{bmatrix}=\begin{bmatrix}0 \\ 0\end{bmatrix}.
+    $$
+    So the SSE of the model with restrictions, that is equation (17) being the null hypothesis, is denoted by $\mathrm{SSE}_{H}$, which is given as 49; whereas, the SSE of the model without any restriction, that is equation (18), is said to be 40. According to the derivation, it is said that the following F-statistic follows an F-distribution with degrees of freedom 2 and $45-5$:
+    $$
+      F=\dfrac{\left(\mathrm{SSE}_{H}-\mathrm{SSE}\right)/2}{\mathrm{SSE}/40} \sim F_{2,40}.
+    $$
+    Using all the information given, $F=4.5$. If $4.5 \geq F_{2,40}\left(0.95\right)$ where $F_{2,40}\left(0.95\right)$ is the 95th percentile of the F-distribution with degrees of freedom 2 and 40, we reject the null hypothesis that the model with restrictions fits better to the data. Otherwise, we conclude that there is little evidence that the restricted model is better.
    \end{solution}
 \end{questions}
 \end{document}
