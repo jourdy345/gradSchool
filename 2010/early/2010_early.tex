@@ -199,7 +199,44 @@
     \item Obtain the method-of-moments estimators of $\mu$ and $\sigma$.
    \end{enumerate}
    \begin{solution}
-
+    \begin{enumerate}
+      \item $f_{X_{i}}\left(x_{i}\right) = \left(2\sqrt{3}\sigma\right)^{-1}$ for $\mu-\sqrt{3}\sigma < x_{i}<\mu+\sqrt{3}\sigma$
+      \item 가능도함수의 경우에는 가변수를 통해 support를 명시해 주어야 한다.
+      \begin{align}
+      L\left(\mu,\sigma;x_{1},\ldots,x_{n}\right)&=\left(2\sqrt{3}\sigma\right)^{-n}\prod_{i=1}^{n}I_{\left(\mu-\sqrt{3}\sigma,\mu+\sqrt{3}\sigma \right)}\left(x_{i}\right)\\
+      &= \left(2\sqrt{3}\sigma\right)^{-n} I_{\left(-\infty,x_{\left(1\right)}\right)}\left(\mu-\sqrt{3}\sigma\right)I_{\left(x_{\left(n\right)},\infty\right)}\left(\mu+\sqrt{3}\sigma\right)
+      \end{align}
+      가능도함수 자체는 $\sigma$에만 의존하고 단조감소함수이므로 $\sigma$가 최대한 작아야 한다. $\sigma$의 범위가
+      \begin{align}
+        \dfrac{1}{\sqrt{3}}\left(\mu-x_{\left(1\right)}\right) &< \sigma\\
+        \dfrac{1}{\sqrt{3}}\left(x_{\left(n\right)}-\mu\right)&<\sigma
+      \end{align}
+      이기 때문에 부등식의 영역을 통해 $\sigma$의 최솟값은 $\mu=2^{-1}\left(x_{\left(1\right)}+x_{\left(n\right)}\right)$일 때이고 그 값은
+      \begin{equation}
+        \widehat{\sigma} = \dfrac{1}{2\sqrt{3}}\left(x_{\left(n\right)}-x_{\left(1\right)}\right)
+      \end{equation}
+      이다. 요약하자면
+      \begin{align}
+        \widehat{\mu} &= \dfrac{1}{2}\left(X_{\left(1\right)}+X_{\left(n\right)}\right)\\
+        \widehat{\sigma} &= \dfrac{1}{2\sqrt{3}}\left(X_{\left(n\right)}-X_{\left(1\right)}\right)
+      \end{align}
+      \item $X\sim \mathrm{Unif}\left(a,b\right)$이라 할 때
+      \begin{align}
+        \mathrm{E}\left(X\right) &= \dfrac{a+b}{2}\\
+        \mathrm{Var}\left(X\right) &= \dfrac{\left(b-a\right)^{2}}{12}
+      \end{align}
+      이므로
+      \begin{align}
+        \dfrac{1}{n}\sum_{i=1}^{n}X_{i} &= 2\mu\\
+        \dfrac{1}{n}\sum_{i=1}^{n}X_{i}^{2} &= \dfrac{\left(2\sqrt{3}\sigma\right)^{2}}{12}+4\mu^{2}
+      \end{align}
+      정리하면
+      \begin{align}
+        \widehat{\mu}^{\text{MME}} &= \dfrac{1}{2n}\sum_{i=1}^{n}X_{i}\\
+        \widehat{\sigma}^{\text{MME}} &= \sqrt{\dfrac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}}
+      \end{align}
+      이고 $\overline{X}_{n}=n^{-1}\sum_{i=1}^{n}X_{i}$이다.
+    \end{enumerate}
    \end{solution}
    \question
    Let $X_{1},X_{2},\ldots,X_{n}$ be a random sample from a Poisson distribution with density
@@ -213,7 +250,52 @@
     \item Show that $T\left(T-1\right)\cdots \left(T-k+1\right)/n^{k}$ is the UMVUE of $\lambda^{k}$ for any positive $k$.
    \end{enumerate}
    \begin{solution}
-
+    \begin{enumerate}
+      \item 포아송 분포에서 표본의 합이 완전통계량(complete statistic)이 됨은 2가지 방법으로 증명할 수 있다.
+      \begin{itemize}
+        \item 다음은 완전통계량의 정의를 이용한 방법이다. 통계량 $T\left(X_{1},\ldots,X_{n}\right)$에 대해 $f\left(t;\theta\right)$가 $T$의 밀도함수 혹은 질량함수라 할 때 다음이 성립하면 그 분포족을 `완전(complete)'하다 하고, 이와 동치인 명제는 $T$가 완전통계량이라는 것이다. 모든 모수값 $\theta$에 대해
+        $$
+          \mathrm{E}\left(r\left(T\right)\right)=0\;\;\implies\;\;\mathrm{Pr}\left(r\left(T\right)=0\right)=1.
+        $$
+        주의해야 하는 것은 `완전성(completeness)'는 하나의 분포족(a family of distributions)의 특성이라는 것이다. 문제의 경우 우리의 통계량은
+        $$
+          T \sim \mathrm{Poi}\left(n\lambda\right)
+        $$
+        을 따르기 때문에 다음을 보여야 한다.
+        \begin{equation}
+          \mathrm{E}\left(r\left(T\right)\right) = 0 \;\;\implies \;\; \mathrm{Pr}\left(r\left(T\right)=0\right)=1
+        \end{equation}
+        포아송 분포의 특징 상 지수함수는 음수일 수 없으므로
+        \begin{align}
+          \mathrm{E}\left(r\left(T\right)\right) &= \sum_{t=0}^{\infty}r\left(t\right)\dfrac{e^{-n\lambda}\left(n\lambda\right)^{t}}{t!}\\
+          &= \sum_{t=0}^{\infty}r\left(t\right)\dfrac{\left(n\lambda\right)^{t}}{t!}\\
+          &=0
+        \end{align}
+        모든 $\lambda$에 대해 $n\lambda > 0$이므로 모든 $r\left(t\right)=0$이다.\par
+        Measure-theoretic하게는 적분의 vanishing property에 의해
+        \begin{equation}
+          \int r\left(T\right)\,dP=0 \implies r\left(T\right)=0\;\;P\text{-a.e}
+        \end{equation}
+        이다.
+        \item 두 번째 증명은 지수족에서의 완전통계량 정리를 이용하는 것이다. \par 즉, 임의표본 $X_{1},\ldots, X_{n}$가 지수족에 속하는 분포에서 얻은 것일 (모수도 일반적인 상황을 가정해서 $k$개로 한다.) 때 밀도함수는
+        $$
+          f\left(x;\theta\right) = h\left(x\right)c\left(\theta\right)\exp\left(\sum_{j=1}^{k}\eta_{j}\left(\theta\right)t_{j}\left(x\right)\right)
+        $$
+        이고 결합밀도함수는
+        $$
+          f_{X_{1},\ldots,X_{n}}\left(x_{1},\ldots,x_{n};\theta\right)= \left(\prod_{i=1}^{n}h\left(x_{i}\right)\right)c\left(\theta\right)^{n}\exp\left(\sum_{j=1}^{k}\left(\eta_{j}\left(\theta\right)\sum_{i=1}^{n}t_{j}\left(x_{i}\right)\right)\right)
+        $$
+        이며 이때
+        $$
+          T\left(X\right)=\left(\sum_{i=1}^{n}t_{1}\left(X_{i}\right),\ldots,\sum_{i=1}^{n}t_{k}\left(X_{i}\right)\right)
+        $$
+        는 완전통계량이다. 포아송분포는 결합밀도함수가
+        \begin{equation}
+          f_{X_{1},\ldots,X_{n}}\left(x_{1},\ldots,x_{n};\lambda\right) = \left(\prod_{i=1}^{n}\dfrac{1}{x_{i}!}\right)e^{-n\lambda}\exp\left(\ln \lambda \cdot \sum_{i=1}^{n}x_{i}\right)
+        \end{equation}
+        이기 때문에 $\sum_{i=1}^{n}X_{i}$이 완전통계량이 된다.
+      \end{itemize}
+    \end{enumerate}
    \end{solution}
    \question
    세 변수에 대한 $n$개의 관찰값 $\left(x_{i1},x_{i2},Y_{i}\right)$, ($i=1,\ldots,n$)에 대하여

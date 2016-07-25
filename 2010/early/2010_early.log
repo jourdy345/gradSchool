@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  23 JUL 2016 23:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  25 JUL 2016 15:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1165,19 +1165,35 @@ Underfull \vbox (badness 2111) detected at line 192
 [1{/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-[2] [3]
+[2]
+Underfull \vbox (badness 4036) detected at line 240
+ []
+
+[3]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 256.
+
+ (/usr/local/texlive/2015/texmf-dist/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 256.
+ [4]
+Overfull \vbox (2.44281pt too high) detected at line 299
+ []
+
+[5] [6]
 This exam contains 5 questions with 0 parts, 0 subparts, and 0 subsubparts.
 (./2010_early.aux) ) 
 Here is how much of TeX's memory you used:
- 17401 strings out of 493089
- 317322 string characters out of 6134842
+ 17422 strings out of 493089
+ 317671 string characters out of 6134842
  407382 words of memory out of 5000000
- 20470 multiletter control sequences out of 15000+600000
+ 20488 multiletter control sequences out of 15000+600000
  48602 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,16n,54p,391b,481s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-m
-athit.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/us
+ 55i,16n,54p,489b,550s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-e
+c.enc}{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/us
 r/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texliv
 e/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2015/tex
 mf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2015/texmf-dist/fo
@@ -1230,10 +1246,10 @@ texmf-dist/fonts/type1/public/nanumtype1/nanummjmd1.pfb></usr/local/texlive/201
 ve/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd5.pfb></usr/local/tex
 live/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd6.pfb></usr/local/t
 exlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd7.pfb>
-Output written on 2010_early.pdf (3 pages, 1797164 bytes).
+Output written on 2010_early.pdf (6 pages, 1858552 bytes).
 PDF statistics:
- 225 PDF objects out of 1000 (max. 8388607)
- 168 compressed objects within 2 object streams
+ 236 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
