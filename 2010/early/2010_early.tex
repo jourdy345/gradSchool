@@ -227,12 +227,12 @@
       \end{align}
       이므로
       \begin{align}
-        \dfrac{1}{n}\sum_{i=1}^{n}X_{i} &= 2\mu\\
-        \dfrac{1}{n}\sum_{i=1}^{n}X_{i}^{2} &= \dfrac{\left(2\sqrt{3}\sigma\right)^{2}}{12}+4\mu^{2}
+        \dfrac{1}{n}\sum_{i=1}^{n}X_{i} &= \mu\\
+        \dfrac{1}{n}\sum_{i=1}^{n}X_{i}^{2} &= \dfrac{\left(2\sqrt{3}\sigma\right)^{2}}{12}+\mu^{2}
       \end{align}
       정리하면
       \begin{align}
-        \widehat{\mu}^{\text{MME}} &= \dfrac{1}{2n}\sum_{i=1}^{n}X_{i}\\
+        \widehat{\mu}^{\text{MME}} &= \dfrac{1}{n}\sum_{i=1}^{n}X_{i}\\
         \widehat{\sigma}^{\text{MME}} &= \sqrt{\dfrac{1}{n}\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}}
       \end{align}
       이고 $\overline{X}_{n}=n^{-1}\sum_{i=1}^{n}X_{i}$이다.
@@ -272,7 +272,7 @@
           &=0
         \end{align}
         모든 $\lambda$에 대해 $n\lambda > 0$이므로 모든 $r\left(t\right)=0$이다.\par
-        Measure-theoretic하게는 적분의 vanishing property에 의해
+        Measure-theoretic하게는 $r\left(T\right)\geq0$이면 적분의 vanishing property에 의해
         \begin{equation}
           \int r\left(T\right)\,dP=0 \implies r\left(T\right)=0\;\;P\text{-a.e}
         \end{equation}
@@ -295,6 +295,21 @@
         \end{equation}
         이기 때문에 $\sum_{i=1}^{n}X_{i}$이 완전통계량이 된다.
       \end{itemize}
+      \item \emph{Lehmann-Scheffé} 정리에 의해 $T$가 완전통계량이자 충분통계량이므로
+      \begin{align}
+        \mathrm{E}\left(\dfrac{T}{n}\right) &= \dfrac{1}{n}\mathrm{E}\left(T\right)\\
+        &= \dfrac{1}{n}\cdot n\lambda\\
+        &= \lambda
+      \end{align}
+      따라서 $T/n$이 $\lambda$의 UMVUE가 된다.
+      \item 기댓값을 구하면
+      \begin{align}
+        \mathrm{E}\left(\dfrac{T\left(T-1\right)\cdots\left(T-k+1\right)}{n^{k}}\right) &= \dfrac{1}{n^{k}}\sum_{t=0}^{\infty}t\left(t-1\right)\cdots \left(t-k+1\right)\dfrac{e^{-n\lambda}\left(n\lambda\right)^{k}}{t!}\\
+        &= \dfrac{1}{n^{k}}\sum_{t=k}^{\infty}\dfrac{e^{-n\lambda}\left(n\lambda\right)^{t-k}}{\left(t-k\right)!}\left(n\lambda\right)^{k}\\
+        &=\dfrac{\left(n\lambda\right)^{k}}{n^{k}}\\
+        &=\lambda^{k}
+      \end{align}
+      따라서 증명끝.
     \end{enumerate}
    \end{solution}
    \question
@@ -308,7 +323,33 @@
     \item $s^{2}=\dfrac{1}{n-3}\displaystyle\sum_{i=1}^{n}\left(Y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{i1}-\widehat{\beta}_{2}x_{i2}\right)^{2}$이 $\sigma^{2}$에 대한 불편추정량이 됨을 보이시오.
    \end{enumerate}
    \begin{solution}
-
+    \begin{enumerate}
+      \item 오차항에 정규성 가정은 하지 않고 평균이 $0$이고 분산이 $\sigma^{2}$을 따른다고 하면 원래 문제의 모형을 오차항을 더해 표현할 수 있다.
+      $$
+        Y_{i}\;|\;x_{i1},x_{i2}= \beta_{0}+\beta_{1}x_{i1}+\beta_{2}x_{i2}+\epsilon_{i}
+      $$
+      이제 행렬표현으로 바꾸자. $Y=\begin{bmatrix}Y_{1} & Y_{2} & \cdots & Y_{n} \end{bmatrix}'$로 정의하고
+      $$
+        \mathbf{X}= \begin{bmatrix}1 & x_{11} & x_{12}\\ 1& x_{21} & x_{22}\\ \vdots & \vdots & \vdots \\ 1 & x_{n1} & x_{n2}  \end{bmatrix}
+      $$
+      , $\beta=\begin{bmatrix}\beta_{0} & \beta_{1} & \beta_{2}\end{bmatrix}'$, $\epsilon=\begin{bmatrix}\epsilon_{1} & \epsilon_{2} & \cdots & \epsilon_{n}\end{bmatrix}'$라 하자. 그러면 최소제곱법은
+      \begin{align}
+        \dfrac{d}{d\beta}\left(Y-\mathbf{X}\beta\right)'\left(Y-\mathbf{X}\beta\right)&= -2\mathbf{X}'Y+2\mathbf{X}'\mathbf{X}\beta=0 \\
+        \widehat{\beta} &= \left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y
+      \end{align}
+      이며 행렬계산은 하지 않는다.
+      \item 잔차를 자유도로 나눈 것이 오차항의 분산에 대한 비편향추정량이 됨을 증명하는 문제이다.
+      \begin{align}
+        s^{2} &= \dfrac{1}{n-3}\left(Y-\mathbf{H}Y\right)'\left(Y-\mathbf{H}Y\right),\qquad \left(\mathbf{H}=\mathbf{X}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'\right)\\
+        &= \dfrac{1}{n-3}Y'\left(\mathbf{I}_{n}-\mathbf{H}\right)Y,\qquad \left(\left(\mathbf{I}_{n}-\mathbf{H}\right)^{2}=\left(\mathbf{I}_{n}-\mathbf{H}\right)\right)\\
+        &= \dfrac{1}{n-3}\left(Y-\mathbf{X}\beta\right)'\left(\mathbf{I}_{n}-\mathbf{H}\right)\left(Y-\mathbf{X}\beta\right),\qquad (\text{전개해보면 원래 부분 제외하고 소거된다})\\
+        &= \dfrac{1}{n-3}\epsilon'\left(\mathbf{I}_{n}-\mathbf{H}\right)\epsilon\\
+        \mathrm{E}\left(s^{2}\right) &= \dfrac{1}{n-3}\Tr\left(\left(\mathbf{I}_{n}-\mathbf{H}\right)\mathrm{E}\left(\epsilon\epsilon'\right)\right)\\
+        &=\dfrac{1}{n-3}\left(\Tr\left(\mathbf{I}_{n}\right)-\Tr\left(\mathbf{H}\right)\right)\sigma^{2}\\
+        &=\dfrac{\sigma^{2}}{n-3}\left(\Tr\left(\mathbf{I}_{n}\right)-\Tr\left(\mathbf{I}_{3}\right)\right)\\
+        &=\sigma^{2}
+      \end{align}
+    \end{enumerate}
    \end{solution}
    \question
    $X_{n}$이 자유도가 $n$인 카이제곱분포를 따른다고 한다. 이 때
@@ -316,5 +357,22 @@
     Z_{n}=\dfrac{X_{n}-n}{\sqrt{2n}}
    $$
    이라고 하자. $n$이 무한대로 접근함에 따라 $Z_{n}$의 분포가 어느 분포에 수렴하는지를 자세히 보아라. (힌트: 자유도가 $n$인 카이제곱확률변수는 자유도가 1인 서로 독립인 카이제곱확률변수의 합으로 표현될 수 있다.)
+   \begin{solution}
+    자유도가 $n$인 카이제곱 확률변수는 자유도가 $1$이고 서로 독립인 카이제곱 확률변수 $n$개의 합으로 표현할 수 있다. 즉 $Y_{1},\cdots,Y_{n}\sim \chi^{2}\left(1\right)$이라 하면
+    $$
+      X_{n} \overset{d}{\equiv}\sum_{i=1}^{n}Y_{i}.
+    $$
+    서로 독립인 확률변수의 합으로 표현될 수 있고, 분산이 유한한 확률변수는 중심극한에 의해 정규분포로 수렴한다. 즉 
+    $$
+      \sqrt{n}\dfrac{\overline{X}_{n}-\mathrm{E}\left(Y_{1}\right)}{\sqrt{\mathrm{Var}\left(Y_{1}\right)}} \xrightarrow{d} \mathcal{N}\left(0,1\right)
+    $$
+    이므로
+    \begin{align}
+      \sqrt{n}\dfrac{\overline{X}_{n}-1}{\sqrt{2}} &= \sqrt{n}\dfrac{n^{-1}X_{n}-1}{\sqrt{2}}\\
+      &= \dfrac{n^{-1/2}X_{n}-\sqrt{n}}{\sqrt{2}}\\
+      &= \dfrac{X_{n}-n}{\sqrt{2n}}.
+    \end{align}
+    따라서 $Z_{n}$은 표준정규분포로 수렴한다.
+   \end{solution}
 \end{questions}
 \end{document}

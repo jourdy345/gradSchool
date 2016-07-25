@@ -1,0 +1,201 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2010, late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2010 late}
+\begin{questions}
+   \question
+    다음과 같은 다중선형회귀모형
+    $$
+      Y=\beta_{0}+\beta_{1}X_{1}+\cdots+\beta_{p}X_{p}+\epsilon
+    $$
+    을 고려하자. 여기서, $Y$는 독립변수를, $X_{1},\ldots,X_{p}$는 설명변수들을, 그리고 $\beta_{0},\beta_{1},\ldots,\beta_{p}$는 회귀계수들을 의미하며 $\epsilon$은 평균이 0, 분산이 $\sigma^{2}$인 오차항을 의미한다.
+    \begin{enumerate}[(a)]
+      \item 이 선형회귀모형을 적합한 후 얻어진 예측값을 $\widehat{Y}$으로 나타낼 때, $\widehat{Y}$의 기댓값 및 분산을 구하시오.
+      \item 이 회귀모형의 잔차(residual)를 $e=Y-\widehat{Y}$으로 나타낼 때, $e$의 기댓값 및 분산을 구하시오.
+      \item 잔차제곱합(residual sum of squares)의 기댓값을 구하시오.
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+    \question
+    Suppose that the conditional distribution of $X$ given that $P=p$ has a binomial distribution wit parameters 5 and $p$, $X\;|\;P=p \sim \mathrm{Bin}\left(5,p\right)$ and the marginal distribution of $P$ is a uniform distribution on $(0,1)$, $P\sim \mathrm{Unif}\left(0,1\right)$. We would like to calculate the correlation coefficient between $X$ and $P$.
+    \begin{enumerate}[(a)]
+      \item Compute variance of $X$.
+      \item Compute covariance of $X$ and $P$.
+      \item Compute $\mathrm{Cor}\left(X,P\right)$.
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+    \question
+    Let $X_{1},X_{2},\ldots,X_{n}\;\;\left(n>2\right)$ be a random sample from the following density
+    $$
+      f\left(x;\theta\right)=\begin{cases}\theta x^{\theta-1}, & 0<x<1,\;0<\theta<\infty \\ 0, & \text{elsewhere}\end{cases}
+    $$
+    \begin{enumerate}[(a)]
+      \item Find the maximum likelhood estimator (MLE) $\widehat{\theta}$ of $\theta$.
+      \item Compare variacne of $\widehat{\theta}$ with the Cramér-Rao lower bound.
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+    \question
+    Let $X_{1},\ldots,X_{n}$ be a random sample from the following probability density function(pdf),
+    $$
+      f\left(x;\theta\right)=\theta/x^{2},\quad 0<\theta\leq x<\infty.
+    $$
+    \begin{enumerate}
+      \item Find a sufficient statistic for $\theta$.
+      \item Find the maximum likelihood estimator (MLE) of $\theta$.
+      \item Find the method of moments estimator (MME) of $\theta$.
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+    \question
+    Let $X_{1},\ldots, X_{n}$ be a random sample from the following probability density function (pdf),
+    $$
+      f\left(x;\theta\right)=\theta e^{-\theta x}, \quad 0<x<\infty,
+    $$
+    where $\theta=\theta_{0}$ or $\theta=\theta_{1}$. We assume that known fixed numbers $\theta_{1}>\theta_{0}$.
+    \begin{enumerate}[(a)]
+      \item Explain the \emph{Neyman-Pearson lemma} briefly.
+      \item Explain the most powerful (MP) test briefly.
+      \item Obtain the MP test for testing $H_{0}:\theta=\theta_{0}$ versus $H_{1}:\theta=\theta_{1}$ by the \emph{Neyman-Pearson lemma}.
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+\end{questions}
+\end{document}
