@@ -42,7 +42,7 @@
 \settowidth\dlf{$\displaystyle #1$}  
     % The width of \dlf is the width of the lhs, with a displaystyle font
 \addtolength\dlf{\fboxsep+\fboxrule}  
-    % Add to it the distance to the box, and the width of the line of the box
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
 \hspace{-\dlf}  
     % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
 \boxed{#1 #2}
@@ -176,14 +176,45 @@
       \end{enumerate}
     \end{solution}
     \question
-    Suppose that the conditional distribution of $X$ given that $P=p$ has a binomial distribution wit parameters 5 and $p$, $X\;|\;P=p \sim \mathrm{Bin}\left(5,p\right)$ and the marginal distribution of $P$ is a uniform distribution on $(0,1)$, $P\sim \mathrm{Unif}\left(0,1\right)$. We would like to calculate the correlation coefficient between $X$ and $P$.
+    Suppose that the conditional distribution of $X$ given that $P=p$ has a binomial distribution with parameters 5 and $p$, $X\;|\;P=p \sim \mathrm{Bin}\left(5,p\right)$ and the marginal distribution of $P$ is a uniform distribution on $(0,1)$, $P\sim \mathrm{Unif}\left(0,1\right)$. We would like to calculate the correlation coefficient between $X$ and $P$.
     \begin{enumerate}[(a)]
       \item Compute variance of $X$.
       \item Compute covariance of $X$ and $P$.
       \item Compute $\mathrm{Cor}\left(X,P\right)$.
     \end{enumerate}
     \begin{solution}
-
+    	\begin{enumerate}[(a)]
+    		\item 또 베이지언 문제다. 개인적인 생각에 이번 연도 문제는 최태련 교수님이 출제하신 것 같다. 보면 알 수 있다. 아무튼 이 문제는 분산의 분해에 대해 묻고 있는 것이다.
+    		\begin{equation}
+    			\mathrm{Var}\left(X\right) = \mathrm{Var}\left(\mathrm{E}\left(X\,|\,P\right)\right)+\mathrm{E}\left(\mathrm{Var}\left(X\,|\,P\right)\right)
+    		\end{equation}
+    		따라서 $\mathrm{E}\left(X\,|\,P\right)=5P$, $\mathrm{Var}\left(X\,|\,P\right)=5P\left(1-P\right)$이므로
+    		\begin{align}
+    			\mathrm{Var}\left(X\right) &= \mathrm{Var}\left(5P\right)+\mathrm{E}\left(5P\left(1-P\right)\right)\\
+    			&=25\mathrm{Var}\left(P\right)+5\left(\mathrm{E}\left(P-P^{2}\right)\right)\\
+    			&=\dfrac{25}{12}+5\times\left(\dfrac{1}{2}-\left(\dfrac{1}{12}+\left(\dfrac{1}{2}\right)^{2}\right)\right)\\
+    			&= \dfrac{35}{12}
+    		\end{align}
+    		\item 분산에 이어 기댓값에서도 비슷한 법칙이 있다. \emph{The law of double expectation}이라 하여 조건부를 걸어준 것을 두번 기댓값을 취하면 조건부 없는 것의 기댓값과 같아진다는 정리이다.
+    		\begin{equation}
+    			\mathrm{E}\left(XP\right) = \mathrm{E}\left(\mathrm{E}\left(XP\,|\,P\right)\right)
+    		\end{equation}
+    		베이지언 문제에서 무엇의 기댓값을 물어본다거나 하면 (a)에서 나온 `분산의 분해(variance decomposition)'와 `이중기댓값의 정리'를 잘 쓸 줄 알아야 한다.
+    		\begin{align}
+    			\mathrm{Cov}\left(X,P\right) &= \mathrm{E}\left(XP\right) -\mathrm{E}\left(X\right)\mathrm{E}\left(P\right)\\
+    			&= \mathrm{E}\left(\mathrm{E}\left(XP\,|\,P\right)\right) -\mathrm{E}\left(X\right)\mathrm{E}\left(P\right)\\
+    			&= \mathrm{E}\left(P\cdot\mathrm{E}\left(X\,|\,P\right)\right) -\mathrm{E}\left(\mathrm{E}\left(X\,|\,P\right)\right)\mathrm{E}\left(P\right)\\
+    			&= \mathrm{E}\left(5P^{2}\right)-\mathrm{E}\left(5P\right)\times\dfrac{1}{2}\\
+    			&= 5\left(\dfrac{1}{12}+\left(\dfrac{1}{2}\right)^{2}\right)-\dfrac{5}{4}\\
+    			&= \dfrac{5}{12}
+    		\end{align}
+    		\item 위에서 필요한 요소를 다 구했다.
+    		\begin{align}
+    			\mathrm{Cor}\left(X,P\right) &= \left.\mathrm{Cov}\left(X,P\right)\middle/ \left(\sqrt{\mathrm{Var}\left(X\right)\mathrm{Var}\left(P\right)}\right)\right.\\
+    			&= \left.\dfrac{5}{12}\middle/\left(\sqrt{\dfrac{35}{12}\cdot\dfrac{1}{12}}\right)\right.\\
+    			&= \dfrac{\sqrt{35}}{7}
+    		\end{align}
+    	\end{enumerate}
     \end{solution}
     \question
     Let $X_{1},X_{2},\ldots,X_{n}\;\;\left(n>2\right)$ be a random sample from the following density
@@ -195,7 +226,41 @@
       \item Compare variacne of $\widehat{\theta}$ with the Cramér-Rao lower bound.
     \end{enumerate}
     \begin{solution}
-
+    	\begin{enumerate}[(a)]
+    		\item 위 분포는 $\mathrm{Be}\left(\theta,1\right)$이다. 이 분포의 MLE를 여러 번 구해봤다면 $\left(-\sum \ln X_{i}\right)^{-1}$이라는 것을 알겠지만 그래도 구해보자.
+    		\begin{align}
+    			L\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \theta^{n}\left(\prod_{i=1}^{n}X_{i}\right)^{\theta-1}\\
+    			\ell\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= n\ln \theta +\left(\theta-1\right)\sum_{i=1}^{n}\ln X_{i}\\
+    			\ell'\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \dfrac{n}{\theta}+\sum_{i=1}^{n}\ln X_{i}\\
+    			\widehat{\theta}^{\text{MLE}} &= \left.n\middle/\left(-\sum_{i=1}^{n}\ln X_{i}\right)\right.
+    		\end{align}
+    		베타 분포를 따르는 $X$에 로그를 취한 $\ln X$는 취하는 값의 범위가 $\left(-\infty,0\right]$이기 때문에 $-\ln X$로 뒤집어주면 감마분포를 따르게 된다. 따라서 그것의 역수꼴인 MLE는 \emph{inverse-gamma distribution}을 따른다.
+    		\item 피셔 정보량(\emph{Fisher information})을 구해야 한다.
+    		\begin{align}
+    			\ln f\left(X\,|\,\theta\right) &= \ln \theta +\left(\theta-1\right)\ln X\\
+    			\dfrac{d}{d\theta}\ln f\left(X\,|\,\theta\right) &= \dfrac{1}{\theta}+\ln X\\
+    			\dfrac{d^{2}}{d\theta^{2}}\ln f\left(X\,|\,\theta\right) &= -\dfrac{1}{\theta^{2}}\\
+    			\mathcal{I}\left(\theta\right) &= -\mathrm{E}_{X}\left(\dfrac{d^{2}}{d\theta^{2}}\ln f\left(X\,|\,\theta\right)\right) \\
+    			&= \dfrac{1}{\theta^{2}}
+    		\end{align}
+    		여기서 주의해야 할 점은 MLE는 비편향 추정량이 아니라는 것이다. \emph{Cramér-Rao bound}는 추정량이 비편향인가 아닌가에 따라 바뀐다.
+    		\begin{align}
+    			\mathrm{CB}\left(\widehat{\theta}\right) &= \begin{cases}\mathrm{Var}\left(\widehat{\theta}\right)\geq \dfrac{1}{n\mathcal{I}\left(\theta\right)},&\text{if $\widehat{\theta}$ is unbiased}\\\mathrm{Var}\left(\widehat{\theta}\right)\geq \left.\dfrac{d}{d\theta}\mathrm{E}\left(\widehat{\theta}\right)\middle/\left(n\mathcal{I}\left(\theta\right)\right)\right.,& \text{if $\widehat{\theta}$ is biased}\end{cases}
+    		\end{align}
+    		우리가 구한 MLE는 분포가 다음과 같이 구해진다.
+    		\begin{align}
+    			-\ln X_{i} &\sim \mathrm{Exp}\left(\theta\right)\\
+    			-\sum_{i=1}^{n}\ln X_{i} &\sim \mathrm{Ga}\left(n,\theta\right)\\
+    			\left.1\middle/\left(-\sum_{i=1}^{n}\ln X_{i}\right)\right. &\sim \mathrm{InvGam}\left(n,\theta\right)\\
+    			\left.n\middle/\left(-\sum_{i=1}^{n}\ln X_{i}\right)\right. &\sim \mathrm{InvGam}\left(n,n\theta\right)\\
+    			\mathrm{E}\left(\widehat{\theta}^{\text{MLE}}\right) &= \dfrac{n}{n-1}\theta\\
+    			\mathrm{Var}\left(\widehat{\theta}^{\text{MLE}}\right) &= \dfrac{n^{2}\theta^{2}}{\left(n-1\right)^{2}\left(n-2\right)}
+    		\end{align}
+    		이다. \emph{Inverse gamma distribution}이 생소한 사람은 위키피디아에 검색해보길 권한다. 쉽게는 감마 확률변수에 역수를 취하면 inverse-gamma 확률변수가 된다. (여기서 모든 변수는 rate-parameter이다.) 아무튼 위에서 보는 것처럼 MLE는 편향되어 있으므로 CB 중 아래 써야 하며, 기댓값을 모수에 대해 미분하면 $n/\left(n-1\right)$이 되고 고로 \emph{Cramér-Rao bound}는 다음과 같다.
+    		\begin{equation}
+    			\mathrm{Var}\left(\widehat{\theta}^{\text{MLE}}\right) \geq \dfrac{\theta^{2}}{n-1}
+    		\end{equation}
+    	\end{enumerate}
     \end{solution}
     \question
     Let $X_{1},\ldots,X_{n}$ be a random sample from the following probability density function(pdf),
@@ -208,7 +273,22 @@
       \item Find the method of moments estimator (MME) of $\theta$.
     \end{enumerate}
     \begin{solution}
-
+    	\begin{enumerate}[(a)]
+    		\item Support가 모수에 의존하므로 가능도함수를 쓸 때 이를 명시해주어야 한다.
+    		\begin{align}
+    			L\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \prod_{i=1}^{n}\dfrac{\theta}{X_{i}^{2}}\cdot I_{\left(\theta,\infty\right)}\left(X_{i}\right)\\
+    			&= \theta^{2}\left(\prod_{i=1}^{n}X_{i}^{2}\right)^{-1}\cdot I_{\left(0,X_{\left(1\right)}\right)}\left(\theta\right)
+    		\end{align}
+    		\emph{Fisher-Neyman factorization theorem}에 따르면 $X_{\left(1\right)}$이 $\theta$에 대한 최소충분통계량이다(minimal sufficient statistic). 이 문제의 의도된 바는 최소충분통계량을 구하는 것이지만 그냥 충분통계량만 구하라고 하면 $X_{1},\ldots,X_{n}$도 되고 $X_{(1)},\ldots,X_{(n)}$도 된다. 문제가 사실 잘못됐다.
+    		\item 이 경우에는 미분을 써서 최대가능도추정량을 구할 수 없다. 왜냐하면 정의역이 모수에 의존하기 때문이다. 하지만 가로축을 $\theta$, 세로축을 가능도함수($L\left(\theta\,|\,\mathbf{X}\right)$)로 놓으면 $\theta$가 증가함에 따라 가능도함수 역시 단조증가한다. 따라서 $\theta$가 가장 클 때가 어디인지를 찾아야 한다. 정의역의 범위가 $0<\theta\leq x$이므로 모든 $X_{i},\;i=1,\ldots,n$과 비교해서 $\theta$가 작아야 하므로 그냥 가장 작은 $X_{\left(1\right)}$보다만 작으면 된다. 따라서 $\theta$가 가장 클 때는 $X_{\left(1\right)}$이다. $\widehat{\theta}^{\text{MLE}}=X_{\left(1\right)}$
+    		\item 이 경우 적률추정량은 존재하지 않는다. 왜냐하면 기댓값(1차 적률)이 존재하지 않기 때문이다.
+    		\begin{align}
+    			\mathrm{E}\left(X_{1}\right) &= \int_{\theta}^{\infty} \dfrac{\theta}{x}\,dx\\
+    			&= \theta\ln x\Big|_{\theta}^{\infty}\\
+    			&=\infty
+    		\end{align}
+    		전년도 기출에서인가 언급했었지만 확률공간(probability space)과 같은 유한측도공간(finite measure space)에서는 \emph{Hölder inequality}로 인해 $1\leq p<q$일 경우 $q$차 적률이 존재하면 그보다 작은 $p$차 적률은 무조건 존재한다고 했다. 뒤집어 말하면 $q$보다 작은 $p$차 적률이 발산할 경우 $q$차 적률은 자동적으로 함께 발산하게 되어 있다. 이 때문에 1차적률인 기댓값이 유한하지 않고 무한대로 발산하면 그보다 큰 모든 $n>1$인 $n$차 적률은 모두 무한대로 발산한다. 고로 그 어떤 적률추정량도 존재하지 않게 된다.
+    	\end{enumerate}
     \end{solution}
     \question
     Let $X_{1},\ldots, X_{n}$ be a random sample from the following probability density function (pdf),
@@ -222,7 +302,22 @@
       \item Obtain the MP test for testing $H_{0}:\theta=\theta_{0}$ versus $H_{1}:\theta=\theta_{1}$ by the \emph{Neyman-Pearson lemma}.
     \end{enumerate}
     \begin{solution}
-
+    	\begin{enumerate}[(a)]
+    		\item Simple과 simple 가설을 비교하는 경우 다음과 같이 가능도비가 어느 상수 $k$보다 작아지면 귀무가설은 기각된다.
+    		\begin{equation}
+    			\Lambda = \dfrac{L\left(\theta_{0}\,|\,x\right)}{L\left(\theta_{1}\,|\,x\right)}\leq k
+    		\end{equation}
+    		\item 이때 $\mathrm{Pr}\left(\Lambda\leq k\,|\,H_{0}\right)=\alpha$ (여기서 $\alpha$는 신뢰수준) 이면 최강력 검정이라 부른다.
+    		\item 
+    		\begin{align}
+    			\Lambda &= \dfrac{\theta_{0}^{n}\exp\left(-\theta_{0}\sum_{i=1}^{n}X_{i}\right)}{\theta_{1}^{n}\exp\left(-\theta_{1}\sum_{i=1}^{n}X_{i}\right)}\\
+    			&=\left(\dfrac{\theta_{0}}{\theta_{1}}\right)^{n}\exp\left(\left(\theta_{1}-\theta_{0}\right)\sum_{i=1}^{n}X_{i}\right) \leq k
+    		\end{align}
+    		따라서 $2\theta\sum_{i=1}^{n}X_{i}\leq 2\theta k'$일 때 귀무가설이 기각되면 최강력 검정이 된다. 여기서 $2\theta$를 곱해준 이유는 카이제곱분포를 따르게 만들어주고자 함이다. 그냥 감마분포로 해도 무방하다.
+    		\begin{equation}
+    			\mathrm{Pr}\left(2\theta_{0}\sum_{i=1}^{n}X_{i}\leq \chi_{2n}^{2}\left(1-\alpha\right)\right)=\alpha
+    		\end{equation}
+    	\end{enumerate}
     \end{solution}
 \end{questions}
 \end{document}
