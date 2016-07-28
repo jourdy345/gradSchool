@@ -146,7 +146,34 @@
       \item 잔차제곱합(residual sum of squares)의 기댓값을 구하시오.
     \end{enumerate}
     \begin{solution}
-
+      \begin{enumerate}[(a)]
+        \item 행렬꼴로 바꾸면 쉽다.
+        \begin{align}
+          \mathrm{E}\left(\widehat{Y}\right) &= \mathrm{E}\left(\mathbf{X}\widehat{\beta}\right)\\
+          &=\mathbf{X}\beta\\
+          \mathrm{Var}\left(\widehat{Y}\right) &= \mathrm{Var}\left(\mathbf{X}\widehat{\beta}\right)\\
+          &= \mathbf{X}\mathrm{Var}\left(\widehat{\beta}\right)\mathbf{X}'\\
+          &=\sigma^{2}\mathbf{X}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'
+        \end{align}
+        \item 이미 구해놨으니 더 쉽다.
+        \begin{align}
+          \mathrm{E}\left(Y-\widehat{Y}\right) &= \mathbf{X}\beta-\mathbf{X}\beta\\
+          &= 0\\
+          \mathrm{Var}\left(Y-\widehat{Y}\right) &= \mathrm{Var}\left(\left(\mathbf{I}-\mathbf{H}\right)Y\right)\\
+          &= \left(\mathbf{I}-\mathbf{H}\right)\sigma^{2}\mathbf{I}\left(\mathbf{I}-\mathbf{H}\right)'\\
+          &=\sigma^{2}\left(\mathbf{I}-\mathbf{H}\right)
+        \end{align}
+        \item 잔차제곱합의 기댓값은 다음과 같다.
+        \begin{align}
+          \left(Y-\mathbf{H}Y\right)'\left(Y-\mathbf{H}Y\right) &= Y'\left(\mathbf{I}-\mathbf{H}\right)Y\\
+          &= \left(Y-\mathbf{X}\beta\right)'\left(\mathbf{I}-\mathbf{H}\right)\left(Y-\mathbf{X}\beta\right)\\
+          &= \epsilon'\left(\mathbf{I}-\mathbf{H}\right)\epsilon\\
+          \mathrm{E}\left(\epsilon'\left(\mathbf{I}-\mathbf{H}\right)\epsilon\right) &= \Tr\left(\left(\mathbf{I}-\mathbf{H}\right)\mathrm{E}\left(\epsilon\epsilon'\right)\right)\\
+          &=\sigma^{2}\left(\Tr\left(\mathbf{I}\right)-\Tr\left(\mathbf{H}\right)\right)\\
+          &= \sigma^{2}\left(n-p-1\right)
+        \end{align}
+        여기서 중요한 것은 (11)에서 (12)로 넘어갈 수 있느냐 없느냐이다. (12)를 전개하면 (11)을 제외한 나머지 항들은 모두 소거되어 없어진다.
+      \end{enumerate}
     \end{solution}
     \question
     Suppose that the conditional distribution of $X$ given that $P=p$ has a binomial distribution wit parameters 5 and $p$, $X\;|\;P=p \sim \mathrm{Bin}\left(5,p\right)$ and the marginal distribution of $P$ is a uniform distribution on $(0,1)$, $P\sim \mathrm{Unif}\left(0,1\right)$. We would like to calculate the correlation coefficient between $X$ and $P$.
