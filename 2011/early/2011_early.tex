@@ -21,6 +21,8 @@
 \usepackage{setspace}
 \usepackage{empheq}
 \usepackage{tikz}
+\usepackage{listings}
+
 % \usepackage[toc,page]{appendix}
 
 \setlength{\heavyrulewidth}{1.5pt}
@@ -282,7 +284,7 @@
         \widehat{\theta}^{\text{MLE}} &= X_{\left(n\right)}
       \end{align}
       \item $\mathrm{E}\left(X_{1}\right)=\theta/2$이므로 $\mathrm{E}\left(T_{n}\right)=\theta$이다.
-      \item 당연히 $\widehat{\theta}^{\text{MLE}}$가 낫다. 왜냐하면 $X_{1},\ldots,X_{n}$이 모두 $\left(\theta/2,\theta\right)$ 사이에서 발생하면 $T_{n}>\theta$인 상황이 발생한다. 분포의 support를 벗어나는 점추정량은 좋지 않다.
+      \item 당연히 $\widehat{\theta}^{\text{MLE}}$가 낫다. 왜냐하면 $X_{1},\ldots,X_{n}$이 모두 $\left(\theta/2,\theta\right)$ 사이에서 발생하면 $T_{n}>\theta$인 상황이 발생한다. 분포의 support를 벗어나는 점추정량은 좋지 않다. 또한 MSE의 관점에서도 MLE가 더 낫다.
     \end{enumerate}
    \end{solution}
    \question
@@ -297,25 +299,29 @@
    \end{enumerate}
    \begin{solution}
     \begin{enumerate}[(a)]
-      \item 이것은 다항분포(multinomial distribution)이다. 그 분포식은 다음과 같다.
+      \item 이것은 다항분포(multinomial distribution)이다. $X_{1}$부터 $X_{5}$까지 각 범주에 해당될 확률은 다음과 같이 정의된다.
+      \begin{equation}
+        \mathrm{Pr}\left(X_{k}\right) = {{4}\choose{k-1}}p^{k-1}\left(1-p\right)^{5-k}
+      \end{equation}
+      다항분포의 그 분포식은 다음과 같다.
       \begin{equation}
         f\left(X_{1},\cdots,X_{5}\,|\,p\right) = \dfrac{\left(X_{1}+\cdots +X_{5}\right)!}{X_{1}!\cdots X_{5}!} 4^{X_{2}+X_{6}}6^{X_{3}}p^{X_{2}+2X_{3}+3X_{4}+4X_{5}}\left(1-p\right)^{4X_{1}+3X_{2}+2X_{3}+X_{4}}
       \end{equation}
       전체 시행횟수 ($X_{1}+\cdots+X_{5}$)를 $n$으로 놓으면 $\left(1-p\right)$의 지수부분은
       \begin{equation}
-        n-X_{2}-2X_{3}-3X_{4}-4X_{5}
+        4n-X_{2}-2X_{3}-3X_{4}-4X_{5}
       \end{equation}
-      로 바뀐다.
+      로 바뀐다. 원래 제약조건이 하나 있으면 자유도가 하나 깎이듯 다항분포에서도 모두 더하면 $n$이라는 제약 조건이 있기 때문에 항목이 5개여도 확률변수는 5개가 필요하지 않다. 이항분포(binomial distribution)의 경우에서 2개 범주이지만 $n$이 정해져있으므로 확률변수 한 개 $X$가 이항분포를 따른다고 하는 것과 마찬가지이다.
       \item $p_{1}>1/2$로 놓고, 편의를 위해
       \begin{equation}
         \mathbf{X}=X_{2}+2X_{3}+3X_{4}+4X_{5}
       \end{equation}
       라 하자. 가능도비를 구하면
       \begin{align}
-        \dfrac{L_{0}}{L_{1}} &= \dfrac{1}{2^{n}}\left(\dfrac{1}{p_{1}}\right)^{\mathbf{X}}\left(\dfrac{1}{1-p_{1}}\right)^{n-\mathbf{X}} < k
+        \dfrac{L_{0}}{L_{1}} &= \dfrac{1}{2^{4n}}\left(\dfrac{1}{p_{1}}\right)^{\mathbf{X}}\left(\dfrac{1}{1-p_{1}}\right)^{4n-\mathbf{X}} < k
       \end{align}
       \begin{align}
-        -\mathbf{X}\ln p_{1}-\left(n-\mathbf{X}\right)\ln \left(1-p_{1}\right) &< c_{1}\\
+        -\mathbf{X}\ln p_{1}-\left(4n-\mathbf{X}\right)\ln \left(1-p_{1}\right) &< c_{1}\\
         -\mathbf{X}\ln p_{1}+\mathbf{X}\ln \left(1-p_{1}\right) &< c_{2}\\
         \mathbf{X}\ln\left(\dfrac{1-p_{1}}{p_{1}}\right) &< c_{3}
       \end{align}
@@ -324,8 +330,27 @@
         \dfrac{1-p_{1}}{p_{1}} < 1
       \end{equation}
       이고 따라서 균일최강력검정은 $\mathbf{X}>c_{4}$일 때이다.
-      \item 
+      \item 귀무가설을 참이라 할 때 각각의 확률변수들이 따르는 분포는 다음과 같다.
+      \begin{itemize}
+        \item $X_{2}\sim \mathrm{Bin}\left(n,\dfrac{4}{16}\right)$
+        \item $X_{3}\sim \mathrm{Bin}\left(n,\dfrac{6}{16}\right)$
+        \item $X_{4}\sim \mathrm{Bin}\left(n,\dfrac{4}{16}\right)$
+        \item $X_{5}\sim \mathrm{Bin}\left(n,\dfrac{1}{16}\right)$
+      \end{itemize}
+      그렇기 때문에 $\mathbf{X}$의 분포를 정확히 계산해 내기란 어렵다. $p$-값을 써보면
+      \begin{equation}
+        \mathrm{Pr}\left(X_{2}+2X_{3}+3X_{4}+4X_{5}\geq 24\,|\,n=8,p=\dfrac{1}{2}\right)
+      \end{equation}
+      이므로 대수의 법칙에 의해
+      \begin{equation}
+        \dfrac{1}{M}\sum_{k=1}^{M}\delta\left(\mathbf{X}\geq 24\right) \xrightarrow{a.s.} \mathrm{Pr}\left(\mathbf{X}\,\middle|\,n=8,p=\dfrac{1}{2}\right)
+      \end{equation}
+      하므로 몬테칼로 방법으로 근사시킬 수 있다. 실제로 \textsf{R}로 시뮬레이션 해본 결과 $p$-값$\approx 0.092$이다. 간략한 \textsf{R}코드는 마지막에 실어놓았다.
     \end{enumerate}
    \end{solution}
 \end{questions}
+\newpage
+\appendix
+\section{Monte-Carlo Simulation}
+\lstinputlisting[label=MonteCarlo,caption=Monte-Carlo algorithm]{mc.R}
 \end{document}

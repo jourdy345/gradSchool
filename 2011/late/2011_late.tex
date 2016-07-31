@@ -1,0 +1,383 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{listings}
+
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2011, late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2011 late}
+\begin{questions}
+   \question
+   \begin{enumerate}[(a)]
+    \item 양의 확률변수(positive random variable) $X$의 1차 적률(평균)이 존재한다고 가정할 때, 다음의 부등식이 성립함을 보이시오.
+    \begin{equation}
+      \mathrm{Pr}\left(X\geq 1\right) \leq \mathrm{E}\left(X\right)
+    \end{equation}
+    \item $Z_{1},Z_{2},\ldots$이 다음과 같은 확률밀도함수를 갖는 연속형 확률분포를 만족하는 분포에서 나온 임의표본이라고 가정하고
+    \begin{equation}
+      f\left(z\right) = \begin{cases}\lambda e^{-\lambda z},& z>0,\;\lambda>0 \\ 0, & \text{otherwise}  \end{cases}
+    \end{equation}
+    $N$을 다음과 같은 확률질량함수를 갖는 이산형 확률변수라고 가정하고
+    \begin{equation}
+      \mathrm{Pr}\left(N=n\right)=\beta\left(1-\beta\right)^{n-1},\; n=1,2,\ldots,\; 0<\beta<1
+    \end{equation}
+    $Z_{1},Z_{2},\ldots$와 $N$이 서로 독립이라고 가정하자.\par
+    이때, (a)의 결과를 이용하여 $X=\displaystyle \sum_{i=1}^{N}Z_{i}$가 1보다 크거나 같을 확률의 상한을 구하시오. 또한 $X$의 분산을 구하시오.
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}[(a)]
+        \item 마코프 부등식(Markov's inequality)는 증명하는 방법이 꽤 여러가지다. 가장 대표적인 3가지를 소개한다.
+        \begin{itemize}
+          \item 일반적으로 $a > 0$이라 가정할 때
+          \begin{equation}
+            aI_{\left(X\geq a\right)}=\begin{cases}a, & \text{if $X\geq a$}\\ 0, & \text{if $X < a$}\end{cases}
+          \end{equation}
+          따라서 $aI_{\left(X\geq a\right)}\leq X$가 성립함을 알 수 있다. 기댓값 연산자(expectation operator) $\mathrm{E}$은 본질적으로 적분이므로 부등호의 방향이 바뀌지 않는다. 그러므로
+          \begin{equation}
+            a\mathrm{E}\left(I_{\left(X\geq a\right)}\right) \leq \mathrm{E}\left(X\right)
+          \end{equation}
+          이 성립하고 indicator variable의 평균은 그 집합의 확률이 되므로
+          \begin{equation}
+            \mathrm{Pr}\left(X\geq a\right) \leq \dfrac{\mathrm{E}\left(X\right)}{a}
+          \end{equation}
+          이 된다. 따라서 주어진 문제의 $a=1$인 경우도 성립한다.
+          \item 두 번째 증명은 기댓값을 적분으로 표현하여 증명한 것이다.
+          \begin{align}
+            \mathrm{E}\left(X\right) &= \int_{0}^{\infty}xf_{X}\left(x\right)\,dx\\
+            &= \int_{0}^{a}xf_{X}\left(x\right)\,dx + \int_{a}^{\infty}xf_{X}\left(x\right)\,dx\\
+            &\geq \int_{0}^{a} 0\cdot f_{X}\left(x\right)\,dx + \int_{a}^{\infty} af_{X}\left(x\right)\,dx\\
+            &= a\mathrm{Pr}\left(X\geq a\right)
+          \end{align}
+          (9)에서 두 번째 적분은 적분하는 $x$의 범위가 $a<x<\infty$이므로 하한인 $x=a$로 고정하게 되면 당연히 (8)의 두 번째 적분보다 작아지게 된다. 따라서 똑같이 나온다.
+          \item 마지막은 Lebesgue theory를 이용해서 증명하는 방법이 있다. 일반적인 르벡 측도(Lebesgue measure) $\mu$가 있을 때 함수 $f\geq 0$에 대하여 다음과 같은 simple function을 생각할 수 있다.
+          \begin{equation}
+            s\left(x\right)=\begin{cases}a, & \text{if $f\left(x\right)\geq a$}\\ 0, & \text{if $f\left(x\right)< a$}\end{cases}
+          \end{equation}
+          그러면 $0\leq s\left(x\right)\leq f\left(x\right)$이 되므로 르벡 적분(Lebesgue integral)의 성질에 따라 전체집합 $\Omega$에 대해
+          \begin{equation}
+            \int_{\Omega}f\,d\mu \geq \int_{\Omega}s\, d\mu
+          \end{equation}
+          가 성립하고 simple function의 르벡 적분은
+          \begin{equation}
+            \int_{\Omega}s\,d\mu = a\mu\left(\left\{\omega \in \Omega\,|\, f\left(\omega\right)\geq a\right\}\right)
+          \end{equation}
+          이 되어
+          \begin{equation}
+            \mu\left(\left\{\omega \in \Omega\,|\, f\left(\omega\right)\geq a\right\}\right) \leq \dfrac{1}{a}\int_{\Omega}f\,d\mu
+          \end{equation}
+          가 된다. 원래 확률변수는 표본공간에서 실수 집합 $\mathbb{R}$로의 대응관계(mapping)이므로 위 증명에서 정의된 함수 $f$가 된다.
+        \end{itemize}
+        \item 먼저 마코프 부등식을 이용하여 상한을 구하려면 기댓값을 알아야 한다. 이 기댓값을 구하는 것도 크게 두 가지 방법이 있다.
+        \begin{itemize}
+          \item 먼저 정의를 그대로 이용하는 방법이다.
+          \begin{align}
+            \mathrm{E}\left(X\right) &= \mathrm{E}\left(\sum_{i=1}^{N}Z_{i}\right)\\
+            &= \mathrm{E}\left(NZ_{1}\right)\\
+            &=\mathrm{E}\left(N\right)\mathrm{E}\left(Z_{1}\right)\\
+            &= \dfrac{1}{\beta\lambda}
+          \end{align}
+          가 된다. 왜냐하면 $N\sim \mathrm{Geo}\left(\beta\right)$이고 $Z_{i}\sim \mathrm{Exp}\left(\lambda^{-1}\right)$이기 때문이다. 다시 여기서 지수분포는 rate parameter로 표기되었다. 
+          \item 두 번째는 조건부로 표현하는 것이다. 다시 말해, 원래는 $X\,|\,N=\sum_{i=1}^{N}Z_{i}$이기 때문에 온전히 $X$만의 기댓값을 구하기 위해서는 이중기댓값의 법칙(the law of double expectation)을 이용할 수 있다. $X\,|\,N \sim \mathrm{Ga}\left(N,\lambda\right)$이다. 고로
+          \begin{align}
+            \mathrm{E}\left(\mathrm{E}\left(X\,|\,N\right)\right) &= \mathrm{E}\left(\dfrac{N}{\lambda}\right)\\
+            &= \dfrac{1}{\lambda}\mathrm{E}\left(N\right)\\
+            &= \dfrac{1}{\beta\lambda}
+          \end{align}
+          가 된다.
+        \end{itemize}
+        아무튼 이렇게 해서 마코프 부등식은 다음과 같이 표현된다.
+        \begin{equation}
+          \mathrm{Pr}\left(X\geq 1\right) \leq \dfrac{1}{\beta\lambda}
+        \end{equation}
+        \begin{itemize}
+          \item 또한 $X$의 분산을 구하기 위해서는 역시 분산의 분해(variance decomposition)를 이용하는 편이 편리하다.
+          \begin{align}
+            \mathrm{Var}\left(X\right)&= \mathrm{Var}\left(\mathrm{E}\left(X\,|\,N\right)\right)+\mathrm{E}\left(\mathrm{Var}\left(X\,|\,N\right)\right)\\
+            &=\mathrm{Var}\left(\dfrac{N}{\lambda}\right)+\mathrm{E}\left(\dfrac{N}{\lambda^{2}}\right)\\
+            &=\dfrac{1}{\lambda^{2}}\left(\dfrac{1-\beta}{\beta^{2}}+\dfrac{\beta}{\beta^{2}} \right)\\
+            &=\dfrac{1}{\beta^{2}\lambda^{2}}
+          \end{align}
+          이다. 여기서 기하분포의 평균은 모수의 역수이고 분산은 $\left(1-\beta\right)/\beta^{2}$이 됨을 기억하자. 까먹었으면 직접 구해도 된다. 귀찮을 뿐.
+          \item 직접 구해도 된다. 즉 $\mathrm{Var}\left(X\right)=\mathrm{E}\left(X^{2}\right)-\mathrm{E}\left(X\right)^{2}$이므로
+          \begin{align}
+            \mathrm{E}\left(X^{2}\right) &= \mathrm{E}\left(\sum_{i=1}^{N}Z_{i}^{2}+\sum_{i\neq j}Z_{i}Z_{j} \right)\\
+            &=\mathrm{E}\left(NZ_{1}\right)+\mathrm{E}\left(\dfrac{N\left(N+1\right)}{2}Z_{1}Z_{2} \right)\\
+            &= \mathrm{E}\left(N\right)\mathrm{E}\left(Z_{1}\right)+\dfrac{1}{2}\left(\mathrm{E}\left(N^{2}\right)+\mathrm{E}\left(N\right)\right)\mathrm{E}\left(Z_{1}\right)\mathrm{E}\left(Z_{2}\right)\\
+            &=\mathrm{E}\left(N\right)\mathrm{E}\left(Z_{1}\right)+\dfrac{1}{2}\left(\mathrm{E}\left(N^{2}\right)+\mathrm{E}\left(N\right)\right)\left\{\mathrm{E}\left(Z_{1}\right)\right\}^{2}
+          \end{align}
+          알아서 잘 하면 첫 번째와 똑같이 나온다. 귀찮아서 못하겠다.
+        \end{itemize}
+      \end{enumerate}
+    \end{solution}
+    \question
+    $X_{1},\ldots,X_{n}$이 다음과 같은 확률질량함수(probability mass function)를 갖는 이산형 확률분포로부터의 임의 표본이라고 할 때
+    \begin{equation}
+      \mathrm{Pr}\left(X=x\right)=\begin{cases}\theta, & x=-1,0<\theta<1\\ \left(1-\theta\right)^{2}\theta^{x},& x=0,1,2,\ldots  \end{cases}
+    \end{equation}
+    모수 $\theta$에 관하여 다음의 두 가지 추정량을 고려하자.
+    \begin{equation}
+      T_{1}\left(X_{1},\ldots,X_{n}\right) = \dfrac{1}{n}\sum_{i=1}^{n}I\left(X_{i}=-1\right),\quad T_{2}\left(X_{1},\ldots,X_{n}\right) = \dfrac{1}{n}\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right).
+    \end{equation}
+    \begin{enumerate}[(a)]
+      \item $n^{-1}\sum_{i=1}^{n}X_{i}=T_{2}-T_{1}$이 됨을 보이고, 이를 이용하여 두 추정량이 각각 $\theta$의 비편향 추정량(unbiased estimator)임을 보이시오.
+      \item 두 추정량의 MSE(mean square error)를 구하고 비교하시오.
+      \item 모두 $\theta$의 최대가능도 추정량은 (maximum likelihood estimator) 다음과 같이 주어짐을 보이고
+      \begin{equation}
+        \widehat{\theta}_{n} = \dfrac{2\displaystyle \sum_{i=1}^{n}I\left(X_{i}=-1\right)+\sum_{i=1}^{n}X_{i}}{2n+\displaystyle \sum_{i=1}^{n}X_{i}}
+      \end{equation}
+      $\widehat{\theta}_{n}^{2}$이 $\theta^{2}$의 일치추정량(consistent estimator)이 됨을 보이시오.
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}[(a)]
+        \item $X_{i}$가 취할 수 있는 값은 $0$부터가 아니라 $-1,0,1,2,\ldots$이므로 0보다 큰 $X_{i}$들을 모두 더했을 때 $T_{2}$가 된다. 왜냐하면 $I\left(X_{i}\geq 0\right)$항은 $X_{i}=-1$일 때만 0이 되고 그 이외에서는 1이 되기 때문에 $0$보다 크거나 같은 확률변수만 남겨두는 효과를 낳게 된다. 따라서 모두 더한 값은 $X_{i}=-1$인 횟수만큼 $T_{2}$에서 빼주어야 하는데 그 `횟수'가 바로 $T_{1}$이다. 횟수는 양수인데 반해 $X_{i}=-1$은 음수여야 하므로 $T_{2}$에서 $T_{1}$을 빼주어야 그냥 다 더해서 나눈 값이 된다. 수식으로 말하자면
+        \begin{equation}
+          -T_{1} = \dfrac{1}{n}\sum_{i=1}^{n}X_{i}I\left(X_{i}=-1\right)
+        \end{equation}
+        이므로
+        \begin{equation}
+          \underbrace{\dfrac{1}{n}\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)}_{T_{2}}+\underbrace{\dfrac{1}{n}\sum_{i=1}^{n}X_{i}I\left(X_{i}=-1\right)}_{-T_{1}}= \dfrac{1}{n}\sum_{i=1}^{n}X_{i}\underbrace{\left(I\left(X_{i}=-1\right)+I\left(X_{i}\geq 0\right)\right)}_{\text{서로소인 집합이므로 항상 1}}
+        \end{equation}
+        이 되어 $\overline{X}_{n}=T_{2}-T_{1}$이 된다. 각각의 기댓값은
+        \begin{align}
+          \mathrm{E}\left(T_{1}\right) &= \dfrac{1}{n}\sum_{i=1}^{n}\mathrm{E}\left(I\left(X_{i}=-1\right)\right)\\
+          &= \dfrac{1}{n}\sum_{i=1}^{n}\mathrm{Pr}\left(X_{i}=-1\right)\\
+          &= \dfrac{1}{n}\cdot n\theta = \theta\\
+          \mathrm{E}\left(T_{2}\right) &= \dfrac{1}{n}\sum_{i=1}^{n}\mathrm{E}\left(X_{i}I\left(X_{i}\geq 0\right)\right)\\
+          &= \dfrac{1}{n}\sum_{i=1}^{n}\sum_{x=0}^{\infty}x\left(1-\theta\right)^{2}\theta^{x},\qquad \text{멱급수 계산은 알아서...}\\
+          &= \dfrac{1}{n}\sum_{i=1}^{n}\theta=\theta
+        \end{align}
+        \item 둘 모두 비편향 추정량이므로 \emph{variance-bias decomposition}에 의해 MSE를 비교하는 것은 분산을 비교하는 것과 같아진다. 둘의 분산을 구하면 다음과 같다.
+        \begin{align}
+          \mathrm{Var}\left(T_{1}\right) &= \mathrm{Var}\left(\dfrac{1}{n}\sum_{i=1}^{n}I\left(X_{i}=-1\right)\right)\\
+          &=\dfrac{1}{n^{2}}\sum_{i=1}^{n}\mathrm{Var}\left(I\left(X_{i}=-1\right)\right)\\
+          &= \dfrac{1}{n^{2}}\sum_{i=1}^{n}\left(\mathrm{E}\left(\left[I\left(X_{i}=-1\right)\right]^{2}\right)-\left[\mathrm{E}\left(I\left(X_{i}=-1\right)\right) \right]^{2}\right)
+        \end{align}
+        이산형 확률변수의 함수의 기댓값은 예전에 고등학교 때 $X$와 $\mathrm{Pr}\left(X\right)$ 표를 그려서 하나 하나 곱해서 더하던 것을 생각해보면 편하다. 함수꼴의 기댓값 역시 \emph{the law of unconscious statistician}에 의해 그냥 원래 확률을 그대로 써도 된다. 고로 $\left[I\left(X_{i}=-1\right)\right]^{2}$은 언제나 $1$이므로 그 기댓값은 $\theta$가 되고 $I\left(X_{i}=-1\right)$의 기댓값은 그 자체로도 $\theta$이므로
+        \begin{align}
+          \mathrm{Var}\left(T_{1}\right) &= \dfrac{1}{n^{2}}n\left(\theta-\theta^{2}\right)\\
+          &=\dfrac{1}{n}\theta\left(1-\theta\right)
+        \end{align}
+        이다. $T_{2}$의 분산 역시 같은 방식으로 하면
+        \begin{align}
+          \mathrm{E}\left(X_{i}I\left(X_{i}\geq 0\right)\right) &= \sum_{x=0}^{\infty}x\left(1-\theta\right)^{2}\theta^{x} = \theta\\
+          \mathrm{E}\left(\left[X_{i}I\left(X_{i}\geq 0\right)\right]^{2}\right) &= \sum_{x=0}^{\infty}x^{2}\left(1-\theta\right)^{2}\theta^{x}=\dfrac{\theta\left(\theta+1\right)}{1-\theta}\\
+          \mathrm{Var}\left(T_{2}\right) &= \dfrac{\theta\left(\theta+1\right)}{1-\theta}-\theta^{2}\\
+          &=\dfrac{\theta\left(\theta^{2}+1\right)}{1-\theta}
+        \end{align}
+        둘의 분산을 비교해 보았을 때 $T_{1}$의 분산이 더 작으므로 $T_{1}$이 MSE의 측면에서 더 좋은 추정량이다.
+        \item $n$개의 확률변수 중 $X_{i}=-1$인 개수를 $m$개라 하면 $\sum_{i=1}^{n}I\left(X_{i}=-1\right)=m$이 되고 가능도 함수는 다음과 같다.
+        \begin{align}
+          L\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \theta^{m}\left(1-\theta\right)^{2\left(n-m\right)}\theta^{\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)}\\
+          \ell\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \left(m+\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)\right)\ln\theta +2\left(n-m\right)\ln\left(1-\theta\right)\\
+          \dfrac{d}{d\theta}\ell\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \dfrac{m+\displaystyle\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)}{\theta}-\dfrac{2\left(n-m\right)}{1-\theta}\\
+          &= \dfrac{m+\displaystyle\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)-\theta\left(m+\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)+2\left(n-m\right)\right)}{\theta\left(1-\theta\right)}
+        \end{align}
+        고로 이를 0으로 놓고 $\theta$에 대해 정리한 뒤 $m$을 원래대로 복원하면
+        \begin{align}
+          \widehat{\theta}_{n} &= \dfrac{\displaystyle\sum_{i=1}^{n}I\left(X_{i}=-1\right)+\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)}{2n + \displaystyle\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0 \right)-\sum_{i=1}^{n}I\left(X_{i}=-1\right)}\\
+          &= \dfrac{-\displaystyle\sum_{i=1}^{n}\left(-1\right)I\left(X_{i}=-1\right)+\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)}{2n+\displaystyle\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)+\sum_{i=1}^{n}\left(-1\right)I\left(X_{i}=-1\right)}\\
+          &= \dfrac{-2\displaystyle\sum_{i=1}^{n}\left(-1\right)I\left(X_{i}=-1\right)+\sum_{i=1}^{n}X_{i}I\left(X_{i}\geq 0\right)+\sum_{i=1}^{n}\left(-1\right)I\left(X_{i}=-1\right)}{2n+\displaystyle\sum_{i=1}^{n}X_{i}}\\
+          &= \dfrac{2\displaystyle\sum_{i=1}^{n}I\left(X_{i}=-1\right)+\sum_{i=1}^{n}X_{i}}{2n+\displaystyle\sum_{i=1}^{n}X_{i}}
+        \end{align}
+        마지막으로 $\widehat{\theta}_{n}$은 $\theta$의 일치추정량이다. 왜냐하면 대수의 법칙에 의해
+        \begin{equation}
+          \dfrac{1}{n}\sum_{i=1}^{n}X_{i}\xrightarrow{p} \mathrm{E}\left(X_{1}\right)
+        \end{equation}
+        인데
+        \begin{equation}
+          \mathrm{E}\left(X_{1}\right) = -\theta + \sum_{x=0}^{\infty}x\left(1-\theta\right)^{2}\theta^{x} = -\theta+\theta=0
+        \end{equation}
+        이므로 $\overline{X}_{n}\xrightarrow{p} 0$이며
+        \begin{equation}
+          \dfrac{1}{n}I\left(X_{i}=-1\right) \xrightarrow{p} \mathrm{E}\left(I\left(X_{1}=-1\right)\right)
+        \end{equation}
+        이므로 $\theta$에 수렴하게 된다. 따라서 \emph{Slutsky's theorem}에 의해서
+        \begin{equation}
+          \widehat{\theta}_{n} \xrightarrow{p} \dfrac{2\theta + 0}{2 + 0} = \theta
+        \end{equation}
+        이므로 MLE의 불변성(invariance property)에 의해 $\widehat{\theta}_{n}^{2}$ 역시 $\theta^{2}$의 일치추정량이 된다.
+      \end{enumerate}
+    \end{solution}
+    \question
+    $X_{1},\ldots,X_{n}$이 $\mathcal{N}\left(\mu,\sigma^{2}\right)$로부터의 랜덤표본이라 할 때, 모평균에 대한 가설 $H:\mu=\mu_{0}$ vs $K:\mu\neq\mu_{0}$에 대한 $t$ 검정법을 가능도비를 사용하여 유도하고, 유도된 검정법의 검정력 및 성질에 대해 논하라. ($\sigma^{2}$는 알려지지 않았음.)
+    \begin{solution}
+      $\mu$의 MLE는 $\overline{X}_{n}$임이 자명하므로 다시 구하지 않겠다. 가능도비를 구하면
+      \begin{align}
+        \dfrac{L\left(\mu_{0}\right)}{L\left(\widehat{\mu}^{\text{MLE}}\right)} &= \dfrac{\exp\left(-\dfrac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(X_{i}-\mu_{0}\right)^{2}\right)}{\exp\left(-\dfrac{1}{2\sigma^{2}}\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}\right)}\\
+        &= \exp\left(-\dfrac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(X_{i}-\mu_{0}\right)^{2}\right)-\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2} \right)\\
+        &= \exp\left(-\dfrac{1}{2\sigma^{2}}\left(\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}+n\left(\overline{X}_{n}-\mu_{0}\right)^{2}-\sum_{i=1}^{n}\left(X_{i}-\overline{X}_{n}\right)^{2}\right)\right)\\
+        &= \exp\left(-\dfrac{1}{2\sigma^{2}}\left(\overline{X}_{n}-\mu_{0}\right)^{2}\right)\leq k
+      \end{align}
+      일 때 귀무가설이 기각된다. 따라서 $\left(\overline{X}_{n}-\mu_{0}\right)^{2}\geq k_{2}$일 때, 다시 고치면
+      \begin{align}
+        \left(\dfrac{\overline{X}_{n}-\mu_{0}}{S}\right)^{2} &\geq \dfrac{k_{2}}{S^{2}}\\
+        \underbrace{\left(\sqrt{n}\dfrac{\overline{X}_{n}-\mu_{0}}{S}\right)^{2}}_{T^{2}} &\geq n\dfrac{k_{2}}{S^{2}}
+      \end{align}
+      이므로 $T^{2}$가 충분히 클 때 귀무가설은 기각된다. 다시 말해서 $T$가 충분히 크거나 충분히 작을 때 귀무가설이 기각된다는 의미이다. 그리고 $T$는 자유도가 $n-1$인 t-분포를 따르므로 $T\leq t_{n-1}\left(1-\alpha\right)$이거나 $T\geq t_{n-1}\left(\alpha\right)$일 때 $\alpha$ 신뢰수준에서 귀무가설은 기각된다.
+    \end{solution}
+    \newpage
+    \question
+    단순회귀모형(simple regression model) $Y_{i}=\beta_{0}+\beta_{1}x_{i}+\epsilon_{i}$을 고려하자. 여기서 $\epsilon_{i}$는 기본회귀모형 가정을 만족하고 $i=1,2,\ldots,n$이다.
+    \begin{enumerate}[(a)]
+      \item 위 모형을 행렬 형식으로 자세히 포현하고, 행렬 형태로 회귀 모수 $\beta=\left(\beta_{0},\beta_{1}\right)'$의 최소제곱추정치(least square estimator; LSE)를 구하시오.
+      \item LSE $\widehat{\beta}=\left(\widehat{\beta}_{0},\widehat{\beta}_{1}\right)'$의 분포를 구하시오.
+      \item $\widehat{\beta}$와 $S^{2}$가 독립임을 보이시오. 여기서 $S^{2}=\mathrm{SSE}/\left(n-2\right)=\left(Y-\mathbf{X}\widehat{\beta}\right)'\left(Y-\mathbf{X}\widehat{\beta}\right)$이다.
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}[(a)]
+        \item 위 모형은 행렬식으로 표현하면
+        \begin{equation}
+          \underbrace{\begin{bmatrix}Y_{1}\\ \vdots \\ Y_{n}  \end{bmatrix}}_{Y} = \underbrace{\begin{bmatrix}1 & x_{1}\\ \vdots & \vdots \\ 1 & x_{n}  \end{bmatrix}}_{\mathbf{X}}\underbrace{\begin{bmatrix}\beta_{0}\\ \beta_{1}  \end{bmatrix}}_{\beta}+\underbrace{\begin{bmatrix}\epsilon_{1}\\ \vdots \\ \epsilon_{n}  \end{bmatrix}}_{\epsilon}
+        \end{equation}
+        이 되고 LSE는 $\widehat{\beta}=\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y$이다.
+        \item $\widehat{\beta}$는 $Y$의 선형변환이고 $Y\sim \mathcal{N}\left(\mathbf{X}\beta,\sigma^{2}\mathbf{I}_{n}\right)$이므로 정규분포의 선형불변성(affine property)에 의해 어떠한 선형변환꼴도 다시 정규분포를 따르게 되어 있다. 따라서
+        \begin{align}
+          \mathrm{E}\left(\widehat{\beta}\right) &= \mathrm{E}\left(\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y\right)\\
+          &= \left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'\mathbf{X}\beta\\
+          &= \beta\\
+          \mathrm{Var}\left(\widehat{\beta}\right) &= \left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'\mathrm{Var}\left(Y\right)\mathbf{X}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\\
+          &= \sigma^{2}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\cancel{\mathbf{X}'\mathbf{X}\left(\mathbf{X}'\mathbf{X}\right)^{-1}}\\
+          &=\sigma^{2}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\\
+          \widehat{\beta} &\sim \mathcal{N}\left(\beta,\sigma^{2}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\right)
+        \end{align}
+        \item 먼저 $\mathrm{Cov}\left(\widehat{\beta},Y-\mathbf{X}\widehat{\beta}\right)$을 구하면
+        \begin{align}
+          \mathrm{Cov}\left(\widehat{\beta},Y-\mathbf{X}\widehat{\beta}\right) &= \mathrm{Cov}\left(\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y,\left(\mathbf{I}_{n}-\mathbf{H}\right)Y\right)\\
+          &=\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'\mathrm{Cov}\left(Y\right)\left(\mathbf{I}_{n}-\mathbf{H}\right)'\\
+          &=\sigma^{2}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'\left(\mathbf{I}_{n}-\mathbf{H}\right)\\
+          &= \mathbf{0}
+        \end{align}
+        정규분포의 경우 공분산이 0이면 서로 독립이므로 $\widehat{\beta}$와 $Y-\mathbf{X}\widehat{\beta}$는 서로 독립이며 그 함수꼴 역시 서로 독립이므로 $\widehat{\beta}$와 $S^{2}$ 역시 서로 독립이다.
+      \end{enumerate}
+    \end{solution}
+\end{questions}
+\end{document}
