@@ -1,0 +1,331 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2011, early}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2011 early}
+\begin{questions}
+   \question
+   선형모형
+   \begin{align}
+    y_{1} &= \theta + \epsilon_{1},\\
+    y_{2} &= 2\theta -\tau +\epsilon_{2},\\
+    y_{3} &= \theta+2\tau-\epsilon_{3},
+   \end{align}
+   을 고려하자. 여기서, $\epsilon_{1},\epsilon_{2}$, 그리고 $\epsilon_{3}$는 서로 독립이고 평균이 $0$, 분산이 $\sigma^{2}$인 정규분포를 따른다고 가정하자.
+   \begin{enumerate}[(a)]
+    \item $y_{1}=0,y_{2}=0$, 그리고 $y_{3}=1$으로 측정되었을 때, 모수 $\theta$의 최소제곱추정량(least squares estimator)을 구하시오. (15점)
+    \item 귀무가설 $H_{0}:\theta=\tau$을 검정하는 방법을 설명하시오. (10점)
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item $-\epsilon_{3}$은 $\epsilon_{3}$과 같은 분포를 가진다. 따라서 (3)은 $-\epsilon_{3}$을 $\epsilon_{3}$로 바꿔도 무방하다. 위 모형을 행렬꼴로 바꾸자.
+      \begin{equation}
+        \underbrace{\begin{bmatrix}y_{1}\\y_{2}\\y_{3} \end{bmatrix}}_{y} = \underbrace{\begin{bmatrix}1&0\\ 2 & -1\\ 1 & 2 \end{bmatrix}}_{\mathbf{X}}\underbrace{\begin{bmatrix}\theta \\ \tau \end{bmatrix}}_{\beta} + \underbrace{\begin{bmatrix}\epsilon_{1}\\ \epsilon_{2} \\ \epsilon_{3} \end{bmatrix}}_{\epsilon}
+      \end{equation}
+      이제 다음의 일반적인 최소제곱법을 풀면
+      \begin{equation}
+        \widehat{\beta}^{\text{LSE}} = \argmin_{\beta}\left(y-\mathbf{X}\beta\right)'\left(y-\mathbf{X}\beta\right)
+      \end{equation}
+      모두가 알고 있는 정규식이 나온다. $\widehat{\beta}^{\text{LSE}}=\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'y$. 이를 대입하면 
+      \begin{align}
+        \mathbf{X}'\mathbf{X} &= \begin{bmatrix}1 & 2 & 1\\ 0 & -1 & 2 \end{bmatrix}\begin{bmatrix}1 & 0 \\ 2 & -1 \\ 1 & 2 \end{bmatrix}\\
+        &= \begin{bmatrix}6 & 0 \\ 0 & 5 \end{bmatrix}\\
+        \left(\mathbf{X}'\mathbf{X}\right)^{-1} &= \begin{bmatrix}1/6 & 0 \\ 0 & 1/5 \end{bmatrix}\\
+        \mathbf{X}'y &= \begin{bmatrix}1 & 2 & 1\\ 0 & -1 & 2 \end{bmatrix}\begin{bmatrix}0 \\ 0\\ 1  \end{bmatrix}\\
+        &= \begin{bmatrix}1 \\ 2 \end{bmatrix}\\
+        \widehat{\beta}^{\text{LSE}}&= \begin{bmatrix}1/6 \\ 2/5 \end{bmatrix}
+      \end{align}
+      \item 귀무가설이 참이라고 가정할 때 모형은
+      \begin{align}
+        y_{1} &= \theta+\epsilon_{1}\\
+        y_{2} &= \theta + \epsilon_{2}\\
+        y_{3} &= 3\theta+\epsilon_{3}
+      \end{align}
+      이 되고 (12)와 (13)은 동일하므로 둘 중 하나를 없앤다. 이렇게 적합한 모형의 RSS(Residual Sum of Squares; SSE라고도 함)와 원래 모형의 RSS를 비교한다. 자세한 사항은 2009년 전기 참조.
+    \end{enumerate}
+   \end{solution}
+   \question
+   $P$가 확률측도(probability measure)가 되기 위한 3가지 조건을 제시하고, 이 3가지 조건을 이용하여 표본공간의 임의 집합 $A$에 대해 $0\leq \mathrm{P}\left(A\right) \leq 1$임을 증명하라.
+   \begin{solution}
+    일반적으로 임의의 집합에 대한 함수(set function) $\mu$가 `측도(measure)'가 되기 위해서는 다음의 세 조건을 만족해야 한다.
+    \begin{itemize}
+      \item Non-negativity: 정의된 $\sigma$-albegra $\mathcal{M}$에 대해 모든 $A\in\mathcal{M}$는 $\mu\left(A\right)\geq 0$여야 한다.
+      \item Null empty set: 공집합의 측도는 0이어야 한다. $\mu\left(\emptyset\right)=0$
+      \item Countable additivity: $\sigma$-albegra $\mathcal{M}$에 속하는 서로소(pairwise disjoint)인 집합 $A_{1},A_{2},\ldots$에 대해 다음이 만족해야 한다.
+      \begin{equation}
+        \mu\left(\bigcup_{k=1}^{\infty}A_{k}\right) = \sum_{k=1}^{\infty}\mu\left(A_{k}\right)
+      \end{equation}
+    \end{itemize}
+    확률측도 역시 `측도'이므로 위 세가지 조건을 만족해야만 한다. 하지만 확률측도는 임의의 집합 $X$로부터 만들어진 $\sigma$-algebra위에 정의된 것이 아니라 전체집합 $X$의 측도가 1이 되도록 설계된 것이므로 그 조건이 추가되어야 한다. 이를 20세기 초 러시아의 수학자 \emph{Andrey Kolmogorov}는 다음과 같이 정의했고 이를 우리는 `확률공리(\emph{probability axioms})'라 부른다.
+      \begin{itemize}
+        \item 측도공간(measure space) $\left(\Omega, \mathcal{F},\mathrm{P}\right)$이 다음의 세 조건을 만족하면 이를 `확률공간(probability space)' 혹은 \emph{probability triple}이라 부른다. 첫 번째 공리는 마찬가지로 non-negativity이다. $\forall A\in \mathcal{F}\;\; \mathrm{P}\left(A\right)\geq 0$\par
+        영국의 수학자 \emph{Paul Dirac}은 negative probability를 제시했으나 양자역학을 제외한 분야에서는 널리 쓰이지 않는다.
+        \item 공집합의 확률이 0이라는 것 대신 전체집합 $\Omega$의 확률이 1임을 주게 되면 공집합의 확률이 0임은 하나의 정리로 증명할 수 있다. 고로 확률공리는 전체집합을 상정한다. $\mathrm{P}\left(\Omega\right)=1$
+        \item 마지막은 countable additivity로 동일하다. $\sigma$-field $\mathcal{F}$에 속하는 서로소인 집합 $A_{1},A_{2},\ldots$에 대해
+        \begin{equation}
+          \mathrm{P}\left(\bigcup_{k=1}^{\infty}A_{k}\right) = \sum_{k=1}^{\infty}\mathrm{P}\left(A_{k}\right)
+        \end{equation}
+        여야 한다.
+      \end{itemize}
+      모든 집합의 확률이 $\left[0,1\right]$ 사이에 있다는 것을 증명하기 위해서는 몇 번의 단계를 거쳐야 한다. 직관적으로 보기에는 전체집합(표본공간)의 확률이 1이고 모든 확률이 0보다 크니 당연해 보이지만 공리를 통해 증명해야 한다. 그 첫 번째는 여집합의 확률이다.
+      \begin{enumerate}[(1)]
+        \item $A\in\mathcal{F}$인 집합에 대해 그 여집합인 $A^{\mathsf{c}}$의 확률은 다음의 관계로부터 얻어진다.
+        \begin{equation}
+          A \cup A^{\mathsf{c}} = \Omega
+        \end{equation}
+        그러면 세 번째 공리로부터
+        \begin{equation}
+          \mathrm{P}\left(A\right)+\mathrm{P}\left(A^{\mathsf{c}}\right) = 1
+        \end{equation}
+        이 되고 $\mathrm{P}\left(A^{\mathsf{c}}\right) = 1-\mathrm{P}\left(A\right)$을 얻을 수 있다.
+        \item 그 다음으로는 확률의 대소 관계이다. $A\subset B \subset \Omega$라면 $B=A \cup \left(B\setminus A\right)$라는 관계가 성립하고 또 다시 세 번째 공리에 의해
+        \begin{equation}
+          \mathrm{P}\left(B\right) = \mathrm{P}\left(A\right)+\mathrm{P}\left(B\setminus A\right)
+        \end{equation}
+        가 된다. 모든 확률은 0보다 크거나 같는 첫 번째 공리에 의해 $\mathrm{P}\left(B\right)\geq \mathrm{P}\left(A\right)$이 된다.\par
+        사실 이 성질은 확률측도에만 해당되는 것은 아니고 일반적인 \emph{Lebesgue measure}의 성질이며 이를 `측도의 단조성(monotonicity of measures)'이라 부르기도 한다.
+        \item 고로 $\sigma$-field $\mathcal{F}$에 속하는 임의의 집합 $A$에 대해서 $A\subset \Omega$이므로 바로 전에 증명한 대소관계를 통해
+        \begin{equation}
+          \mathrm{P}\left(A\right) \leq 1
+        \end{equation}
+        이 얻어진다. 따라서 $0\leq \mathrm{P}\left(A\right)\leq 1$이 된다. 증명끝.
+      \end{enumerate}
+   \end{solution}
+   \question
+   Let $X_{1},X_{2},\ldots,X_{n}$ be a random sample with a Gamma distribution with parameters $\alpha$ and $\beta$, whose probability density function is given by
+   \begin{equation}
+    f\left(x\,|\,\alpha,\beta\right) = \dfrac{1}{\Gamma\left(\alpha\right)\beta^{\alpha}}x^{\alpha-1}\exp\left(-\dfrac{x}{\beta}\right),\;x>0.
+   \end{equation}
+   \begin{enumerate}[(a)]
+    \item Find a distribution of $\overline{X}=n^{-1}\sum_{i=1}^{n}X_{i}$.
+    \item Suppose that $\alpha=1$. Determine a constant $c$ such that $c\overline{X}$ has a $\chi^{2}$ distribution with degrees of freedom $n$, that is, $c\overline{X}\sim\chi^{2}\left(2n\right)$.
+    \item Suppose that $\alpha=2$. Find the MLE(maximum likelihood estimator) $\widehat{\beta}_{n}$ of $\beta$, and derive the asymptotic variance of $\widehat{\beta}_{n}$ using the Fisher information.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 해당 문제에서 쓰인 표기방식은 scale parameter이기 때문에 지금까지 써왔던 rate parameter 표기법과는 조금 다르다. 약간 헷갈릴 수도 있겠지만 본 문제의 표기법을 따르겠다. 모든 확률변수 $X_{i}\sim \mathrm{Ga}\left(\alpha,\beta\right)$라면 $\sum_{i=1}^{n}X_{i}\sim \mathrm{Ga}\left(n\alpha,\beta\right)$이 되며 $n^{-1}$을 곱해주면 scale parameter 표기법으로 하면 뒤의 scale parameter인 $\beta$에 똑같이 곱해지므로
+      \begin{equation}
+        \overline{X} \sim \mathrm{Ga}\left(n\alpha,n^{-1}\beta\right)
+      \end{equation}
+      이 된다.
+      \item $\chi^{2}\left(2n\right)$ 분포는 $\mathrm{Ga}\left(n,2\right)$와 동일하므로
+      \begin{equation}
+        c\overline{X} \sim \mathrm{Ga}\left(n,\dfrac{c}{n}\beta\right)
+      \end{equation}
+      를 통해
+      \begin{equation}
+        c= \dfrac{2n}{\beta}
+      \end{equation}
+      가 된다.
+      \item 귀찮다.
+      \begin{align}
+        L\left(\beta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \left(\dfrac{1}{\Gamma\left(2\right)\beta^{2}}\right)^{n}\left(\prod_{i=1}^{n}X_{i}\right)\exp\left(-\dfrac{1}{\beta}\sum_{i=1}^{n}X_{i}\right)\\
+        \ell\left(\beta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= -n\ln\Gamma\left(2\right)-2n\ln \beta +\sum_{i=1}^{n}\ln X_{i} -\dfrac{1}{\beta}\sum_{i=1}^{n}X_{i}\\
+        \dfrac{d}{d\beta}\ell\left(\beta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= -\dfrac{2n}{\beta}+\dfrac{1}{\beta^{2}}\sum_{i=1}^{n}X_{i}=0\\
+        \widehat{\beta}^{\text{MLE}} &= \dfrac{1}{2n}\sum_{i=1}^{n}X_{i}
+      \end{align}
+      피셔의 정보량은 두번 미분해야 하므로
+      \begin{align}
+        \dfrac{d^{2}}{d\beta^{2}}\ell\left(\beta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \dfrac{2n}{\beta^{2}}-\dfrac{2}{\beta^{3}}\sum_{i=1}^{n}X_{i}\\
+        -\mathrm{E}\left[\dfrac{d^{2}}{d\beta^{2}}\ell\left(\beta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) \right] &= -\dfrac{2n}{\beta^{2}}+\dfrac{2}{\beta^{3}}\cdot 2n\beta\\
+        &= \dfrac{2n}{\beta^{2}}
+      \end{align}
+      따라서 최대가능도추정량의 점근분포는 다음과 같다.
+      \begin{equation}
+        \sqrt{n}\left(\beta-\widehat{\beta}^{\text{MLE}}\right) \xrightarrow{d}\mathcal{N}\left(0,\dfrac{\beta^{2}}{2n}\right)
+      \end{equation}
+    \end{enumerate}
+   \end{solution}
+   \question
+   Let $X_{1},X_{2},\ldots,X_{n}$ be an i.i.d. sample from $\mathrm{Unif}\left(0,\theta\right), \; \theta>0$.
+   \begin{enumerate}[(a)]
+    \item Find the MLE $\widehat{\theta}_{n}$ of $\theta$, and compute the MSE (mean squared error) of $\widehat{\theta}_{n}$.
+    \item Let $T_{n}=2\overline{X}_{n}$. Show that it is an unbiased estimator of $\theta$.
+    \item Which one would you like better between $T_{n}$ and $\widehat{\theta}_{n}$ as a point estimator of $\theta$? Give your reasoning.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 균일분포의 최대값에 대한 추정량이므로 묻고 따지지도 않고 MLE는 최대값이 될 것이지만 정석대로 하자면
+      \begin{align}
+        L\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) &= \dfrac{1}{\theta^{n}}I_{\left(0,\theta\right)}\left(X_{i}\right)\cdots I_{\left(0,\theta\right)}\left(X_{n}\right)\\
+        &=\dfrac{1}{\theta^{n}}I_{\left(X_{\left(n\right)},\infty\right)}\left(\theta\right)\\
+        \widehat{\theta}^{\text{MLE}} &= X_{\left(n\right)}
+      \end{align}
+      \item $\mathrm{E}\left(X_{1}\right)=\theta/2$이므로 $\mathrm{E}\left(T_{n}\right)=\theta$이다.
+      \item 당연히 $\widehat{\theta}^{\text{MLE}}$가 낫다. 왜냐하면 $X_{1},\ldots,X_{n}$이 모두 $\left(\theta/2,\theta\right)$ 사이에서 발생하면 $T_{n}>\theta$인 상황이 발생한다. 분포의 support를 벗어나는 점추정량은 좋지 않다.
+    \end{enumerate}
+   \end{solution}
+   \question
+   아래 그림에서 보듯이 구슬을 위에서 아래로 흘려보낸다고 하자. 각 단계에서 구슬은 오른쪽으로 갈 확률이 $p$이고 왼쪽으로 갈 확률이 $1-p$이다 ($0<p<1$).
+   \begin{enumerate}[(1)]
+    \item 가장 아래 단계에 있는 각 칸에 구슬의 수를 확률변수 $\begin{pmatrix}X_{1},X_{2},X_{3},X_{4},X_{5}\end{pmatrix}$라고 하자. 그 확률변수의 분포를 구하시오.
+    \item 확률변수 $\begin{pmatrix}X_{1},X_{2},X_{3},X_{4},X_{5}\end{pmatrix}$를 이용하여 다음 가설의 균일최강력(uniformly most powerful) 검정을 유도하시오.
+    \begin{equation}
+      H_{0}: p=1/2\quad \text{vs}\quad H_{1}:p>1/2
+    \end{equation}
+    \item 각 칸에 구슬이 $(0,0,2,4,2)$인 경우에 균일최강력(uniformly most powerful) 검정의 $p$-값을 구하시오.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 이것은 다항분포(multinomial distribution)이다. 그 분포식은 다음과 같다.
+      \begin{equation}
+        f\left(X_{1},\cdots,X_{5}\,|\,p\right) = \dfrac{\left(X_{1}+\cdots +X_{5}\right)!}{X_{1}!\cdots X_{5}!} 4^{X_{2}+X_{6}}6^{X_{3}}p^{X_{2}+2X_{3}+3X_{4}+4X_{5}}\left(1-p\right)^{4X_{1}+3X_{2}+2X_{3}+X_{4}}
+      \end{equation}
+      전체 시행횟수 ($X_{1}+\cdots+X_{5}$)를 $n$으로 놓으면 $\left(1-p\right)$의 지수부분은
+      \begin{equation}
+        n-X_{2}-2X_{3}-3X_{4}-4X_{5}
+      \end{equation}
+      로 바뀐다.
+      \item $p_{1}>1/2$로 놓고, 편의를 위해
+      \begin{equation}
+        \mathbf{X}=X_{2}+2X_{3}+3X_{4}+4X_{5}
+      \end{equation}
+      라 하자. 가능도비를 구하면
+      \begin{align}
+        \dfrac{L_{0}}{L_{1}} &= \dfrac{1}{2^{n}}\left(\dfrac{1}{p_{1}}\right)^{\mathbf{X}}\left(\dfrac{1}{1-p_{1}}\right)^{n-\mathbf{X}} < k
+      \end{align}
+      \begin{align}
+        -\mathbf{X}\ln p_{1}-\left(n-\mathbf{X}\right)\ln \left(1-p_{1}\right) &< c_{1}\\
+        -\mathbf{X}\ln p_{1}+\mathbf{X}\ln \left(1-p_{1}\right) &< c_{2}\\
+        \mathbf{X}\ln\left(\dfrac{1-p_{1}}{p_{1}}\right) &< c_{3}
+      \end{align}
+      $p_{1}>1/2$이므로
+      \begin{equation}
+        \dfrac{1-p_{1}}{p_{1}} < 1
+      \end{equation}
+      이고 따라서 균일최강력검정은 $\mathbf{X}>c_{4}$일 때이다.
+      \item 
+    \end{enumerate}
+   \end{solution}
+\end{questions}
+\end{document}
