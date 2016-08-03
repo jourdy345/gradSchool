@@ -205,7 +205,7 @@
             &=\mathrm{E}\left(N\right)\mathrm{E}\left(Z_{1}\right)\\
             &= \dfrac{1}{\beta\lambda}
           \end{align}
-          가 된다. 왜냐하면 $N\sim \mathrm{Geo}\left(\beta\right)$이고 $Z_{i}\sim \mathrm{Exp}\left(\lambda^{-1}\right)$이기 때문이다. 다시 여기서 지수분포는 rate parameter로 표기되었다. 
+          가 된다. 왜냐하면 $N\sim \mathrm{Geo}\left(\beta\right)$이고 $Z_{i}\sim \mathrm{Exp}\left(\lambda\right)$이기 때문이다. 다시 여기서 지수분포는 rate parameter로 표기되었다. 
           \item 두 번째는 조건부로 표현하는 것이다. 다시 말해, 원래는 $X\,|\,N=\sum_{i=1}^{N}Z_{i}$이기 때문에 온전히 $X$만의 기댓값을 구하기 위해서는 이중기댓값의 법칙(the law of double expectation)을 이용할 수 있다. $X\,|\,N \sim \mathrm{Ga}\left(N,\lambda\right)$이다. 고로
           \begin{align}
             \mathrm{E}\left(\mathrm{E}\left(X\,|\,N\right)\right) &= \mathrm{E}\left(\dfrac{N}{\lambda}\right)\\
@@ -318,7 +318,7 @@
         \end{equation}
         이므로 $\overline{X}_{n}\xrightarrow{p} 0$이며
         \begin{equation}
-          \dfrac{1}{n}I\left(X_{i}=-1\right) \xrightarrow{p} \mathrm{E}\left(I\left(X_{1}=-1\right)\right)
+          \dfrac{1}{n}\sum_{i=1}^{n}I\left(X_{i}=-1\right) \xrightarrow{p} \mathrm{E}\left(I\left(X_{1}=-1\right)\right)\;\;\begin{pmatrix}=\mathrm{Pr}\left(X_{1}=-1\right)\end{pmatrix}
         \end{equation}
         이므로 $\theta$에 수렴하게 된다. 따라서 \emph{Slutsky's theorem}에 의해서
         \begin{equation}

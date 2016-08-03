@@ -181,9 +181,9 @@
    \begin{solution}
     일반적으로 임의의 집합에 대한 함수(set function) $\mu$가 `측도(measure)'가 되기 위해서는 다음의 세 조건을 만족해야 한다.
     \begin{itemize}
-      \item Non-negativity: 정의된 $\sigma$-albegra $\mathcal{M}$에 대해 모든 $A\in\mathcal{M}$는 $\mu\left(A\right)\geq 0$여야 한다.
+      \item Non-negativity: 정의된 $\sigma$-algebra $\mathcal{M}$에 대해 모든 $A\in\mathcal{M}$는 $\mu\left(A\right)\geq 0$여야 한다.
       \item Null empty set: 공집합의 측도는 0이어야 한다. $\mu\left(\emptyset\right)=0$
-      \item Countable additivity: $\sigma$-albegra $\mathcal{M}$에 속하는 서로소(pairwise disjoint)인 집합 $A_{1},A_{2},\ldots$에 대해 다음이 만족해야 한다.
+      \item Countable additivity: $\sigma$-algebra $\mathcal{M}$에 속하는 서로소(pairwise disjoint)인 집합 $A_{1},A_{2},\ldots$에 대해 다음이 만족해야 한다.
       \begin{equation}
         \mu\left(\bigcup_{k=1}^{\infty}A_{k}\right) = \sum_{k=1}^{\infty}\mu\left(A_{k}\right)
       \end{equation}
@@ -339,13 +339,13 @@
       \end{itemize}
       그렇기 때문에 $\mathbf{X}$의 분포를 정확히 계산해 내기란 어렵다. $p$-값을 써보면
       \begin{equation}
-        \mathrm{Pr}\left(X_{2}+2X_{3}+3X_{4}+4X_{5}\geq 24\,|\,n=8,p=\dfrac{1}{2}\right)
+        \mathrm{Pr}\left(X_{2}+2X_{3}+3X_{4}+4X_{5}\geq 24\,\middle|\,n=8,p=\dfrac{1}{2}\right)
       \end{equation}
       이므로 대수의 법칙에 의해
       \begin{equation}
-        \dfrac{1}{M}\sum_{k=1}^{M}\delta\left(\mathbf{X}\geq 24\right) \xrightarrow{a.s.} \mathrm{Pr}\left(\mathbf{X}\,\middle|\,n=8,p=\dfrac{1}{2}\right)
+        \dfrac{1}{M}\sum_{k=1}^{M}\delta\left(\mathbf{X}^{\left(k\right)}\geq 24\right) \xrightarrow{a.s.} \mathrm{Pr}\left(\mathbf{X}\geq 24\,\middle|\,n=8,p=\dfrac{1}{2}\right)
       \end{equation}
-      하므로 몬테칼로 방법으로 근사시킬 수 있다. 실제로 \textsf{R}로 시뮬레이션 해본 결과 $p$-값$\approx 0.092$이다. 간략한 \textsf{R}코드는 마지막에 실어놓았다.
+      하므로 몬테칼로 방법으로 근사시킬 수 있다. $\delta$는 \emph{dirac-delta function}으로 $\mathbf{X}^{\left(k\right)}\geq 24$이면 1, 아니면 0이다. 실제로 \textsf{R}로 시뮬레이션 해본 결과 $p$-값$\approx 0.092$이다. 간략한 \textsf{R}코드는 마지막에 실어놓았다.
     \end{enumerate}
    \end{solution}
 \end{questions}

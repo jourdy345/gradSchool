@@ -1,0 +1,227 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{listings}
+
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2012, late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2012 late}
+\begin{questions}
+   \question
+   If $X$ and $Y$ are independent exponential random variables with respective means $1/\lambda_{1}$ and $1/\lambda_{2}$.
+   \begin{enumerate}[(a)]
+    \item Compute the distribution of $Z=\min\left(X,Y\right)$.
+    \item What is the conditional distribution of $Z$ given that $Z=X$?
+    \item Consider the function $\lambda_{X}\left(t\right)$ defined as follows:
+    \begin{equation}
+        \exp\left[-\int_{0}^{x}\lambda_{X}\left(t\right)\,dt \right]=1-F_{X}\left(x\right),
+    \end{equation}
+    where $F_{X}\left(x\right)=\mathrm{Pr}\left(X\leq x\right)$. The function $\lambda_{X}\left(t\right)$ is called the failure rate function of $X$. Show that the failure rate function of $X$ is constant for $t>0$.
+    \item Show that
+    \begin{equation}
+        \mathrm{Pr}\left(X<Y\,|\,Z=t\right)=\dfrac{\lambda_{X}\left(t\right)}{\lambda_{X}\left(t\right)+\lambda_{Y}\left(t\right)},
+    \end{equation}
+    where $\lambda_{X}\left(t\right)$ and $\lambda_{Y}\left(t\right)$ are the failure rate functions of $X$ and $Y$.
+   \end{enumerate}
+   \begin{solution}
+    Rate parameter로 표기하면 $X\sim \mathrm{Exp}\left(\lambda_{1}\right),\; Y\sim\mathrm{Exp}\left(\lambda_{2}\right)$이다.
+    \begin{enumerate}[(a)]
+      \item CDF부터 시작하면
+      \begin{align}
+        \mathrm{Pr}\left(\min\left(X,Y\right)\leq z\right) &= 1-\mathrm{Pr}\left(X>z,Y>z\right)\\
+        &=1-\mathrm{Pr}\left(X>z\right)\mathrm{Pr}\left(Y>z\right)\\
+        &=1-\left(\int_{z}^{\infty}\lambda_{1}e^{-\lambda_{1}x}\,dx\,\int_{z}^{\infty}\lambda_{2}e^{-\lambda_{2}y}\,dy\right)\\
+        &=1-\left(-1+e^{-\lambda_{1}z}-1+e^{-\lambda_{2}z}\right)\\
+        &= 3-e^{-\lambda_{1}z}-e^{-\lambda_{2}z}
+      \end{align}
+    \end{enumerate}
+
+   \end{solution}
+   \question
+   One observation is taken on a discrete random variable $Y$ with a probability mass function $f\left(y\,|\,\theta\right) = \mathrm{Pr}\left(Y=y\,|\,\theta\right)$, where $\theta\in\left\{-1,0,1\right\}$. Find the maximum likelihood estimate (MLE) of $\theta$.
+   \begin{table}[!htbp]
+    \centering
+      \begin{tabular}{*4c}
+        \toprule
+        $Y$ & $\mathrm{Pr}\left(Y=y\,|\,\theta=-1\right)$ & $\mathrm{Pr}\left(Y=y\,|\,\theta=0\right)$ & $\mathrm{Pr}\left(Y=y\,|\,\theta=1\right)$\\
+        \toprule
+        1 & $1/3$ & $1/4$ & $0$ \\
+        \midrule
+        2 & $1/3$ & $1/4$ & $0$ \\
+        \midrule
+        3 & $0$ & $1/4$ & $1/2$ \\
+        \midrule
+        4 & $1/6$ & $1/4$ & $1/2$ \\
+        \midrule
+        5 & $1/6$ & $0$ & $1/4$\\ 
+        \bottomrule
+      \end{tabular}
+    \end{table}
+    \begin{solution}
+
+    \end{solution}
+    \question
+    $X_{1},X_{2},\ldots,X_{100}$이 포아송 분포 $\mathrm{Poi}\left(\lambda\right)$로부터 추출한 랜덤 표본이라 하자. $H_{0}:\lambda=\lambda_{0}$ vs $H_{1}:\lambda=\lambda_{1}(>\lambda_{0})$에 대한 검정을 고려하자.
+    \begin{enumerate}[(a)]
+      \item 균일최강력검정법(uniformly most powerful test)의 기각 영역을 구하시오.
+      \item (a)에서 구한 검정법의 검정력 함수(power function)를 구하시오.
+      \item 대립가설이 $H_{1}:\lambda>\lambda_{0}$이라면 균일최강력검정법(uniformly most powerful test)이 존재하는지 보이시오.
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+    \question
+    단순선형회귀모형에 따르는 $n$개의 자료
+    \begin{equation}
+      y_{i} = \beta_{0}+\beta_{1}x_{i}+\epsilon_{i},\;\;i=1,\ldots,n
+    \end{equation}
+    들을 고려하자.
+    \begin{enumerate}[(a)]
+      \item 식 (1)을 행렬식
+      \begin{equation}
+        Y=\mathbf{X}\beta+\epsilon
+      \end{equation}
+      으로 표현하고자 한다. 이 경우 $Y,\mathbf{X},\beta$ 및 $\epsilon$을 행렬 또는 벡터로 표현하시오. (5점)
+      \item 모수 $\beta$에 대한 최소제곱추정량(least squares estimator) $\widehat{\beta}$을 행렬대수를 이용하여 정의하고, $\widehat{\beta}$이 정규방정식
+      \begin{equation}
+        \mathbf{X}'\mathbf{X}\widehat{\beta}=\mathbf{X}'Y
+      \end{equation}
+      을 만족함을 보이시오. (5점)
+      \item 행렬 $\mathbf{X}$가 full rank일 충분조건을 쓰고 이 경우 최소제곱추정량을 구체적으로 구하시오. (5점)
+      \item 행렬 $\mathbf{X}$가 full rank라는 가정 하에서 기울기 모수 $\beta_{1}$에 대한 95\% 신뢰구간을 제시하되 신뢰수준이 95\%가 될 조건을 나열하시오. (5점)
+      \item 위에서 제시한 신뢰구간의 신뢰수준이 95\%가 됨을 증명하시오. (5점)
+    \end{enumerate}
+    \begin{solution}
+
+    \end{solution}
+\end{questions}
+\end{document}

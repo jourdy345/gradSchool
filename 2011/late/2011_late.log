@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  1 AUG 2016 01:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  1 AUG 2016 16:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1193,7 +1193,7 @@ This exam contains 4 questions with 0 parts, 0 subparts, and 0 subsubparts.
 Here is how much of TeX's memory you used:
  17432 strings out of 493089
  317920 string characters out of 6134842
- 427030 words of memory out of 5000000
+ 428031 words of memory out of 5000000
  20494 multiletter control sequences out of 15000+600000
  63551 words of font info for 105 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1258,7 +1258,7 @@ ive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd4.pfb></usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd5.pfb></usr/local/
 texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd6.pfb></usr/loca
 l/texlive/2015/texmf-dist/fonts/type1/public/nanumtype1/nanummjmd7.pfb>
-Output written on 2011_late.pdf (10 pages, 2188139 bytes).
+Output written on 2011_late.pdf (10 pages, 2188158 bytes).
 PDF statistics:
  277 PDF objects out of 1000 (max. 8388607)
  206 compressed objects within 3 object streams
