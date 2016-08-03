@@ -4,6 +4,7 @@
 \documentclass[answers]{exam}
 \usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
 \usepackage{amssymb,amsmath}
+\usepackage{mathtools}
 \usepackage{graphicx}
 \usepackage{kotex}
 \usepackage[utf8]{inputenc}
@@ -28,7 +29,7 @@
 \setlength{\heavyrulewidth}{1.5pt}
 \setlength{\abovetopsep}{4pt}
 
-
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \newcommand\encircle[1]{%
   \tikz[baseline=(X.base)] 
     \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
@@ -160,11 +161,39 @@
         \mathrm{Pr}\left(\min\left(X,Y\right)\leq z\right) &= 1-\mathrm{Pr}\left(X>z,Y>z\right)\\
         &=1-\mathrm{Pr}\left(X>z\right)\mathrm{Pr}\left(Y>z\right)\\
         &=1-\left(\int_{z}^{\infty}\lambda_{1}e^{-\lambda_{1}x}\,dx\,\int_{z}^{\infty}\lambda_{2}e^{-\lambda_{2}y}\,dy\right)\\
-        &=1-\left(-1+e^{-\lambda_{1}z}-1+e^{-\lambda_{2}z}\right)\\
-        &= 3-e^{-\lambda_{1}z}-e^{-\lambda_{2}z}
+        &=1-e^{-\lambda_{1}z}e^{-\lambda_{2}z} \\
+        &= 1-e^{-\left(\lambda_{1}+\lambda_{2}\right)z}\\
+        \dfrac{d}{dz}\mathrm{Pr}\left(\min\left(X,Y\right)\leq z\right) &= \left(\lambda_{1}+\lambda_{2}\right)e^{-\left(\lambda_{1}+\lambda_{2}\right)z}, \;\;z>0
+      \end{align}
+      그러므로 $Z\sim\mathrm{Exp}\left(\lambda_{1}+\lambda_{2}\right)$이다.
+      \item 정의대로 계산하면 된다.
+      \begin{align}
+        \mathrm{Pr}\left(Z\leq z\,|\,Z=X\right)&= 1-\mathrm{Pr}\left(Z\geq z\,|\,Z=X\right)\\
+        &=1-\dfrac{\mathrm{Pr}\left(Z\geq z, X<Y\right)}{\mathrm{Pr}\left(X<Y\right)}\\
+        &=1-\dfrac{\mathrm{Pr}\left(Z\leq X<Y\right)}{\mathrm{Pr}\left(X<Y\right)}\\
+        \mathrm{Pr}\left(X<Y\right) &= \int_{0}^{\infty}\int_{0}^{y}\lambda_{1}e^{-\lambda_{1}x}\lambda_{2}e^{-\lambda_{2}y}\,dx\,dy\\
+        &= \dfrac{\lambda_{1}}{\lambda_{1}+\lambda_{2}}\\
+        \mathrm{Pr}\left(Z\leq X<Y\right) &= \int_{z}^{\infty}\int_{z}^{y}\lambda_{1}e^{-\lambda_{1}x}\lambda_{2}e^{-\lambda_{2}y}\,dx\,dy\\
+        &=\dfrac{\lambda_{1}}{\lambda_{1}+\lambda_{2}}e^{-\left(\lambda_{1}+\lambda_{2}\right)z}\\
+        \therefore \mathrm{Pr}\left(Z\leq z\,|\,Z=X\right) &= 1-e^{-\left(\lambda_{1}+\lambda_{2}\right)z}\\
+        Z\,|\,Z=X &\sim \mathrm{Exp}\left(\lambda_{1}+\lambda_{2}\right)
+      \end{align}
+      where $\mathrm{Exp}\left(\lambda_{1}+\lambda_{2}\right)$ denotes the exponential distribution whose mean is $\left(\lambda_{1}+\lambda_{2}\right)^{-1}$.
+      \item 위에서 풀어봤으면 알겠지만 $X\sim\mathrm{Exp}\left(\lambda_{1}\right)$인 $X$의 CDF는 $1-e^{-\lambda_{1} x}$, 고로 $1-F_{X}\left(x\right)=e^{-\lambda_{1} x}$이다. 즉, 미적분의 기본정리에 의해
+      \begin{equation}
+      \dfrac{d}{dx}\int_{0}^{x}\lambda_{X}\left(t\right)=\lambda_{X}\left(x\right)=\lambda_{1}
+      \end{equation}
+      로 상수가 나오게 된다.
+      \item 이것도 그냥 정의대로 풀면 된다.
+      \begin{align}
+        \mathrm{Pr}\left(X<Y\,|\,Z=t\right) &=\dfrac{\mathrm{Pr}\left(X<Y,Z=t\right)}{\mathrm{Pr}\left(Z=t\right)}\\
+        &=\dfrac{\mathrm{Pr}\left(X<Y,X=t\right)}{\mathrm{Pr}\left(Z=t\right)}\\
+        &=\dfrac{\mathrm{Pr}\left(X=t,t<Y\right)}{\mathrm{Pr}\left(Z=t\right)}\\
+        &=\dfrac{\mathrm{Pr}\left(X=t\right)\mathrm{Pr}\left(t<Y\right)}{\mathrm{Pr}\left(Z=t\right)},\qquad \text{적분은 스스로...}\\
+        &=\dfrac{\lambda_{1}}{\lambda_{1}+\lambda_{2}}\\
+        &=\dfrac{\lambda_{X}\left(t\right)}{\lambda_{X}\left(t\right)+\lambda_{Y}\left(t\right)}
       \end{align}
     \end{enumerate}
-
    \end{solution}
    \question
    One observation is taken on a discrete random variable $Y$ with a probability mass function $f\left(y\,|\,\theta\right) = \mathrm{Pr}\left(Y=y\,|\,\theta\right)$, where $\theta\in\left\{-1,0,1\right\}$. Find the maximum likelihood estimate (MLE) of $\theta$.
@@ -178,7 +207,7 @@
         \midrule
         2 & $1/3$ & $1/4$ & $0$ \\
         \midrule
-        3 & $0$ & $1/4$ & $1/2$ \\
+        3 & $0$ & $1/4$ & $1/4$ \\
         \midrule
         4 & $1/6$ & $1/4$ & $1/2$ \\
         \midrule
@@ -187,7 +216,10 @@
       \end{tabular}
     \end{table}
     \begin{solution}
-
+      표까지 그려가면서 정성스럽게 쉬운 문제를 냈는데, 그냥 각 관측값마다 확률이 (정확하게는 \emph{unnormalized likelihood function}이) 가장 큰 모수값을 선택해주면 된다. 그러니까
+      \begin{equation} 
+        \widehat{\theta}^{\text{MLE}}=\begin{cases}-1,& \text{if $Y=1$ or $Y=2$}\\0\text{ or }1,& \text{if Y=3}\\ 1,& \text{if $Y=4$ or $Y=5$} \end{cases}
+      \end{equation}
     \end{solution}
     \question
     $X_{1},X_{2},\ldots,X_{100}$이 포아송 분포 $\mathrm{Poi}\left(\lambda\right)$로부터 추출한 랜덤 표본이라 하자. $H_{0}:\lambda=\lambda_{0}$ vs $H_{1}:\lambda=\lambda_{1}(>\lambda_{0})$에 대한 검정을 고려하자.
@@ -197,7 +229,32 @@
       \item 대립가설이 $H_{1}:\lambda>\lambda_{0}$이라면 균일최강력검정법(uniformly most powerful test)이 존재하는지 보이시오.
     \end{enumerate}
     \begin{solution}
-
+      \begin{enumerate}[(a)]
+        \item 가능도비를 구한다.
+        \begin{align}
+          \dfrac{L_{0}}{L_{1}}&=\dfrac{e^{-\lambda_{0}n}\lambda_{0}^{X_{1}+\cdots+X_{n}}}{e^{-\lambda_{1}n}\lambda_{1}^{X_{1}+\cdots+X_{n}}}\\
+          &=e^{\left(\lambda_{1}-\lambda_{0}\right)n}\left(\dfrac{\lambda_{0}}{\lambda_{1}}\right)^{X_{1}+\cdots+X_{n}}\leq k
+        \end{align}
+        일 때 귀무가설이 기각되는 것이 균일최강력검정법이다. $\lambda_{1}>\lambda_{0}$이므로 $\lambda_{0}$의 $\lambda_{1}$에 대한 비는 $1$보다 작다. 따라서 기각영역은 
+        \begin{equation}
+          \sum_{i=1}^{n}X_{i}\geq c
+        \end{equation}
+        일 때이며 (본 문제에서는 $n=100$), 상수 $c$는 다음과 같이 구한다.
+        \begin{equation}
+          \mathrm{Pr}\left(\sum_{i=1}^{n}X_{i}\geq c\,\middle|\,H_{0}\right)=\alpha
+        \end{equation}
+        여기서 $X_{1}+\cdots+X_{n}\sim\mathrm{Poi}\left(n\lambda\right)$이므로 (29)는
+        \begin{equation}
+          \sum_{x=\ceil{c}}^{\infty}\dfrac{e^{-n\lambda_{0}}\left(n\lambda_{0}\right)^{x}}{x!}=\alpha
+        \end{equation}
+        가 된다. 따라서 저 식을 만족하는 실수 $c$를 찾아서 그것보다 모든 변수를 다 더한 값이 크면 귀무가설을 기각한다.
+        \item 검정력 함수는 대립가설을 참으로 놓고 기각역의 확률을 구하는 것이므로
+        \begin{equation}
+          \beta\left(X_{1},\ldots,X_{n}\right) = \sum_{x=\ceil{c}}^{\infty}\dfrac{e^{-n\lambda_{1}}\left(n\lambda_{1}\right)^{x}}{x!}
+        \end{equation}
+        이며 어차피 $c$는 정수로 나올 것이므로 $\ceil{c}=c$가 될 것이다. 그리고 $n=100$이다.
+        \item 결국 위에서 사용한 대립가설의 정보는 $\lambda_{1}>\lambda_{0}$뿐이므로 대립가설이 그에 따라 바뀌어도 결과는 변함이 없다. 고로 균일최강력검정은 존재하고 그 기각역 및 모든 결과는 위와 동일하다.
+      \end{enumerate}
     \end{solution}
     \question
     단순선형회귀모형에 따르는 $n$개의 자료
@@ -221,7 +278,58 @@
       \item 위에서 제시한 신뢰구간의 신뢰수준이 95\%가 됨을 증명하시오. (5점)
     \end{enumerate}
     \begin{solution}
-
+      \begin{enumerate}[(a)]
+      \item 예년도 문제 참조.
+      \item 이 문제는 두 가지 방법으로 풀 수 있다. 하나는 가장 편하게 벡터미분을 이용하는 것이다. 즉, 문제를 수치최적화 문제로 치환한 뒤 변수벡터에 대해 미분한 후 0으로 놓고 정리하는 식이다.
+      \begin{align}
+        \widehat{\beta} &= \argmin_{\beta}\left(Y-\mathbf{X}\beta\right)'\left(Y-\mathbf{X}\beta\right)\\
+        \dfrac{d}{d\beta}\left(Y-\mathbf{X}\beta\right)'\left(Y-\mathbf{X}\beta\right) &= -2\mathbf{X}'Y+2\mathbf{X}'\mathbf{X}\beta = 0\\
+        \left(\mathbf{X}'\mathbf{X}\right)\widehat{\beta} &= \mathbf{X}'Y
+      \end{align}
+      따라서 최소제곱추정량은 이를 반드시 만족함을 알 수 있다. 다만 이 식이 반드시 성립하는지는 증명해야 한다. 이는 다음과 같이 증명한다. 행렬의 열공간(column space)는 $\bs{\mathrm{col}}\left(\mathbf{X}\right)$로 영공간(null space)는 $\bs{\mathrm{null}}\left(\mathbf{X}\right)$로 표현하기로 한다. \par
+      \begin{lemma}
+        For any $m\times n$ matrix $A$, $\bs{\mathrm{null}}\left(A'A\right)=\bs{\mathrm{null}}\left(A\right)$.
+      \end{lemma}
+      \begin{proof}
+        벡터 $x$가 $\bs{\mathrm{null}}\left(A\right)$에 있다고 하자. 즉, $Ax=0$. 여기서 $A'Ax=0$도 성립함은 쉽게 알 수 있다. 반대로 만약 $x\in\bs{\mathrm{null}}\left(A'A\right)$라면 $A'Ax=0$이다. 다시 여기에 $x'$를 곱하면 $x'A'Ax=0$는 변함이 없고 이는 다시 $\left(Ax\right)'\left(Ax\right)=0$이 되어 $Ax$벡터의 내적이 된다. 내적이 0이기 위해서는 $Ax=0$이어야 하므로 $x\in\bs{\mathrm{null}}\left(A\right)$. 따라서 $x\in\bs{\mathrm{null}}\left(A'A\right)\iff x\in\bs{\mathrm{null}}\left(A\right)$.
+      \end{proof}
+      \begin{lemma}
+        For any $m\times n$ matrix $A$, $\bs{\mathrm{col}}\left(A'\right)=\bs{\mathrm{col}}\left(A'A\right)$.
+      \end{lemma}
+      \begin{proof}
+        임의의 $x\in\mathbb{R}^{n}$ 벡터를 택하면 $A'Ax$는 $\bs{\mathrm{col}}\left(A'A\right)$에 속한다. 이는 다시 $A'\left(Ax\right)$이므로 $\bs{\mathrm{col}}\left(A'\right)$에도 속한다. 따라서 $\bs{\mathrm{col}}\left(A'A\right)\subset \bs{\mathrm{col}}\left(A'\right)$이다. 이제 열공간의 차원을 비교하면 되는데 우회적으로 앞서 \emph{lemma}로 증명했던 영공간을 통해 $\bs{\mathrm{col}}\left(A'A\right)=\bs{\mathrm{col}}\left(A'\right)$임을 보일 수 있다. 왜냐하면 $\bs{\mathrm{null}}\left(A'A\right)=\bs{\mathrm{null}}\left(A\right)$이고 $A'A$와 $A$모두 열의 개수가 $n$개로 동일하기 때문에 \emph{rank-nullity theorem}에 의해 열공간의 차원 역시 동일함을 알 수 있다. 다시 \emph{rank theorem}에 따라 $\bs{\mathrm{col}}\left(A'\right)$의 차원과 $\bs{\mathrm{col}}\left(A\right)$의 차원이 동일하므로 $\bs{\mathrm{col}}\left(A'A\right)$의 차원과 $\bs{\mathrm{col}}\left(A'\right)$의 차원이 같다. 따라서 $\bs{\mathrm{col}}\left(A'A\right)=\bs{\mathrm{col}}\left(A'\right)$이다.\par
+      \end{proof}
+      이제 다시 돌아와서 $\mathbf{X}'\mathbf{X}\widehat{\beta}=\mathbf{X}'Y$가 항상 성립하는가에 대한 질문에 답해보자. 분명 위에 따르면 $\mathbf{X}'Y\in\bs{\mathrm{col}}\left(\mathbf{X}'\right)$이며 이는 곧 $\bs{\mathrm{col}}\left(\mathbf{X}'\mathbf{X}\right)$이므로 언제나 성립함을 알 수 있다. 단, $\widehat{\beta}$가 유일하게 결정되기 위해서는 $\mathbf{X}'\mathbf{X}$의 역행렬이 존재해야 하고 (일반적으로 행보다 열이 많은 $\mathbf{X}$를 가정하므로) $\bs{\mathrm{rank}}\left(\mathbf{X}'\mathbf{X}\right)=\text{\# of independent columns}$이기 때문에 $\mathbf{X}$의 열이 모두 선형독립이어야 함을 알 수 있다.
+      \item (b) 참조.
+      \begin{equation}
+        \widehat{\beta}=\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y
+      \end{equation}
+      \item $\widehat{\beta}\sim\mathcal{N}\left(\beta,\sigma^{2}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\right)$이므로 $\mathbf{C}=\left(\mathbf{X}'\mathbf{X}\right)^{-1}$라 놓으면 $\mathrm{Var}\left(\widehat{\beta}_{1}\right)=\sigma^{2}\mathbf{C}_{22}$. 단순선형회귀의 경우
+      \begin{align}
+        \mathbf{X}'\mathbf{X} &= \begin{bmatrix}1 & 1 &\cdots & 1\\ x_{1} &x_{2} & \cdots & x_{n}\end{bmatrix}\begin{bmatrix}1& x_{1}\\ 1 & x_{2} \\ \vdots & \vdots \\ 1 & x_{n}\end{bmatrix}\\
+        &= \begin{bmatrix}n & \sum_{i=1}^{n}x_{i}\\ \sum_{i=1}^{n}x_{i} & \sum_{i=1}^{n}x_{i}^{2}\end{bmatrix}\\
+        \left(\mathbf{X}'\mathbf{X}\right)^{-1} &= \dfrac{1}{n\sum_{i=1}^{n}x_{i}^{2}-\left(n\overline{x}_{n}\right)^{2}}\begin{bmatrix}\sum_{i=1}^{n}x_{i}^{2}& -\sum_{i=1}^{n}x_{i}\\ -\sum_{i=1}^{n}x_{i} & n \end{bmatrix}
+      \end{align}
+      여기서
+      \begin{equation}
+        n\sum_{i=1}^{n}x_{i}^{2}-\left(n\overline{x}_{n}\right)^{2} = n\sum_{i=1}^{n}\left(x_{i}-\overline{x}_{n}\right)^{2}
+      \end{equation}
+      따라서 $\mathbf{C}_{22}=1\Big/ \left(\sum_{i=1}^{n}\left(x_{i}-\overline{x}_{n}\right)^{2} \right)$이므로 ($\sigma^{2}$는 모르므로 비편향추정량인 $S^{2}$로 대입한다.)
+      \begin{align}
+        \mathrm{Var}\left(\widehat{\beta}_{1}\right) &= \dfrac{\displaystyle \sum_{i=1}^{n}\left(y_{i}-\hat{y}_{i}\right)^{2}}{\left(n-2\right)\displaystyle \sum_{i=1}^{n}\left(x_{i}-\overline{x}_{n}\right)^{2}}
+      \end{align}
+      그러므로
+      \begin{equation}
+        \dfrac{\widehat{\beta}_{1}-\beta_{1}}{\sqrt{\mathrm{Var}\left(\widehat{\beta}_{1}\right)}}\sim t_{n-2}
+      \end{equation}
+      를 이용하여
+      \begin{align}
+        \mathrm{Pr}&\left(-t_{n-2}\left(0.025\right)\leq \dfrac{\displaystyle\widehat{\beta}_{1}-\beta_{1}}{\sqrt{\mathrm{Var}\left(\widehat{\beta}_{1}\right)}} \leq t_{n-2}\left(0.025\right)\right)=0.95\\
+        \mathrm{CI}&:\;\widehat{\beta}_{1}-t_{n-2}\left(0.025\right)\sqrt{\mathrm{Var}\left(\widehat{\beta}\right)} \leq \beta_{1} \leq \widehat{\beta}_{1}+t_{n-2}\left(0.025\right)\sqrt{\mathrm{Var}\left(\widehat{\beta}\right)}
+      \end{align}
+      (43)을 (46)에 대입한다. 이게 성립하려면 처음에 세웠던 모형이 맞아야 한다. 즉, 오차항이 정규분포를 따라야 하고 모두 같은 분산을 가져야 한다. 또한 $\mathbf{X}$와 오차항은 독립이어야 한다.
+      \item 뭘 증명하라는 건지 모르겠다. By construction, 신뢰수준은 95\%이다.
+      \end{enumerate}
     \end{solution}
 \end{questions}
 \end{document}
