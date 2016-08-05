@@ -264,7 +264,7 @@
       \end{align}
       따라서 최대가능도추정량의 점근분포는 다음과 같다.
       \begin{equation}
-        \sqrt{n}\left(\beta-\widehat{\beta}^{\text{MLE}}\right) \xrightarrow{d}\mathcal{N}\left(0,\dfrac{\beta^{2}}{2n}\right)
+        \sqrt{n}\left(\widehat{\beta}^{\text{MLE}}-\beta\right) \xrightarrow{d}\mathcal{N}\left(0,\dfrac{\beta^{2}}{2n}\right)
       \end{equation}
     \end{enumerate}
    \end{solution}
@@ -305,7 +305,7 @@
       \end{equation}
       다항분포의 그 분포식은 다음과 같다.
       \begin{equation}
-        f\left(X_{1},\cdots,X_{5}\,|\,p\right) = \dfrac{\left(X_{1}+\cdots +X_{5}\right)!}{X_{1}!\cdots X_{5}!} 4^{X_{2}+X_{6}}6^{X_{3}}p^{X_{2}+2X_{3}+3X_{4}+4X_{5}}\left(1-p\right)^{4X_{1}+3X_{2}+2X_{3}+X_{4}}
+        f\left(X_{1},\cdots,X_{5}\,|\,p\right) = \dfrac{\left(X_{1}+\cdots +X_{5}\right)!}{X_{1}!\cdots X_{5}!} 4^{X_{2}+X_{4}}6^{X_{3}}p^{X_{2}+2X_{3}+3X_{4}+4X_{5}}\left(1-p\right)^{4X_{1}+3X_{2}+2X_{3}+X_{4}}
       \end{equation}
       전체 시행횟수 ($X_{1}+\cdots+X_{5}$)를 $n$으로 놓으면 $\left(1-p\right)$의 지수부분은
       \begin{equation}

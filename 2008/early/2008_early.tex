@@ -211,9 +211,9 @@
       \item 가능도비를 계산하면
       \begin{align}
         \dfrac{L_{0}}{L_{1}} &= \dfrac{\left(0.25\right)^{x}\left(0.25\times 3\right)^{n-x}}{\left(0.5\right)^{x}}\\
-        &= \left(\dfrac{3}{2}\right)^{n}\dfrac{1}{3}^{x} \geq c
+        &= \left(\dfrac{3}{2}\right)^{n}\left(\dfrac{1}{3}\right)^{x} \leq c
       \end{align}
-      이를 정리하면 $c' \geq x$일 때 귀무가설을 기각하는 것이 최강력 검정이 됨을 알 수 있다. 어떤 상수 $c'$는 유의확률이 $\alpha$(유의수준)과 같아지는 상수값을 찾으면 된다. 하지만 이 경우 이산확률분포이므로 정확히 $\alpha=0.05$가 되는 값이 없을 수도 있고, 그러한 경우 
+      이를 정리하면 $x \geq c'$일 때 귀무가설을 기각하는 것이 최강력 검정이 됨을 알 수 있다. 어떤 상수 $c'$는 유의확률이 $\alpha$(유의수준)과 같아지는 상수값을 찾으면 된다. 하지만 이 경우 이산확률분포이므로 정확히 $\alpha=0.05$가 되는 값이 없을 수도 있고, 그러한 경우 
       \begin{equation}
         \sum_{x=c'}^{n}{{n}\choose{x}}\left(0.25\right)^{x}\left(0.75\right)^{n-x} \leq 0.05
       \end{equation}

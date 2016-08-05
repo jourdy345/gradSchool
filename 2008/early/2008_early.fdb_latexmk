@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1469101871 "2008_early.tex" "2008_early.pdf" "2008_early" 1469101872
+["pdflatex"] 1470309296 "2008_early.tex" "2008_early.pdf" "2008_early" 1470309297
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1254269338 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1202520719 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1202520719 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -184,9 +184,9 @@
   "/usr/local/texlive/2015/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1432479641 1764542 91654ba72bdb667e84ea24f076ae16d8 ""
   "/usr/local/texlive/2015/texmf-var/web2c/pdftex/pdflatex.fmt" 1432479681 3849859 39a7d258195bde2394e244961601fbc5 ""
   "/usr/local/texlive/2015/texmf.cnf" 1432479636 577 0d611272082f3cdb8e80e09a3c69cf07 ""
-  "2008_early.aux" 1469101871 963 64906ca33ce42f4b06e47d3f001ef578 ""
-  "2008_early.tex" 1469101870 22589 82703abd2b738f14024b9312a9e96c7d ""
+  "2008_early.aux" 1470309296 963 64906ca33ce42f4b06e47d3f001ef578 ""
+  "2008_early.tex" 1470309295 22602 ec9b66a586d1d89d54d217ab22b83bf0 ""
   (generated)
+  "2008_early.pdf"
   "2008_early.aux"
   "2008_early.log"
-  "2008_early.pdf"
