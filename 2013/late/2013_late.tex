@@ -138,16 +138,50 @@
 \runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2013 late}
 \begin{questions}
    \question
-    (25점) let $X$ and $Y$ be independent non-negative random variables with continuous density functions $f_{X}\left(x\right)$ and $f_{Y}\left(y\right)$ respectively on $\left(0,\infty\right)$. Show that
+    (25점) Let $X$ and $Y$ be independent non-negative random variables with continuous density functions $f_{X}\left(x\right)$ and $f_{Y}\left(y\right)$ respectively on $\left(0,\infty\right)$. Show that
     \begin{enumerate}[(a)]
       \item If, given $X+Y=u$, $X$ is uniformly distributed on $(0,u)$ whatever the value of $u$, then
       $$
-        f_{Y}\left(u-v\right)f_{X}\left(v\right) = \dfrac{1}{v}\int_{0}^{u}f_{Y}\left(u-y\right)f_{X}\left(y\right)\,dy.
+        f_{Y}\left(u-v\right)f_{X}\left(v\right) = \dfrac{1}{u}\int_{0}^{u}f_{Y}\left(u-y\right)f_{X}\left(y\right)\,dy.
       $$
       \item If $X$ and $Y$ be independent exponential random variables with a common parameter $\lambda$, $X,Y\sim \mathrm{Exp}\left(\lambda\right)$, then the conditional distribution of $X$ given $X+Y=u$ is a uniform distribution on $\left(0,u\right)$.
     \end{enumerate}
     \begin{solution}
-
+      \begin{enumerate}[(a)]
+        \item 처음 보고 풀기 조금 어려운 문제인 듯하다. 좌변을 먼저 보면, $X+Y=U$와 $X=V$의 결합분포를 구한 것이다. 즉,
+        \begin{align}
+          \begin{cases}U=X+Y\\V=X  \end{cases} &\implies \begin{cases}X=V\\Y=U-V \end{cases}\\
+          \left|J\right| &= 1\\
+          f_{U,V}\left(u,v\right) &= f_{X,Y}\left(v,u-v\right)\cdot 1\\
+          &= f_{Y}\left(u-v\right)f_{X}\left(v\right)
+        \end{align}
+        그리고 우변은 $U,V$의 분포를
+        \begin{equation}
+          f_{V|U}\left(v\,|\,u\right)f_{U}\left(u\right)
+        \end{equation}
+        의 꼴로 구한 것이다. 문제에서 $V\,|\,U\sim\mathrm{Unif}\left(0,u\right)$라고 했고 
+        \begin{align}
+        f_{U}\left(u\right) &= \int_{0}^{u}f_{U,V}\left(u,v\right)\,dv\\
+        &= \int_{0}^{u}f_{Y}\left(u-v\right)f_{X}\left(v\right)\,dv
+        \end{align}
+        이므로
+        \begin{equation}
+          f_{V|U}\left(v|u\right)f_{U}\left(u\right)= \dfrac{1}{u}\int_{0}^{u}f_{Y}\left(u-v\right)f_{X}\left(v\right)\,dv
+        \end{equation}
+        이다. 둘 모두 $U,V$의 결합분포이므로 문제에서 주어진 등식이 성립한다.
+        \item (a)에서 한 것을 바탕으로 계산하면
+        \begin{align}
+          f_{U,V}\left(u,v\right) &= f_{Y}\left(u-v\right)f_{X}\left(v\right)\\
+          &= \lambda e^{-\lambda\left(u-v\right)}\cdot \lambda e^{-\lambda v}\\
+          &=\lambda^{2}e^{-\lambda u}
+        \end{align}
+        따라서 $V\,|\,U$는 $U,V$의 결합분포에서 $U$의 주변분포를 나눠야 하므로
+        \begin{align}
+          f_{V|U}\left(v|u\right) &= f_{U,V}\left(u,v\right)\Big/\int_{0}^{u}f_{U,V}\left(u,v\right) \,dv\\
+          &=\dfrac{1}{u}
+        \end{align}
+        그러므로 $V\,|\,U\sim \mathrm{Unif}\left(0,u\right)$이다.
+      \end{enumerate}
     \end{solution}
     \question
     (25점) $X_{1},X_{2},\ldots,X_{n}$을 $\mathrm{Unif}\left(0,\theta\right)$로부터 얻은 랜덤표본이라고 하자.
@@ -157,7 +191,13 @@
       \item 모수 $\theta$에 대한 $\left(1-\alpha_{1}-\alpha_{2}\right)\times 100\%$ 신뢰구간을 구하라.
     \end{enumerate}
     \begin{solution}
-
+      \begin{enumerate}[(a)]
+        \item 이런 거 물어보지 마.
+        \begin{equation}
+          \widehat{\theta}=\max_{1\leq i \leq n}X_{i} \quad \left(=X_{\left(n\right)}\right)
+        \end{equation}
+        \item 완비통계량의 정의상 
+      \end{enumerate}
     \end{solution}
     \question
     (25점) $X_{1},\ldots,X_{n}$이 다음의 확률밀도함수를 가지는 랜덤표본일 때,
