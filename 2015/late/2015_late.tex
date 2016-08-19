@@ -1,0 +1,322 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{listings}
+
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ 2015, Late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{Year of 2015, late}
+\begin{questions}
+   \question
+   Let $X$ and $Y$ be random variables for which the joint PDF is as follows:
+   $$
+    f\left(x,y\right) = \begin{cases}xe^{-y},& \text{for $0<x<y<\infty$}\\0,& \text{otherwise}  \end{cases}
+   $$
+   \begin{enumerate}[(a)]
+    \item Compute $\mathrm{E}\left(Y\,|\,X\right)$
+    \item Compute $\mathrm{E}\left(e^{tY}\,|\,X\right)$
+    \item Let $W=Y-X$. Find the PDF of $W$.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 먼저 $X$의 주변분포는 적분하면 $f_{X}\left(x\right)=xe^{-x}$. 따라서 조건부 분포는
+      \begin{equation}
+        f_{Y|X}\left(y|x\right) = e^{x-y}
+      \end{equation}
+      이며 정의에 따라
+      \begin{align}
+        \mathrm{E}\left(Y\,|\,X=x\right) &= \int_{x}^{\infty}ye^{x-y}\,dy\\
+        &=e^{x}\int_{x}^{\infty}ye^{-y}\,dy\\
+        &=e^{x}\left(\left[-ye^{-y}\right]_{x}^{\infty}+\int_{x}^{\infty}e^{-y}\,dy\right)\\
+        &=e^{x}\left(xe^{-x}+e^{-x}\right)\\
+        &= x+1\\
+        \mathrm{E}\left(Y\,|\,X\right) &= X+1
+      \end{align}
+      \item 정의와 \emph{the law of unconscious statistician}에 의해
+      \begin{align}
+        \mathrm{E}\left(e^{tY}\,|\,X=x\right) &= \int_{x}^{\infty}e^{ty}e^{x-y}\,dy\\
+        &=e^{x}\int_{x}^{\infty}e^{\left(t-1\right)y}\,dy\\
+        &=e^{x}\left[\dfrac{1}{t-1}e^{\left(t-1\right)y} \right]_{x}^{\infty}\\
+        &=\begin{cases}\dfrac{1}{t-1}e^{tx}, & \text{if $t<1$}\\ \infty,&\text{if $t\geq 1$} \end{cases}\\
+        \mathrm{E}\left(e^{tY}\,|\,X\right)&=\begin{cases}\dfrac{1}{t-1}e^{tX}, & \text{if $t<1$}\\ \infty,&\text{if $t\geq 1$} \end{cases}
+      \end{align}
+      \item $W=Y-X$, $V=X$로 두면 $W\sim \mathrm{Exp}\left(1\right)$이다.
+    \end{enumerate}
+   \end{solution}
+   \question
+   $X_{1},\ldots,X_{n}$의 평균이 $\theta$인 지수분포에서 뽑은 임의표본이라고 하자.
+   \begin{enumerate}[(a)]
+    \item 이 지수분포의 분산에 대한 최대가능도 추정량(MLE)의 점근적 분산 (asymptotic variance)을 구하시오.
+    \item $n=30$이고 표본평균이 $26.5$라고 할 때, $\mathrm{Pr}\left(X>10\right)$의 최대가능도 추정량(MLE)을 이용하여 $95\%$ 근사 신뢰구간을 구하시오.
+    \item 이 분포로부터 $20$에서 중도 절단된(right-censored) 크기 $5$인 표본 $7,12,15,20,20$이 주어졌다고 할 때, $\theta$의 최대가능도 추정치를 구하시오.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item MLE의 점근분포는 다음과 같다.
+      \begin{equation}
+        \widehat{\theta} \xrightarrow{d}\mathcal{N}\left(\theta,\mathcal{I}\left(\theta\right)^{-1}\right)
+      \end{equation}
+      따라서 정보량을 구하면
+      \begin{equation}
+        \mathrm{I}\left(\theta\right) = \theta^{-2}
+      \end{equation}
+      따라서
+      \begin{equation}
+        \widehat{\theta}\xrightarrow{d}\mathcal{N}\left(\theta,n\theta^{-2}\right)
+      \end{equation}
+      \item 먼저 확률을 구하자.
+      \begin{align}
+        \mathrm{Pr}\left(X>10\right) &= \int_{10}^{\infty}\dfrac{1}{\theta}\exp\left(-\dfrac{x}{\theta}\right)\\
+        &= \exp\left(-\dfrac{10}{\theta}\right)\\
+        \widehat{\mathrm{Pr}\left(X>10\right)} &= \exp\left(-\dfrac{10}{\widehat{\theta}}\right),\qquad \text{(By the invariance property)}
+      \end{align}
+      \emph{Delta method}를 사용하면 다음과 같다.
+      \begin{equation}
+        \sqrt{n}\left(g\left(\widehat{\theta}\right)-g\left(\theta\right)\right)\xrightarrow{d}\mathcal{N}\left(0,\sigma^{2}\left[g'\left(\theta\right)\right]^{2}\right)
+      \end{equation}
+      따라서 $g\left(\widehat{\theta}\right)=\widehat{\mathrm{Pr}\left(X>10\right)}$이므로
+      \begin{equation}
+        \sqrt{n}\left(g\left(\widehat{\theta}\right)-g\left(\theta\right)\right)\xrightarrow{d}\mathcal{N}\left(0,n\theta^{-2}\cdot\dfrac{100}{\theta^{4}}\exp\left(-\dfrac{20}{\theta}\right)\right)
+      \end{equation}
+      이제 편의를 위해 $\sigma=10\sqrt{n}\theta^{-3}\exp\left(-10\theta^{-1}\right)$라 하자. 그러면
+      \begin{equation}
+        \dfrac{\sqrt{n}\left(g\left(\widehat{\theta}\right)-g\left(\theta\right)\right)}{\sigma}\xrightarrow{d}\mathcal{N}\left(0,1\right)
+      \end{equation}
+      그런데 신뢰구간을 구할 때 $\sigma$에 있는 모수 $\theta$가 매우 계산을 복잡하게 한다. 이는 MLE인 $\widehat{\theta}$로 대체해도 된다. 그렇게 대체한 것을 $\widehat{\sigma}$라 하자. 왜냐하면 \emph{Slutsky's theorem}에 의해
+      \begin{equation}
+        \dfrac{\sqrt{n}\left(g\left(\widehat{\theta}\right)-g\left(\theta\right)\right)}{\widehat{\sigma}} \xrightarrow{d} \dfrac{\sqrt{n}\left(g\left(\widehat{\theta}\right)-g\left(\theta\right)\right)}{\sigma}
+      \end{equation}
+      이기 때문이다. 그러면 신뢰구간은 다음과 같이 나온다.
+      \begin{equation}
+        g\left(\widehat{\theta}\right)-1.96\dfrac{\widehat{\sigma}}{\sqrt{n}}\leq g\left(\theta\right)\leq g\left(\widehat{\theta}\right)+1.96\dfrac{\widehat{\sigma}}{\sqrt{n}}
+      \end{equation}
+      문제에서 $\widehat{\theta}=26.5$이고 $n=30$이라 했으므로 $g\left(26.5\right)= e^{-10/26.5}$, $\widehat{\sigma}=10\sqrt{30}\cdot 26.5^{-3}\cdot e^{-10/26.5}$이므로
+      \begin{equation}
+        e^{-10/26.5}\left(1-\dfrac{19.6}{26.5^{3}}\right)\leq g\left(\theta\right)\leq e^{-10/26.5}\left(1+\dfrac{19.6}{26.5^{3}}\right)
+      \end{equation}
+      \end{enumerate}
+   \end{solution}
+   \question
+   이산형 확률변수 $X$의 확률밀도함수가
+   \begin{table}[!htbp]
+    \centering
+      \begin{tabular}{*7c}
+        \toprule
+        $X$ & 1 & 2 &3&4&5&6\\
+        \toprule
+        $f\left(x;\theta_{0}\right)$&0.02&0.03&0.05&0.30&0.50&0.10 \\
+        \midrule
+        $f\left(x;\theta_{1}\right)$&0.50&0.30&0.10&0.05&0.03&0.02\\ 
+        \bottomrule
+      \end{tabular}
+    \end{table}
+    로 주어졌다고 하자.
+    $$
+      H_{0}:\theta=\theta_{0}\quad \text{대} \quad H_{1}:\theta=\theta_{1}
+    $$
+    을 고려할 때
+    \begin{enumerate}[(a)]
+      \item 유의수준이 $0.10$인 모든 기각역을 제시하라.
+      \item 위의 확률밀도함수로부터 얻은 하나의 랜덤표본인 $x$의 값이 $6$이라 하자. 문제 (a)에서 구한 기각역의 검정력을 비교하여 유의수준이 $0.10$인 최강력 검정법을 시행하라.
+    \end{enumerate}
+     \begin{solution}
+      \begin{enumerate}[(a)]
+        \item 기각역이 2개 있다.
+        \begin{equation}
+          \mathrm{RR}_{1} = \left\{1,2,3\right\},\quad \mathrm{RR}_{2}=\left\{6\right\}
+        \end{equation}
+        \item 두 기각역에 대하여 검정력을 비교하면
+        \begin{align}
+          \mathrm{Pr}\left(\mathrm{RR}_{1}\,|\,H_{1}\right) &= 0.9\\
+          \mathrm{Pr}\left(\mathrm{RR}_{2}\,|\,H_{1}\right) &= 0.02
+        \end{align}
+        따라서 유의수준 $0.10$인 검정에서 최강력 검정법의 기각역은 $\left\{1,2,3\right\}$이므로 관측값이 $6$인 경우 귀무가설은 기각되지 않는다.
+      \end{enumerate}
+     \end{solution}
+     \question
+     선형회귀모형(Linear Regression Model) $Y_{i}=\beta_{0}+\beta_{1}x_{1i}+\cdots+\beta_{k}x_{ki}+\epsilon_{i}$을 고려하자. 여기서 $\epsilon_{i}$는 회귀모형 기본가정을 만족하고 $i=1,2,\ldots,n$이다.
+     \begin{enumerate}[(a)]
+      \item 회귀모형 기본가정을 모두 나열하고, 어떻게 기본가정 만족 여부를 확인하는지 간단히 서술하시오.
+      \item 위 모형에서 회귀계수모수 $\beta_{0},\beta_{1},\ldots,\beta_{k}$와 분산모수 $\sigma^{2}$의 최대우도추정(Maximum Likelihood Estimation; MLE) 방법에 의해 구하시오.
+      \item 위 모형에서 회귀계수모수 $\beta_{0},\beta_{1},\ldots,\beta_{k}$와 분산모수 $\sigma^{2}$를 최소제곱추정(Least Squares Estimation; LSE) 방법에 의해 구하시오.
+      \item 위 모형에서 분산이 일정하지 않은 경우, 즉, $\mathrm{Var}\left(Y_{i}\right)=\sigma_{i}^{2}$, 회귀계수모수 $\beta_{0},\beta_{1},\ldots,\beta_{k}$를 가중최소제곱추정(Weighted Least Squares Estimation; WLSE) 방법에 의해 구하시오.
+     \end{enumerate}
+     \begin{solution}
+      \begin{enumerate}[(a)]
+        \item 회귀모형의 기본 가정은 다음과 같다.
+        \begin{itemize}
+          \item linearity and additivity: 반응변수 $Y$의 기댓값은 설명변수 $X_{i}$들의 선형결합으로 표현될 수 있다.
+          \item statistical independence: 오차항들은 통계적으로 독립이다. 특히 자기상관(autocorrelation)이 없어야 한다.
+          \item homoskedasticity: 오차항들은 모두 같은 분산을 가진다.
+          \item normality: 오차항들은 모두 정규분포를 따른다.
+        \end{itemize}
+        각각의 가정에 대해 검정하는 방법은 차례대로
+        \begin{itemize}
+          \item linearity and additivity: 산점도행렬을 그려본다. 또한 적합값(fitted values)들과 반응변수의 산점도를 그려본다.
+          \item statistical independence: 통계적으로 독립인지는 모형을 세울 때의 가설이므로 검정하기는 어려울 수 있다. 자기상관성은 \emph{Durbin-Watson test}로 검정할 수 있다.
+          \item homoskedasticity: 산점도 행렬을 통해 검정할 수 있다.
+          \item normality: Q-plot을 그려본다.
+        \end{itemize}
+        이밖에도 다중공선성(multicollinearity)가 거의 없어야 한다. 이는 설계행렬(design matrix) $\mathbf{X}$의 열들이 선형독립이어야 한다는 의미이다. 그렇지 않으면 회귀계수의 추정치가 유일하지 않다. 다중공선성은 $\mathbf{X}'\mathbf{X}$(Grammian matrix)의 condition number를 통해 확인할 수 있다.
+        \item 다변량 정규분포를 이용하자. $Y=\mathbf{X}\beta+\epsilon$, $\epsilon\sim\mathcal{N}\left(\bs{0},\sigma^{2}\mathbf{I}_{n}\right)$. 따라서
+        \begin{equation}
+          L\left(\beta,\sigma^{2}\,|\,Y,\mathbf{X}\right) = \left(2\pi\sigma^{2}\right)^{-n/2}\exp\left(-\dfrac{1}{2\sigma^{2}}\left(Y-\mathbf{X}\beta\right)'\left(Y-\mathbf{X}\beta\right)\right)
+        \end{equation}
+        따라서 로그 가능도함수는
+        \begin{align}
+          \ell\left(\beta,\sigma^{2}\,|\,Y,\mathbf{X}\right) &= -\dfrac{n}{2}\ln\left(2\pi\sigma^{2}\right)-\dfrac{1}{2\sigma^{2}}\left(Y-\mathbf{X}\beta\right)'\left(Y-\mathbf{X}\beta\right)\\
+          \dfrac{\partial}{\partial \beta}\ell &= -\dfrac{1}{2\sigma^{2}}\left(2\mathbf{X}'\mathbf{X}\beta-2\mathbf{X}'Y\right)=0\\
+          \widehat{\beta}^{\text{MLE}} &= \left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y\\
+          \dfrac{\partial}{\partial \sigma^{2}}\ell &= -\dfrac{n}{2\sigma^{2}}+\dfrac{1}{2\left(\sigma^{2}\right)^{2}}\left(Y-\mathbf{X}\beta\right)'\left(Y-\mathbf{X}\beta\right)\\
+          \widehat{\sigma}^{2}_{\text{MLE}} &= \dfrac{1}{n}\left(Y-\mathbf{X}\widehat{\beta}^{\text{MLE}}\right)'\left(Y-\mathbf{X}\widehat{\beta}^{\text{MLE}}\right)
+        \end{align}
+        \item 이건 알아서...
+        \item WLSE는 GLS의 특수한 형태이다. GLS에서 오차의 공분산 행렬을 어떤 $\sigma^{2}\mathbf{V}$라고 두는데 여기서 행렬 $\mathbf{V}$에 특별한 제약이 없다. 그러나 WLSE는 오차의 공분산행렬이 대각행렬이어야 한다. 즉, $\epsilon\sim\mathcal{N}\left(\bs{0},\mathbf{W}\right)$이며 $\mathbf{W}=\mathrm{diag}\left(\sigma_{1}^{2},\sigma_{2}^{2},\ldots, \sigma_{n}^{2}\right)$이다. GLS에서도 변환을 통해 일반적인 선형회귀 모형으로 돌려놓는 데에 행렬 $\mathbf{V}$의 \emph{square-root matrix}를 사용했다. WLSE에서도 똑같이 $\mathbf{W}$행렬의 \emph{square-root matrix} $\mathbf{W}^{-1/2}=\mathrm{diag}\left(\sigma_{1}^{-1},\sigma_{2}^{-1},\ldots,\sigma_{n}^{-1}\right)$를 사용한다. 즉,
+        \begin{align}
+          \mathbf{W}^{-1/2}Y &= \mathbf{W}^{-1/2}\mathbf{X}\beta+\mathbf{W}^{-1/2}\epsilon\\
+          \mathbf{W}^{-1/2}\epsilon &\sim \mathcal{N}\left(\bs{0},\mathbf{I}_{n}\right)
+        \end{align}
+        가 되어 다시 최소제곱법을 쓸 수 있게 된다. 즉,
+        \begin{equation}
+          \widehat{\beta}^{\text{WLSE}} = \argmin_{\beta}\left(\mathbf{W}^{-1/2}Y-\mathbf{W}^{-1/2}\mathbf{X}\beta\right)'\left(\mathbf{W}^{-1/2}Y-\mathbf{W}^{-1/2}\mathbf{X}\beta\right)
+        \end{equation}
+        이는 다시
+        \begin{align}
+          \left(Y-\mathbf{X}\beta\right)'\mathbf{W}^{-1}\left(Y-\mathbf{X}\beta\right) &= \beta'\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\beta-2\beta'\mathbf{X}'\mathbf{W}^{-1}Y+\text{const}\\
+          \widehat{\beta}^{\text{WLSE}} &= \left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)^{-1}\mathbf{X}'\mathbf{W}^{-1}Y
+        \end{align}
+        가 된다.
+      \end{enumerate}
+     \end{solution}
+\end{questions}
+\end{document}

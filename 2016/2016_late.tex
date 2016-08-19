@@ -1,0 +1,352 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{listings}
+
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ 2016, Late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{Year of 2016, late}
+\begin{questions}
+   \question
+   표 1은 확률변수 $\left(X,Y\right)$의 결합밀도함수 $p$를 나타낸다. 이에 대해 다음 물음에 답하시오.
+   \begin{enumerate}[(a)]
+    \item $X$의 주변밀도함수를 구하시오.
+    \item $X=30$일 때 $Y$의 조건부밀도함수를 구하시오.
+    \item $X=30$일 때 $Y$의 조건부평균을 구하시오.
+    \item $\mathrm{E}\left(Y-a\right)^{2}$을 최소로 하는 상수 $a^{*}$를 구하시오.
+    \item $\mathrm{E}\left(Y-\beta_{0}-\beta_{1}X\right)^{2}$을 최소로 하는 2차원 벡터 $\beta^{*}=\left(\beta_{0}^{*},\beta_{1}^{*}\right)$를 구하시오.
+    \item $X=30$일 때 최적선형예측값 $\beta_{0}^{*}+\beta_{1}^{*}\times 30$을 구하고, $X=30$일 때 $Y$의 조건부 평균값과 비교하시오.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 주변(marginal)분포이므로 가생이에 있는 걸 쓰면 된다.
+      \begin{equation}
+        \mathrm{Pr}\left(X=x\right)=\begin{cases}0.45,& \text{if $x=30$}\\0.55,& \text{if $x=50$} \end{cases}
+      \end{equation}
+      \item $\mathrm{Pr}\left(X=30\right)=0.45$이므로
+      \begin{align}
+        \mathrm{Pr}\left(Y=4000\,|\,X=30\right) &= \dfrac{8}{9}\\
+        \mathrm{Pr}\left(Y=7000\,|\,X=30\right) &= \dfrac{1}{9}
+      \end{align}
+      \item 다음과 같다.
+      \begin{equation}
+        \mathrm{E}\left(Y\,|\,X=30\right) = 4000\times\dfrac{8}{9}+7000\times\dfrac{1}{9}=\dfrac{13000}{3}
+      \end{equation}
+      \item 다음과 같이 구할 수 있다.
+      \begin{align}
+        \mathrm{E}\left(\left(Y-a\right)^{2}\right) &= \mathrm{E}\left(\left(Y-\mathrm{E}\left(Y\right)+\mathrm{E}\left(Y\right)-a\right)^{2}\right)\\
+        &= \mathrm{E}\left( \left(Y-\mathrm{E}\left(Y\right)\right)^{2}+2\cancel{\left(\mathrm{E}\left(Y\right)-a\right)\left(Y-\mathrm{E}\left(Y\right)\right)}+\left(\mathrm{E}\left(Y\right)-a\right)^{2}\right)\\
+        &= \mathrm{E}\left( \left(Y-\mathrm{E}\left(Y\right)\right)^{2}+\left(\mathrm{E}\left(Y\right)-a\right)^{2}\right)
+      \end{align}
+      따라서 제곱식 2개가 있을 때 변할 수 있는 값이 $a$뿐일 때 제곱식 하나를 $0$으로 만드는 것이 전체를 최소화하는 방법이므로 $a^{*}=\mathrm{E}\left(Y\right)$이다. 고로 본 문제에서는
+      \begin{equation}
+        a^{*}=\dfrac{1}{2}\left(4000+7000\right)= 5500
+      \end{equation}
+      \item 선형식을 주었을 때는 다음과 같이 구한다. $f\left(\beta_{0},\beta_{1}\right)=\mathrm{E}\left(\left(Y-\beta_{0}-\beta_{1}X\right)^{2}\right)$라고 할 때
+      \begin{align}
+        \dfrac{\partial}{\partial \beta_{0}}f\left(\beta_{0},\beta_{1}\right) &= -2\left(\mathrm{E}\left(Y\right)-\beta_{0}-\beta_{1}\mathrm{E}\left(X\right)\right)=0\\
+        \dfrac{\partial}{\partial \beta_{1}}f\left(\beta_{0},\beta_{1}\right) &= -2\left(\mathrm{E}\left(XY\right)-\beta_{0}\mathrm{E}\left(X\right)-\beta_{1}\mathrm{E}\left(X^{2}\right)\right)=0
+      \end{align}
+      (8)을 $\mathrm{E}\left(Y\right)=\beta_{0}+\beta_{1}\mathrm{E}\left(X\right)$로 정리하고 양변에 $\mathrm{E}\left(X\right)$을 곱해주면
+      \begin{equation}
+        \mathrm{E}\left(X\right)\mathrm{E}\left(Y\right) = \beta_{0}\mathrm{E}\left(X\right)+\beta_{1}\left\{\mathrm{E}\left(X\right)\right\}^{2}
+      \end{equation}
+      이 되고 (9)번 식도 정리하면 $\mathrm{E}\left(XY\right)=\beta_{0}\mathrm{E}\left(X\right)+\beta_{1}\mathrm{E}\left(X^{2}\right)$이 되므로 이 식에서 (10)을 빼주면
+      \begin{equation}
+        \mathrm{Cov}\left(X,Y\right) = \beta_{1}\mathrm{Var}\left(X\right)
+      \end{equation}
+      이 되어서
+      \begin{equation}
+        \beta_{1}^{*} = \dfrac{\mathrm{Cov}\left(X,Y\right)}{\mathrm{Var}\left(X\right)}
+      \end{equation}
+      가 된다. 그리고 (8)번 식에서
+      \begin{equation}
+        \beta_{0}^{*} = \mathrm{E}\left(Y\right)-\beta_{1}^{*}\mathrm{E}\left(X\right)
+      \end{equation}
+      를 유도할 수 있다. 실제로 값을 구할 때 가장 문제가 되는 것은 $\mathrm{E}\left(XY\right)$인데 이는 다음과 같이 구할 수 있다.
+      \begin{align}
+        \mathrm{E}\left(XY\right)&= \sum_{x}\sum_{y}xyf_{X,Y}\left(x,y\right)\\
+        &= 30\cdot 4000\cdot 0.4+50\cdot 4000\cdot 0.1+30\cdot 7000\cdot 0.05 +50\cdot 7000\cdot 0.45\\
+        &= 236000\\
+        \mathrm{E}\left(X\right) &= 30\cdot 0.45+50\cdot 0.55\\
+        &=41\\
+        \mathrm{E}\left(X^{2}\right) &= 30^{2}\cdot 0.45+50^{2}\cdot 0.55\quad (\text{By the law of unconscious statistician})\\
+        &= 1780\\
+        \mathrm{Var}\left(X\right)&=99\\
+        \beta_{1}^{*} &= \dfrac{10500}{99}\\
+        \beta_{0}^{*} &= \dfrac{38000}{33}
+      \end{align}
+      \item 그냥 대입하자.
+      \begin{align}
+        \beta_{0}^{*}+\beta_{1}^{*}\times 30 &= \dfrac{38000}{33}+\dfrac{10500\times 30}{99} = \dfrac{13000}{3}\\
+        \mathrm{E}\left(Y\,|\,X=30\right) &= 4000\times\dfrac{8}{9}+7000\times\dfrac{1}{9}=\dfrac{13000}{3}
+      \end{align}
+      똑같다.
+    \end{enumerate}
+   \end{solution}
+   \question
+   Suppose that a random sample of size $n$ is drawn from each of the following distributions. Obtain the maximum likelihood estimate (MLE) for each of (a) and (b).
+   \begin{enumerate}[(a)]
+    \item $f\left(y;\mu,\sigma^{2}\right)=\dfrac{1}{\sqrt{2\pi\sigma^{2}}}\exp\left(-\dfrac{\left(y-\mu\right)^{2}}{2\sigma^{2}}\right)$
+    \item $f\left(y;\pi\right)=\pi^{y}\left(1-\pi\right)^{1-y}I_{\left[0,1\right]}\left(y\right)$, where $0\leq \pi \leq 1$.
+   \end{enumerate}
+   In addition, sketch the likelihood function for $n=3$ in (b), and mark the MLE on your figure.
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 정규분포 MLE는 다 알 것으로 간주...
+      \begin{align}
+        \widehat{\mu} &= \overline{Y}_{n}\\
+        \widehat{\sigma}^{2} &= \dfrac{1}{n}\sum_{i=1}^{n}\left(Y_{i}-\overline{Y}_{n}\right)^{2}
+      \end{align}
+      \item 문제가 좀 잘못됐다. indicator function의 아랫부분이 $[0,1]$이 아니라 집합이어야 한다. 즉, $\left\{0,1\right\}$이어야 한다. 그러면 베르누이 변수들이므로 우리가 아는 것처럼
+      \begin{equation}
+        \widehat{\pi}=\overline{Y}_{n}
+      \end{equation}
+      이 된다. 개형은 알아서...
+    \end{enumerate}
+   \end{solution}
+   \question
+   $X_{1},\ldots,X_{n}$이 다음의 확률밀도함수를 갖는 임의표본이라고 하자.
+   $$
+    f\left(x\right)=\dfrac{\theta^{3}e^{-\theta/x}}{2x^{4}},\qquad x>0.
+   $$
+   \begin{enumerate}[(a)]
+    \item $H_{0}:\theta=\theta_{0}$ vs $H_{a}:\theta>\theta_{0}$의 가설검정에 대하여, 유의수준 $\alpha$의 균일최강력검정 (Uniformly Most Powerful Test)의 기각역을 구하시오.
+    \item $n=10$이고 $\theta_{0}=1$, $\alpha=0.05$라 하자. $\theta=2$에서 (a)에서 구한 균일최강력검정의 검정력을 구하시오. 첨부된 카이제곱 임계값을 이용하시오.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 먼저 가능도함수를 구하자.
+      \begin{equation}
+        L\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) = \dfrac{\theta^{3n}}{2^{n}\left(X_{1}X_{2}\cdots X_{n}\right)^{4}}\exp\left(-\theta\left(\dfrac{1}{X_{1}}+\cdots+\dfrac{1}{X_{n}}\right)\right)
+      \end{equation}
+      따라서 $\theta_{1}>\theta_{0}$인 임의의 $\theta_{1}$를 정해놓고 가능도비를 구하면
+      \begin{align}
+        \dfrac{L_{0}}{L_{1}} &= \left(\dfrac{\theta_{0}}{\theta_{1}}\right)^{3n}\exp\left(\left(\theta_{1}-\theta_{0}\right)\sum_{i=1}^{n}\dfrac{1}{X_{i}}\right)\leq k
+      \end{align}
+      이므로 \emph{Karlin-Rubin theorem}에 따라
+      \begin{equation}
+        \mathrm{RR}=\left\{\left\{X_{i}\right\}_{i=1}^{n}\,\middle|\, \sum_{i=1}^{n}\dfrac{1}{X_{i}}\leq k' \text{ for some $k'$} \right\}
+      \end{equation}
+      사실 $X_{i}\sim\mathrm{InvGam}\left(3,\theta\right)$이다. 따라서 $X_{i}^{-1}\sim\mathrm{Ga}\left(3,\theta\right)$이다. 그러므로
+      \begin{equation}
+        \sum_{i=1}^{n}\dfrac{1}{X_{i}} \sim \mathrm{Ga}\left(3n,\theta\right)
+      \end{equation}
+      이 된다. 이를 카이제곱 변수로 만들기 위해서는 다음과 같이 해야 한다.
+      \begin{equation}
+        2\theta\sum_{i=1}^{n}\dfrac{1}{X_{i}} \sim \mathrm{Ga}\left(\dfrac{6n}{2},\dfrac{1}{2}\right)\overset{d}{\equiv} \chi^{2}\left(6n\right)
+      \end{equation}
+      이를 이용하여
+      \begin{equation}
+        \mathrm{Pr}\left(2\theta_{0}\sum_{i=1}^{n}\dfrac{1}{X_{i}}\leq \chi^{2}_{6n}\left(1-\alpha\right)\right) = \alpha
+      \end{equation}
+      임을 알 수 있고 따라서 기각역에서 $k'$는 다음과 같다.
+      \begin{equation}
+        k' = \dfrac{1}{2\theta_{0}}\chi_{6n}^{2}\left(1-\alpha\right)
+      \end{equation}
+      \item 주어진 조건에 의하면
+      \begin{equation}
+        \sum_{i=1}^{10}\dfrac{1}{X_{i}} \sim \mathrm{Ga}\left(30,1\right)
+      \end{equation}
+      이고 검정력은 다음과 같다.
+      \begin{equation}
+        \mathrm{Pr}\left(\sum_{i=1}^{10}\dfrac{1}{X_{i}}\leq \dfrac{1}{4}\chi_{60}^{2}\left(0.95\right)\right)
+      \end{equation}
+      우을 구하기 위해 \textsf{R}의 다음 코드, \texttt{qchisq(0.95,60,lower.tail=FALSE)/4}를 이용하면 \texttt{10.79699}를 얻을 수 있다. 따라서 검정력을 다음 \textsf{R} 코드를 통해 구한다.\par \texttt{pgamma(10.79699,30,1)=1.171414e-06}. 그러므로 $\alpha=0.05$ 유의수준에서 귀무가설은 기각된다.
+    \end{enumerate}
+   \end{solution}
+   \question
+   체중($x$)과 신장($y$)의 선형관계를 살펴보기 위하여 남녀 각각 $3$명을 랜덤하게 추출하였다. 남녀 간의 평균 신장 및 평균 체중의 차이를 반영하기 위하여 아래의 회귀모형을 고려하였다. 여기서 $\overline{x}_{i\cdot}$는 남자와 여자의 체중의 표본평균을 나타낸다.
+   $$
+    y_{ij}=\mu_{i}+\left(x_{ij}-\overline{x}_{i\cdot}\right)\beta+\epsilon_{ij},\quad \epsilon_{ij}\sim\mathcal{N}\left(0,\sigma^{2}\right),\;\; i=\text{남자, 여자},\;\;j=1,2,3.
+   $$
+   \begin{enumerate}[(a)]
+    \item $\mu_{i}$의 최소제곱추정량을 구하시오.
+    \item $\widehat{\beta}$을 $\beta$의 최소제곱추정량이라 하자. (a)의 답과 $\widehat{\beta}$을 이용하여 $\sigma^{2}$의 비편향 추정량을 구하시오.
+   \end{enumerate}
+   \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 이를 어떻게든 회귀모형의 행렬꼴로 바꿔야 한다. 즉 $Y=\mathbf{X}\bs{\theta}+\epsilon$. 다음과 같이 바꾸자.
+      \begin{align}
+        Y &= \begin{bmatrix}y_{11}&y_{12}&y_{13}&y_{21}&y_{22}&y_{23}\end{bmatrix}'\\
+        \mathbf{X} &= \begin{bmatrix}1 & 0 & \left(x_{11}-\overline{x}_{1\cdot}\right)\\1 & 0 & \left(x_{12}-\overline{x}_{1\cdot}\right)\\1 & 0 & \left(x_{13}-\overline{x}_{1\cdot}\right)\\ 0 & 1 & \left(x_{21}-\overline{x}_{2\cdot}\right)\\0 & 1 & \left(x_{22}-\overline{x}_{2\cdot}\right)\\0 & 1 & \left(x_{23}-\overline{x}_{2\cdot}\right)  \end{bmatrix}\\ 
+        \bs{\theta} &= \begin{bmatrix}\mu_{1}&\mu_{2}&\beta \end{bmatrix}'\\
+        \epsilon &= \begin{bmatrix}\epsilon_{11} &\epsilon_{12}&\epsilon_{13}&\epsilon_{21}&\epsilon_{22}&\epsilon_{23} \end{bmatrix}'
+      \end{align}
+      나머지는 회귀분석과 동일하다.
+      \begin{equation}
+        \widehat{\bs{\theta}} = \left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y
+      \end{equation}
+      하... 구해보자.
+      \begin{align}
+        \mathbf{X}'\mathbf{X} &= \begin{bmatrix}3 & 0 & \displaystyle\sum_{j=1}^{3}\left(x_{1j}-\overline{x}_{1\cdot}\right)\\ 0 & 3 &  \displaystyle\sum_{j=1}^{3}\left(x_{2j}-\overline{x}_{2\cdot}\right)\\\displaystyle\sum_{j=1}^{3}\left(x_{1j}-\overline{x}_{1\cdot}\right)& \displaystyle\sum_{j=1}^{3}\left(x_{2j}-\overline{x}_{2\cdot}\right) & \displaystyle\sum_{i=1}^{2}\sum_{j=1}^{3}\left(x_{ij}-\overline{x}_{i\cdot}\right)^{2} \end{bmatrix}
+      \end{align}
+      % $3\times 3$ 대칭행렬의 역행렬은 다음과 같다. 어떤 행렬 $M$의 원소를 $m_{ij},\;i=1,2,3,\; j=1,2,3$라 하자. 역행렬의 원소는 $a_{ij},\;i=1,2,3,\;j=1,2,3$로 표기하도록 한다. 그러면
+      % \begin{align}
+      %   a_{11} &= \left(m_{11}m_{22}-m_{23}^{2}\right)/\mathrm{det}\left(M\right)\\
+      %   a_{12} &= \left(m_{13}m_{23}-m_{11}m_{12}\right)/\mathrm{det}\left(M\right)\\
+      %   a_{13} &= \left(m_{12}m_{23}-m_{13}m_{22}\right)/\mathrm{det}\left(M\right)\\
+      %   a_{22} &= \left(m_{11}^{2}-m_{13}^{2}\right)/\mathrm{det}\left(M\right)\\
+      %   a_{23} &= \left(m_{12}m_{13}-m_{11}m_{23}\right)/\mathrm{det}\left(M\right)\\
+      %   a_{33} &= \left(m_{11}m_{22}-m_{12}^{2}\right)/\mathrm{det}\left(M\right)\\
+      %   \mathrm{det}\left(M\right) &= -m_{11}m_{12}^{2}+m_{11}^{2}m_{22}-m_{13}^{2}m_{22}+2m_{12}m_{13}m_{23}-m_{11}m_{23}^{2}
+      % \end{align}
+      위 행렬은 대각행렬임을 알 수 있다. 따라서
+      \begin{equation}
+        \mathbf{X}'Y = \begin{bmatrix}y_{11}+y_{12}+y_{13}\\y_{21}+y_{22}+y_{23}\\\displaystyle \sum_{i=1}^{2}\sum_{j=1}^{3}\left(x_{ij}-\overline{x}_{i\cdot}\right)y_{ij}  \end{bmatrix}
+      \end{equation}
+      그러므로
+      \begin{equation} 
+        \bs{\theta} = \begin{bmatrix}\dfrac{1}{3}\left(y_{11}+y_{12}+y_{13}\right)\\\dfrac{1}{3}\left(y_{21}+y_{22}+y_{23}\right)\\ \left.\left(\displaystyle  \sum_{i=1}^{2}\sum_{j=1}^{3}\left(x_{ij}-\overline{x}_{i\cdot}\right)y_{ij}\right) \middle/\displaystyle \left(\sum_{i=1}^{2}\sum_{j=1}^{3}\left(x_{ij}-\overline{x}_{i\cdot}\right)^{2}\right)\right. \end{bmatrix}
+      \end{equation}
+      \item 회귀분석과 똑같다. 비편향 추정량은 다음과 같다.
+      \begin{equation}
+        \widehat{\sigma}^{2} = \dfrac{\left(Y-\widehat{Y}\right)'\left(Y-\widehat{Y}\right)}{n-3}
+      \end{equation}
+      여기서 3은 이미 추정한 모수의 개수이다. 비편향 추정량인지 확인하려면 다음처럼 하면 된다.
+      \begin{align}
+        \mathrm{E}\left(\widehat{\sigma}^{2}\right) &= \dfrac{1}{n-3}\mathrm{E}\left(\left(Y-\widehat{Y}\right)'\left(Y-\widehat{Y}\right)\right)\\
+        &= \dfrac{1}{n-3}\mathrm{E}\left(Y'\left(\mathrm{I}_{n}-\mathbf{H}\right)Y\right)\qquad \left(\text{여기서 $\mathbf{H}=\mathbf{X}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'$}\right)\\
+        &= \dfrac{1}{n-3}\mathrm{E}\left(\left(Y-\mathbf{X}\bs{\theta}\right)'\left(\mathrm{I}_{n}-\mathrm{H}\right)\left(Y-\mathbf{X}\bs{\theta}\right)\right) \qquad \left(\text{전개하면 소거되고 위와 같다}\right)\\
+        &= \dfrac{1}{n-3}\mathrm{E}\left(\epsilon'\left(\mathbf{I}_{n}-\mathbf{H}\right)\epsilon\right)\\
+        &= \dfrac{1}{n-3}\mathrm{E}\left(\Tr\left(\epsilon'\left(\mathbf{I}_{n}-\mathbf{H}\right)\epsilon\right)\right)\\
+        &= \dfrac{1}{n-3}\mathrm{E}\left(\Tr\left(\left(\mathbf{I}_{n}-\mathbf{H}\right)\epsilon\epsilon'\right)\right) \qquad \left(\text{$\Tr$ 연산자는 permutable}\right)\\
+        &= \dfrac{1}{n-3}\Tr\left(\left(\mathbf{I}_{n}-\mathbf{H}\right)\mathrm{E}\left(\epsilon\epsilon'\right)\right) \qquad \left(\text{$\Tr$ 연산자는 linear하므로 $\mathrm{E}$가 들어갈 수 있다.}\right)\\
+        &= \dfrac{\sigma^{2}}{n-3}\Tr\left(\mathbf{I}_{n}-\mathbf{H}\right)\\
+        &= \sigma^{2}
+      \end{align}
+      따라서 비편향 추정량이 된다.
+    \end{enumerate}
+   \end{solution}
+\end{questions}
+\end{document}

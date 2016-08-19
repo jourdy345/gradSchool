@@ -177,7 +177,7 @@
         \end{align}
         따라서 $V\,|\,U$는 $U,V$의 결합분포에서 $U$의 주변분포를 나눠야 하므로
         \begin{align}
-          f_{V|U}\left(v|u\right) &= f_{U,V}\left(u,v\right)\Big/\int_{0}^{u}f_{U,V}\left(u,v\right) \,dv\\
+          f_{V|U}\left(v|u\right) &= \left.f_{U,V}\left(u,v\right)\middle/\int_{0}^{u}f_{U,V}\left(u,v\right) \,dv\right.\\
           &=\dfrac{1}{u}
         \end{align}
         그러므로 $V\,|\,U\sim \mathrm{Unif}\left(0,u\right)$이다.
@@ -196,7 +196,46 @@
         \begin{equation}
           \widehat{\theta}=\max_{1\leq i \leq n}X_{i} \quad \left(=X_{\left(n\right)}\right)
         \end{equation}
-        \item 완비통계량의 정의상 
+        \item 완비통계량의 정의상 어떤 통계량 $T$가 있을 때, 임의의 $\theta\in \Omega$에 대해서
+        \begin{equation}
+          \mathrm{E}\left(r\left(T\right)\right)=0 \implies \mathrm{Pr}\left(r\left(T\right)=0\right)=1
+        \end{equation}
+        이어야 하므로 우리의 통계량 $X_{\left(n\right)}$의 분포로부터 어떤 함수꼴 $g\left(X_{\left(n\right)}\right)$의 기댓값과 $g\left(X_{\left(n\right)}\right)=0$일 확률 사이의 관계를 알아보면 된다.
+        \begin{align}
+          \mathrm{Pr}\left(X_{\left(n\right)}\leq x\right) &= \left(\mathrm{Pr}\left(X_{1}\leq x\right)\right)^{n}\\
+          &=\left(\dfrac{x}{\theta}\right)^{n}\\
+          f_{X_{\left(n\right)}}\left(x\right) &= nx^{n-1}\theta^{-n}
+        \end{align}
+        따라서
+        \begin{align}
+          \mathrm{E}\left(g\left(X_{\left(n\right)}\right)\right) &= \int_{0}^{\theta}nx^{n-1}g\left(x\right)\theta^{-n}\,dx\\
+          &=n\theta^{-n}\int_{0}^{\theta}x^{n-1}g\left(x\right)\,dx=0
+        \end{align}
+        우리가 그러므로 알아봐야 할 관계는 다음과 같다.
+        \begin{equation}
+          \int_{0}^{\theta}x^{n-1}g\left(x\right)\,dx=0 \implies g\left(x\right)=0
+        \end{equation}
+        미적분의 기본정리에 의해
+        \begin{align}
+          \dfrac{d}{d\theta}\int_{0}^{\theta}x^{n-1}g\left(x\right)\,dx &= \theta^{n-1}g\left(\theta\right)\\
+          &=0\\
+          g\left(\theta\right) &= 0
+        \end{align}
+        0보다 큰 그 어떤 모수값 $\theta$를 가져와도 항상 $g\left(\theta\right)=0$이므로 $g:\mathbb{R}_{+}\mapsto \left\{0\right\}$이다.\par
+        충분통계량임은 \emph{Neyman-Fisher factorization theorem}을 통해 밝힐 수 있다.
+        \item 신뢰구간을 구하기 위해서는 주축통계량(pivot quantity)를 구해야 한다. 주축통계량으로 $X_{\left(n\right)}/\theta$를 생각할 수 있다. $Y=X_{\left(n\right)}/\theta$라 놓으면
+        \begin{equation}
+          f_{Y}\left(y\right) = ny^{n-1}
+        \end{equation}
+        이 되어 $Y\sim \mathrm{Be}\left(n,1\right)$이 됨을 알 수 있다. 모수가 $n$과 $1$인 베타분포의 CDF를 $F$라 할 때
+        \begin{equation}
+          \mathrm{Pr}\left(F_{\left(1-\alpha_{1}-\alpha_{2}\right)/2}^{-1}\leq \dfrac{X_{\left(n\right)}}{\theta}\leq F_{\left(1+\alpha_{1}+\alpha_{2}\right)/2}^{-1}\right)=1-\alpha_{1}-\alpha_{2}
+        \end{equation}
+        이므로 신뢰구간은
+        \begin{equation}
+          F_{\left(1+\alpha_{1}+\alpha_{2}\right)/2}^{-1}\cdot X_{\left(n\right)}\leq \theta\leq F_{\left(1-\alpha_{1}-\alpha_{2}\right)/2}^{-1}\cdot X_{\left(n\right)}
+        \end{equation}
+        가 될 것이다.
       \end{enumerate}
     \end{solution}
     \question
@@ -210,8 +249,28 @@
     $$
     이 가설에 대한 가능도비 검정을 $\theta$에 대한 최대가능도 추정량(MLE)의 함수로 표현하시오. (즉, MLE의 값에 따라 언제 귀무가설을 기각할 수 있는지 표현하시오.)
     \begin{solution}
-
-    \end{solution}
+      우선 $X_{i}\sim \mathrm{Be}\left(\theta,1\right)$이다. 2010년 후기 3번 문제에서 구했듯이
+        \begin{align}
+          \widehat{\theta}^{\text{MLE}} &= \left.n\middle/\left(-\sum_{i=1}^{n}\ln X_{i}\right)\right.\\
+          &\sim \mathrm{InvGam}\left(n,n\theta\right)
+        \end{align}
+        이다. 그러므로 가능도비를 구하면
+        \begin{align}
+          \dfrac{L_{0}}{\widehat{L}} = \left(\dfrac{3}{\widehat{\theta}}\right)^{n}\left(\prod_{i=1}^{n}x_{i}\right)^{3-\widehat{\theta}} &< c_{1}\\
+          n\left(\ln3-\ln\widehat{\theta}\right)+\left(3-\widehat{\theta}\right)\sum_{i=1}^{n}\ln x_{i}&<c_{2}\\
+          -n\ln\widehat{\theta}-\dfrac{3n}{\widehat{\theta}}&<c_{3}\\
+          \ln\widehat{\theta}+\dfrac{3}{\widehat{\theta}}&>c_{4}
+        \end{align}
+        도함수와 이계도함수를 구해서 최솟값이 어디인지, 그리고 변곡점이 어디인지 구하면 대충 그래프의 개형이 나온다. $f\left(x\right)=\ln x+3/x$는 $x>0$인 반직선 위에서 내려갔다 올라가므로 기각역은
+        \begin{equation}
+          \mathrm{RR}=\left\{\widehat{\theta}\,\middle|\,\ln\widehat{\theta}+\dfrac{3}{\widehat{\theta}}<a\quad \text{or}\quad \ln\widehat{\theta}+\dfrac{3}{\widehat{\theta}}>b \right\}
+        \end{equation}
+        이고 정확한 $a,b$값을 알려면 $\ln\widehat{\theta}+3/\widehat{\theta}$의 분포로 계산을 해야 하는데 변환 자체가 bijective하지 않아서 invertible하지 않으므로 수학적으로 상당히 복잡해진다. 따라서 
+        \begin{equation}
+          -2\ln\Lambda \xrightarrow{d}\chi_{L}^{2}
+        \end{equation}
+        라는 점근분포(asymptotic distribution)를 이용하는 편이 쉽다.
+      \end{solution}
     \question
     (25점) 선형회귀모형 $Y=\beta_{0}+\beta_{1}X_{1}+\cdots+\beta_{p}X_{p}+\epsilon$을 고려하자. 여기서, $Y$는 독립변수를, $X_{1},\ldots,X_{p}$는 설명변수들을, 그리고 $\beta_{0},\ldots, \beta_{p}$는 회귀계수들을 의미하며 $\epsilon$은 평균이 $0$, 분산이 $\sigma^{2}$인 오차항을 의미한다.
     \begin{enumerate}[(a)]
@@ -219,7 +278,52 @@
       \item 결정계수는 설명변수 $X_{1},\ldots,X_{p}$들의 측정단위에 의존하지 않음을 보여라.
     \end{enumerate}
     \begin{solution}
-
+      \begin{enumerate}[(a)]
+        \item \begin{align}
+          R^{2} &= 1-\dfrac{\text{SSE}}{\text{SST}}\\
+          &= 1-\dfrac{\sum_{i=1}^{n} \left(y_{i}-\hat{y}_{i}\right)^{2}}{\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}}\\
+          &=1-\dfrac{\sum_{i=1}^{n} \left(y_{i}-\widehat{\beta}_{0}-\widehat{\beta}_{1}x_{1}\right)^{2}}{\sum_{i=1}^{n} \left(y_{i}-\overline{y}\right)^{2}}\\
+          &=1-\dfrac{\sum_{i=1}^{n}\left(y_{i}-\overline{y}-\widehat{\beta}_{1}\left(x_{i}-\overline{x}\right)\right)^{2}}{\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}}\\
+          &=1-\dfrac{\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}-2\widehat{\beta}_{1}\sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)\left(y_{i}-\overline{y}\right)+\widehat{\beta}_{1}^{2}\sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)^{2}}{\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}}\\
+          &=\dfrac{\left(\sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)\left(y_{i}-\overline{y}\right)\right)^{2}}{\sum_{i=1}^{n}\left(y_{i}-\overline{y}\right)^{2}\sum_{i=1}^{n}\left(x_{i}-\overline{x}\right)^{2}}\\
+          &=\mathrm{Cor}^{2}\left(X,Y\right)
+        \end{align}
+        (40)에서 (41)로 넘어갈 때 $\widehat{\beta}_{1}$을 넣는다.
+        \item 설계행렬을 $\mathbf{X}$라 하고 다음과 같이 표기한다.
+        \begin{equation}
+          \mathbf{X}= \begin{bmatrix}\mathbf{1}& \mathbf{c}_{1} & \cdots & \mathbf{c}_{p}  \end{bmatrix}
+        \end{equation}
+        여기서 $\mathbf{c}_{i}$는 $(i+1)$번째 열을 의미한다. 그렇다면 단위가 다른 설계행렬을 $\mathbf{X}_{s}$라 하고 다음과 같다고 하자.
+        \begin{equation}
+          \mathbf{X}_{s}= \begin{bmatrix}\mathbf{1}& d_{1}\mathbf{c}_{1} & \cdots & d_{p}\mathbf{c}_{p}  \end{bmatrix}
+        \end{equation}
+        여기서 $d_{i}$는 모두 상수이다. 이는 다시 다음과 같이 표기 할 수 있다.
+        \begin{align}
+          \mathbf{X}_{s}&= \mathbf{XD}\\
+          \mathbf{D} &= \mathrm{diag}\left(1, d_{1},d_{2},\ldots ,d_{p}\right)
+        \end{align}
+        그리고 $Y$도 변환해서 $aY$로 놓는다. 이제 LSE를 다시 구해보면
+        \begin{align}
+          \widehat{\beta}_{s} &= a\mathbf{D}^{-1}\left(\mathbf{X}'\mathbf{X}\right)^{-1}\mathbf{X}'Y\\
+          &=a\mathbf{D}^{-1}\widehat{\beta}
+        \end{align}
+        그리고 적합값(fitted values)도
+        \begin{align}
+          \widehat{Y}_{s} &= \mathbf{X}_{s}\widehat{\beta}_{s}\\
+          &=a\mathbf{XDD}^{-1}\widehat{\beta}\\
+          &=a\mathbf{X}\widehat{\beta}\\
+          &=a\widehat{Y}
+        \end{align}
+        이제 $\mathrm{R}^{2}$를 다시 구해보면 다음과 같다. 원래가
+        \begin{align}
+          \mathrm{R}^{2} &= 1-\dfrac{\left(Y-\widehat{Y}\right)'\left(Y-\widehat{Y}\right)}{\left(Y-\overline{y}\mathbf{1}\right)'\left(Y-\overline{y}\mathbf{1}\right)}
+        \end{align}
+        라면
+        \begin{align}
+          \mathrm{R}_{s}^{2} &= 1-\dfrac{\left(aY-a\widehat{Y}\right)'\left(aY-a\widehat{Y}\right)}{\left(aY-a\overline{y}\mathbf{1}\right)'\left(aY-a\overline{y}\mathbf{1}\right)}\\
+          &=\mathrm{R}^{2}
+        \end{align}
+      \end{enumerate}
     \end{solution}
 \end{questions}
 \end{document}
