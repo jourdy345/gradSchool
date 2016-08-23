@@ -1,0 +1,376 @@
+\title{Graduate School Pre-exam Solution}
+\author{Daeyoung Lim}
+
+\documentclass[answers]{exam}
+\usepackage[left=3cm,right=3cm,top=3.5cm,bottom=2cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{kotex}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% \usepackage{enumerate}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{cancel}
+\usepackage{array}
+\usepackage{courier}
+\usepackage{booktabs}
+\usepackage{titlesec}
+\usepackage[shortlabels]{enumitem}
+\usepackage{setspace}
+\usepackage{empheq}
+\usepackage{tikz}
+\usepackage{listings}
+
+% \usepackage[toc,page]{appendix}
+
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\newcommand\encircle[1]{%
+  \tikz[baseline=(X.base)] 
+    \node (X) [draw, shape=circle, inner sep=0] {\strut #1};}
+ 
+% Command "alignedbox{}{}" for a box within an align environment
+% Source: http://www.latex-community.org/forum/viewtopic.php?f=46&t=8144
+\newlength\dlf  % Define a new measure, dlf
+\newcommand\alignedbox[2]{
+% Argument #1 = before & if there were no box (lhs)
+% Argument #2 = after & if there were no box (rhs)
+&  % Alignment sign of the line
+{
+\settowidth\dlf{$\displaystyle #1$}  
+    % The width of \dlf is the width of the lhs, with a displaystyle font
+\addtolength\dlf{\fboxsep+\fboxrule}  
+    % Add to it the distance to the box, and the width of the line of the box     ㅊ
+\hspace{-\dlf}  
+    % Move everything dlf units to the left, so that & #1 #2 is aligned under #1 & #2
+\boxed{#1 #2}
+    % Put a box around lhs and rhs
+}
+}
+\setcounter{secnumdepth}{4}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, % Standardschrift
+         %numbers=left,               % Ort der Zeilennummern
+         numberstyle=\tiny,          % Stil der Zeilennummern
+         %stepnumber=2,               % Abstand zwischen den Zeilennummern
+         numbersep=5pt,              % Abstand der Nummern zum Text
+         tabsize=2,                  % Groesse von Tabs
+         extendedchars=true,         %
+         breaklines=true,            % Zeilen werden Umgebrochen
+         keywordstyle=\color{red},
+            frame=b,         
+ %        keywordstyle=[1]\textbf,    % Stil der Keywords
+ %        keywordstyle=[2]\textbf,    %
+ %        keywordstyle=[3]\textbf,    %
+ %        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+         stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           % Leerzeichen anzeigen ?
+         showtabs=false,             % Tabs anzeigen ?
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false      % Leerzeichen in Strings anzeigen ?        
+ }
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+         %[Visual]Basic
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+         Java
+ }
+    %\DeclareCaptionFont{blue}{\color{blue}} 
+
+\definecolor{myblue}{RGB}{72, 165, 226}
+\definecolor{myorange}{RGB}{222, 141, 8}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\setlength{\heavyrulewidth}{1.5pt}
+\setlength{\abovetopsep}{4pt}
+\setlength{\parindent}{0mm}
+\linespread{1.3}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator{\Tr}{Tr}
+
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\opn}{\operatorname}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % We use newtheorem to define theorem-like structures
+% %
+% % Here are some common ones. . .
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{scolium}{Scolium}   %% And a not so common one.
+\newtheorem{definition}{Definition}
+\newenvironment{proof}{{\sc Proof:}}{~\hfill QED}
+\newenvironment{AMS}{}{}
+\newenvironment{keywords}{}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %   The first thanks indicates your affiliation
+% %
+% %  Just the name here.
+% %
+% % Your mailing address goes at the end.
+% %
+% % \thanks is also how you indicate grant support
+% %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+\setstretch{1.5} %줄간격 조정
+\newpage
+\firstpageheader{}{}{\bf\large Daeyoung Lim \\ Grad School \\ Year of 2016, late}
+\runningheader{Daeyoung Lim}{Graduate School Pre-exam}{2016 late}
+\begin{questions}
+  \question
+  $X$는 자연수의 값만 갖는 이산확률변수로서, $p_{k}=\mathrm{Pr}\left(X=k\right)$는 $\beta>0$, $r>-1\,\left(r\neq0\right)$에 대해 다음의 점화식을 만족한다.
+  $$
+    \dfrac{p_{k}}{p_{k-1}} = \dfrac{\beta}{\beta+1}\left(1+\dfrac{r-1}{k}\right),\quad k=2,3,4,\ldots
+  $$
+  \begin{enumerate}[(a)]
+    \item $p_{k}\;\left(k=1,2,\cdots\right)$를 $r,\beta,k$의 식으로 표현하시오. 이때, 다음의 결과를 이용할 수 있다.
+    $$
+      \forall x \text{ s.t. }\left|x\right|<1, \forall r\in\mathbb{R},\;\; \left(1-x\right)^{-r}=\sum_{k=0}^{\infty}{{-r}\choose{k}}\left(-x\right)^{k}=\sum_{k=0}^{\infty}{{r+k-1}\choose{k}}x^{k}
+    $$
+    \item 이 분포의 확률생성함수(probability generating function)를 구하고, 이것을 사용하여 $\mathrm{E}\left(X\left(X-1\right)\right)$을 구하시오.
+  \end{enumerate}
+  \begin{solution}
+    \begin{enumerate}[(a)]
+      \item 점화식을 풀기 위해 다음과 같이 곱한다.
+      \begin{equation}
+        \dfrac{\cancel{p_{2}}}{p_{1}}\times \dfrac{\cancel{p_{3}}}{\cancel{p_{2}}}\times \cdots \times \dfrac{p_{k}}{\cancel{p_{k-1}}} = \prod_{x=2}^{k}\dfrac{\beta}{\beta+1}\left(1+\dfrac{r-1}{x}\right)
+      \end{equation}
+      상수인 베타의 분수 항을 제외하고 실제로 변하는 $x$가 들어있는 항을 정리하면 다음과 같다.
+      \begin{align}
+        \prod_{x=2}^{k}\left(1+\dfrac{r-1}{x}\right)&= \dfrac{1}{r}\left(\dfrac{r}{1}\times \dfrac{r+1}{2}\times \dfrac{r+2}{3}\times \cdots \times \dfrac{k+r-1}{k}\right)\\
+        &= \dfrac{1}{r}{{r+k-1}\choose{k}}
+      \end{align}
+      그러면 (1)은 다음과 같이 정리된다.
+      \begin{equation}
+        \dfrac{p_{k}}{p_{1}} = \dfrac{1}{r}{{r+k-1}\choose{k}}\left(\dfrac{\beta}{\beta+1}\right)^{k-1}
+      \end{equation}
+      $p_{k}$는 확률질량함수이므로 $k=1,2,\ldots$에 대해 다 더하면 $1$이 되어야 한다. 따라서
+      \begin{align}
+        \sum_{k=1}^{\infty}\dfrac{p_{k}}{p_{1}} &= \sum_{k=1}^{\infty}\dfrac{1}{r}{{r+k-1}\choose{k}}\left(\dfrac{\beta}{\beta+1}\right)^{k-1}\\
+        &= \sum_{k=1}^{\infty}\dfrac{1}{r}{{r+k-1}\choose{k}}\left(\dfrac{\beta}{\beta+1}\right)^{k}\cdot \dfrac{\beta+1}{\beta}\\
+        &= \dfrac{1}{r}\dfrac{\beta+1}{\beta}\left(\sum_{k=0}^{\infty}{{r+k-1}\choose{k}}\left(\dfrac{\beta}{\beta+1}\right)^{k} -1\right)\\
+        \dfrac{1}{p_{1}}&= \dfrac{1}{r}\dfrac{\beta+1}{\beta}\left(\left(1-\dfrac{\beta}{\beta+1}\right)^{-r}-1\right)\\
+        p_{k} &= \left.{{r+k-1}\choose{k}}\left(\dfrac{\beta}{\beta+1}\right)^{k}\middle/ \left(\left(\dfrac{1}{\beta+1}\right)^{-r}-1\right)\right.
+      \end{align}
+      \item 확률생성함수는 오직 `이산확률변수'에 대해서만 정의할 수 있으며 해석학에서 나왔던, 확률질량함수의 \emph{`power series'}에 해당된다. 그러므로 다음과 같다.
+      \begin{equation}
+        G\left(z\right) = \mathrm{E}\left(z^{X}\right)=\sum_{x=0}^{\infty}p\left(x\right)z^{x}
+      \end{equation}
+      \emph{`Power series'}는 $\left|z\right|\leq1$인 복소수 $z\in\mathbb{C}$에 대해서 절대수렴(\emph{absolute convergence})한다. 본 문제의 확률질량함수에 대한 확률생성함수를 구해보자. 편의상 (a)의 마지막 $p_{k}$의 분모에 있는 정규화 상수(\emph{normalizing constant})를 $C$라고 놓자.
+      \begin{align}
+        \sum_{x=1}^{\infty}p_{x}z^{x} &= \dfrac{1}{C}\sum_{x=1}^{\infty}{{r+x-1}\choose{x}}\left(\dfrac{\beta}{\beta+1}\right)^{x}z^{x}\\
+        &=\dfrac{1}{C}\sum_{x=1}^{\infty}{{r+x-1}\choose{x}}\left(\dfrac{\beta z}{\beta+1}\right)^{x}\\
+        &= \dfrac{1}{C}\left(\sum_{x=0}^{\infty}{{r+x-1}\choose{x}}\left(\dfrac{\beta z}{\beta+1}\right)^{x}-1\right)\\
+        &= \dfrac{1}{C}\left(\left(1-\dfrac{\beta z}{\beta+1}\right)^{-r}-1\right)
+      \end{align}
+      확률생성함수의 특징은 `factorial moment'를 구할 수 있다는 것이다. 즉,
+      \begin{equation}
+        \left.\dfrac{d^{k}}{dz^{k}}G\left(z\right)\right|_{z=1} = \mathrm{E}\left(X\left(X-1\right)\cdots\left(X-k+1\right)\right)
+      \end{equation}
+      직접 전개해서 미분해보면 알 수 있다. 따라서 문제에서 요구한 `second order factorial moment'는 두번 미분해서 $z=1$를 대입하면 되므로
+      \begin{align}
+        \dfrac{d^{2}}{dz^{2}}G\left(z\right) &= \dfrac{r\left(r+1\right)}{C}\left(\dfrac{\beta}{\beta+1}\right)^{2}\left(1-\dfrac{\beta z}{\beta+1}\right)^{-r-2}
+      \end{align}
+      $z=1$ 대입하고 $C$와 함께 예쁘게 정리하면 다음과 같다.
+      \begin{equation}
+        \mathrm{E}\left(X\left(X-1\right)\right) = \dfrac{r\left(r+1\right)\beta^{2}}{\left(\beta+1\right)^{r}}
+      \end{equation}
+    \end{enumerate}
+    \end{solution}
+    \question
+    Let $X_{1},X_{2},\ldots,X^{n}\overset{iid}{\sim}\mathrm{Unif}\left(0,\theta\right)$.
+    \begin{enumerate}[(a)]
+      \item Show that the sample maximum, $X_{\left(n\right)}=\max\left(X_{1},\ldots,X_{n}\right)$ is the maximum likelihood estimator (MLE) of $\theta$.
+      \item Compute $\mathrm{E}\left(X_{\left(n\right)}\right)$ and $\mathrm{Var}\left(X_{\left(n\right)}\right)$.
+      \item Show that $X_{\left(n\right)}$ is a consistent estimator of $\theta$. That is, show that for an arbitrary given $\epsilon >0$,
+      $$
+        \lim_{n\to\infty}\mathrm{Pr}\left(\left|X_{\left(n\right)}-\theta\right|<\epsilon\right)=1.
+      $$
+      \item It is known that $X_{\left(n\right)}$ is a complete and sufficient statistic for $\theta$. Find the minimum variance unbiased estimator (MVUE) of $\theta$.
+      \item Let $\widehat{\theta}_{1}$ and $\widehat{\theta}_{2}$ denote the MLE and MVUE of $\theta$ respectively. Compare the mean squared error (MSE) of $\widehat{\theta}_{1}$ and $\widehat{\theta}_{2}$. Which one is better in terms of the MSE?
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}[(a)]
+        \item 가능도함수를 지표함수(\emph{indicator function})과 함께 쓰면 다음과 같다.
+        \begin{equation}
+          L\left(\theta\,|\,\left\{X_{i}\right\}_{i=1}^{n}\right) = \left(\dfrac{1}{\theta}\right)^{n}I_{\left(X_{\left(n\right)},\infty\right)}\left(\theta\right)
+        \end{equation}
+        그러므로 단조감소함수인 $\theta^{-n}$의 최댓값은 가장 작은 값인 $X_{\left(n\right)}$이다.
+        \item CDF부터 시작하면
+        \begin{align}
+          \mathrm{Pr}\left(X_{\left(n\right)}\leq x\right) &= \mathrm{Pr}\left(X_{1}\leq x\right)\mathrm{Pr}\left(X_{2}\leq 2\right)\cdots\mathrm{Pr}\left(X_{n}\leq x\right)\\
+          &= \left(\mathrm{Pr}\left(X_{1}\leq x\right)\right)^{n}\\
+          &= \left(\dfrac{x}{\theta}\right)^{n}
+        \end{align}
+        그러므로 $X_{\left(n\right)}$의 PDF는 다음과 같다.
+        \begin{equation}
+          f_{X_{\left(n\right)}}\left(x\right) = nx^{n-1}\theta^{-n}, \quad 0<x<\theta
+        \end{equation}
+        이를 통해 1,2차 적률을 통해 분산을 구하면
+        \begin{align}
+          \mathrm{E}\left(X_{\left(n\right)}\right) &= n\theta^{-n}\int_{0}^{\theta}x^{n}\,dx\\
+          &= \dfrac{n}{n+1}\theta\\
+          \mathrm{E}\left(X_{\left(n\right)}^{2}\right) &= n\theta^{-n}\int_{0}^{\theta}x^{n+1}\,dx\\
+          &= \dfrac{n}{n+1}\theta^{2}\\
+          \mathrm{Var}\left(X_{\left(n\right)}\right) &= \dfrac{n}{\left(n+1\right)^{2}\left(n+2\right)}\theta^{2}
+        \end{align}
+        \item 마코프 부등식(\emph{Markov's inequality})를 이용하면 쉽게 풀 수 있다.
+        \begin{equation}
+          \mathrm{Pr}\left(\left|X_{\left(n\right)}-\theta\right|\geq \epsilon \right)\leq \dfrac{\mathrm{E}\left|X_{\left(n\right)}-\theta\right|}{\epsilon}
+        \end{equation}
+        $X_{\left(n\right)}<\theta$이므로 우변의 분자는 $(-)$가 곱해져서 나온다. 고로 
+        \begin{equation}
+          \mathrm{Pr}\left(\left|X_{\left(n\right)}-\theta\right|\geq \epsilon \right)\leq \dfrac{1}{\epsilon}\left(\theta-\dfrac{n}{n+1}\theta\right)
+        \end{equation}
+        극한을 취하면
+        \begin{equation}
+          \lim_{n\to\infty}\mathrm{Pr}\left(\left|X_{\left(n\right)}-\theta\right|\geq \epsilon \right)\leq \lim_{n\to\infty}\dfrac{\theta}{\epsilon\left(n+1\right)}
+        \end{equation}
+        샌드위치 정리에 의해 우변이 0으로 간다. 확률측도에 대해서 다음을 정의하자. 표본공간(전체집합)을 $\Omega$라 했을 때 $\omega\in\Omega$에 대해서
+        \begin{equation}
+          A = \left\{\omega\,\middle|\,\left|X_{\left(n\right)}\left(\omega\right)-\theta\right|\geq \epsilon,\quad \text{for some } \epsilon>0 \right\}
+        \end{equation}
+        인데 문제에서 주어진 것은 $A^{\mathsf{c}}$의 측도(\emph{measure})이므로 $\sigma$-algebra의 성질을 이용하여 다음과 같이 구할 수 있다.
+        \begin{equation}
+          \mathrm{Pr}\left(A^{\mathsf{c}}\right) = \mathrm{Pr}\left(\Omega\setminus A\right)
+        \end{equation}
+        그런데 다음에 의해
+        \begin{equation}
+          A\cup A^{\mathsf{c}}=\Omega \implies \mathrm{Pr}\left(A\right)+\mathrm{Pr}\left(A^{\mathsf{c}}\right)=\mathrm{Pr}\left(\Omega\right)
+        \end{equation}
+        문제에 주어진 $A^{\mathsf{c}}$의 측도는 우리가 구한 $A$에 대해 다음과 같은 성질을 만족한다. 이는 유한 측도 공간(\emph{finite measure space})이기 때문에 가능하다.
+        \begin{equation}
+          \lim_{n\to\infty}\mathrm{Pr}\left(A^{c}\right)=\lim_{n\to\infty}\left(1-\mathrm{Pr}\left(A\right)\right)
+        \end{equation}
+        따라서 다음이 성립한다.
+        \begin{equation}
+          \lim_{n\to\infty}\mathrm{Pr}\left(\left|X_{\left(n\right)}-\theta\right|<\epsilon\right)=1
+        \end{equation}
+        \item \emph{Lehmann Scheffé lemma}에 의해 완비충분통계량이 존재한다면 최소분산비편향 추정량은 완비충분통계량의 어떤 함수꼴로 표현된다. 따라서 $X_{\left(n\right)}$가 완비충분통계량이라면 이를 비편향 추정량으로만 만들면 최소분산이 된다. 고로
+        \begin{equation}
+          \dfrac{n+1}{n}X_{\left(n\right)}
+        \end{equation}
+        가 최소분산비편향 추정량이 된다.
+        \item \emph{Variance-bias decomposition}에 의해 어떤 추정량 $\widehat{\theta}$의 MSE는 다음과 같이 분해된다.
+        \begin{equation}
+          \mathrm{MSE}\left(\widehat{\theta}\right) = \mathrm{Var}\left(\widehat{\theta}\right)+\mathrm{Bias}^{2}\left(\widehat{\theta}\right)
+        \end{equation}
+        우선 MLE는 비편향추정량이 아니므로 편향이 없어지지 않는다. 따라서 그대로 계산하면
+        \begin{equation}
+          \mathrm{MSE}\left(\widehat{\theta}_{1}\right) = \dfrac{2}{\left(n+1\right)\left(n+2\right)}\theta^{2}
+        \end{equation}
+        그리고 비편향추정량인 $\widehat{\theta}_{2}$의 MSE는 분산과 같다. 고로
+        \begin{equation}
+          \mathrm{MSE}\left(\widehat{\theta}_{2}\right)= \mathrm{Var}\left(\dfrac{n+1}{n}X_{\left(n\right)}\right)=\left(\dfrac{n+1}{n}\right)^{2}\mathrm{Var}\left(X_{\left(n\right)}\right)=\dfrac{n}{n^{2}\left(n+2\right)}\theta^{2}
+        \end{equation}
+        둘을 비교하면 최소분산비편향 추정량의 MSE가 더 작다.
+      \end{enumerate}
+    \end{solution}
+    \question
+    Suppose a box contains four marbles, $\theta$ white ones and $4-\theta$ black ones. Let two marbles be drawn from this box without replacement. Define a random variable $X$ as
+    $$
+      X=\begin{cases}1, & \text{if both selected marbles are same color}\\0, & \text{otherwise} \end{cases}
+    $$
+    Test $H_{0}:\theta=2$ against $H_{1}:\theta\neq2$ as follows; reject $H_{0}$ if both selected marbles are the same color.
+    \begin{enumerate}[(a)]
+      \item Derive the probability mass function of the discrete random variable $X$. That is, erive the probabilities $\mathrm{Pr}\left(X=1\right)$ and $\mathrm{Pr}\left(X=0\right)$ as functions of $\theta$.
+      \item Derive the power function, which is the probability of rejecting $H_{0}:\theta=2$, of this test.
+      \item What is the significance level $\alpha$ of this test?
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}[(a)]
+        \item 흰공 두개가 나오는 사건을 $\mathrm{WW}$라 표기하고 검은공 두개가 나오는 사건을 $\mathrm{BB}$라 표기하자. 그러면 그 확률은 다음과 같다.
+        \begin{align}
+          \mathrm{Pr}\left(\mathrm{WW}\right) &= \dfrac{\theta\left(\theta-1\right)}{12}\\
+          \mathrm{Pr}\left(\mathrm{BB}\right) &= \left(1-\dfrac{\theta}{4}\right)\left(1-\dfrac{\theta}{3}\right)
+        \end{align}
+        $X=1$은 $\mathrm{WW}$ 혹은 $\mathrm{BB}$이 일어날 사건이므로
+        \begin{align}
+          \mathrm{Pr}\left(X=1\right) &= \dfrac{\theta^{2}-4\theta+6}{6}\\
+          \mathrm{Pr}\left(X=0\right) &= \dfrac{\theta\left(4-\theta\right)}{6}
+        \end{align}
+        \item $X=1$일 때 기각한다고 했으므로 (a)에서 (42)번 식이 검정력함수이다.
+        \item 검정력함수에 귀무가설에서 상정한 모수값을 집어넣은 것이 유의수준이다. 따라서
+        \begin{equation}
+          \alpha = 1/3
+        \end{equation}
+      \end{enumerate}
+    \end{solution}
+    \question
+    $n$개의 자료가 단순선형회귀모형
+    \begin{equation}
+      y_{i} = \beta_{0}+\beta_{1}x_{i}+\epsilon_{i},\quad i=1,\ldots,n
+    \end{equation}
+    을 따른다고 가정하자. 여기서 $y_{i}$는 $i$번째 개체의 반응변수값, $x_{i}$는 $i$번째 개체의 설명변수값, 그리고 $\beta_{0}$와 $\beta_{1}$의 회귀계수들을 의미하며 $\epsilon_{i}$은 평균이 $0$, 분산이 $x_{i}$의 값이 증가함에 따라 증가하는 분포를 따른다고 한다.
+    \begin{enumerate}[(a)]
+      \item $\beta_{0}$과 $\beta_{1}$의 가중최소제곱 추정량(weighted least squares estimator) $\widehat{\beta}_{0}$와 $\widehat{\beta}_{1}$을 각각 구하시오.
+      \item (a)에서 구한 $\widehat{\beta}_{0}$와 $\widehat{\beta}_{1}$이 각각 $\beta_{0}$과 $\beta_{1}$의 비편향 추정량(unbiased estimator)인지 아닌지 보이시오.
+    \end{enumerate}
+    \begin{solution}
+      \begin{enumerate}[(a)]
+        \item GLS에서 오차항의 공분산행렬을 $\sigma^{2}\mathbf{V}$라고 가정하고 그것을 단위행렬로 돌리기 위해서 \emph{square-root matrix}를 곱해주었듯이, WLSE에서도 오차항의 공분산행렬을 다음과 같이 정의한다.
+        \begin{equation}
+          \mathbf{W} = \mathrm{diag}\left(\sigma_{1}^{2},\sigma_{2}^{2},\ldots,\sigma_{n}^{2}\right)
+        \end{equation}
+        그리고 다음과 같이 변환해준다.
+        \begin{equation}
+          \mathbf{W}^{-1/2}Y=\mathbf{W}^{-1/2}\mathbf{X}\beta+\mathbf{W}^{-1/2}\epsilon
+        \end{equation}
+        그러면 $\mathbf{W}^{-1/2}\epsilon$의 공분산행렬은 $\mathbf{I}_{n}$이 된다. 이제 선형회귀모형의 등분산성(\emph{homoskedasticity})를 만족하므로 일반적인 최소제곱법을 써서 추정할 수 있다.
+        \begin{align}
+          \widehat{\beta}^{\text{WLSE}} &= \argmin_{\beta}\left(Y-\mathbf{X}\beta\right)'\mathbf{W}^{-1}\left(Y-\mathbf{X}\beta\right)\\
+          &= \left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)^{-1}\mathbf{X}'\mathbf{W}^{-1}Y
+        \end{align}
+        본 문제는 단순선형회귀모형이므로 손으로 하기 귀찮긴 하지만 못하진 않는다. 다음 두 등식을 이용하면 편하다. $\mathbf{x}_{i}$를 $\mathbf{X}$행렬의 $i$번째 행을 열벡터(\emph{column vector})로 세운 것을 의미한다고 할 때
+        \begin{align}
+          \mathbf{X}'\mathbf{W}^{-1}\mathbf{X} &= \sum_{i=1}^{n}\dfrac{\mathbf{x}_{i}\mathbf{x}_{i}'}{\sigma_{i}^{2}}\\
+          \mathbf{X}'\mathbf{W}^{-1}Y &= \sum_{i=1}^{n}\dfrac{y_{i}\mathbf{x}_{i}}{\sigma_{i}^{2}}
+        \end{align}
+        이를 이용해서 구해보면
+        \begin{align}
+          \mathbf{x}_{i}\mathbf{x}' &= \begin{bmatrix} 1\\ x_{i}  \end{bmatrix}\begin{bmatrix}1 & x_{i} \end{bmatrix}\\
+          &= \begin{bmatrix}1 & x_{i}\\ x_{i} & x_{i}^{2}  \end{bmatrix}\\
+          \sum_{i=1}^{n}\dfrac{\mathbf{x}_{i}\mathbf{x}_{i}'}{\sigma_{i}^{2}} &= \begin{bmatrix}\displaystyle \sum_{i=1}^{n}\dfrac{1}{\sigma_{i}^{2}} & \displaystyle \sum_{i=1}^{n}\dfrac{x_{i}}{\sigma_{i}^{2}}\\ \displaystyle \sum_{i=1}^{n}\dfrac{x_{i}}{\sigma_{i}^{2}} &  \displaystyle \sum_{i=1}^{n}\dfrac{x_{i}^{2}}{\sigma_{i}^{2}}  \end{bmatrix}\\
+          \sum_{i=1}^{n}\dfrac{y_{i}\mathbf{x}_{i}}{\sigma_{i}^{2}} &= \begin{bmatrix}\displaystyle \sum_{i=1}^{n}\dfrac{y_{i}}{\sigma_{i}^{2}}\\ \displaystyle \sum_{i=1}^{n}\dfrac{x_{i}y_{i}}{\sigma_{i}^{2}} \end{bmatrix}
+        \end{align}
+        그리고 (54)의 역행렬을 구하기 위해 행렬식(\emph{determinant})를 구하자.
+        \begin{equation}
+          \mathrm{det}\left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right) = \left(\sum_{i=1}^{n}\dfrac{1}{\sigma_{i}^{2}}\right)\left(\sum_{i=1}^{n}\dfrac{x_{i}^{2}}{\sigma_{i}^{2}}\right)-\left(\sum_{i=1}^{n}\dfrac{x_{i}}{\sigma_{i}^{2}}\right)^{2}
+        \end{equation}
+        그러면 $\widehat{\beta}_{0},\widehat{\beta}_{1}$은 다음과 같다.
+        \begin{align}
+          \widehat{\beta}_{0}^{\text{WLSE}} &= \dfrac{1}{\mathrm{det}\left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)}\left(\sum_{i=1}^{n}\dfrac{x_{i}^{2}}{\sigma_{i}^{2}}\sum_{i=1}^{n}\dfrac{y_{i}}{\sigma_{i}^{2}}-\sum_{i=1}^{n}\dfrac{x_{i}}{\sigma_{i}^{2}}\sum_{i=1}^{n}\dfrac{x_{i}y_{i}}{\sigma_{i}^{2}}\right)\\
+          \widehat{\beta}_{1}^{\text{WLSE}} &= \dfrac{1}{\mathrm{det}\left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)}\left(\sum_{i=1}^{n}\dfrac{x_{i}y_{i}}{\sigma_{i}^{2}}\sum_{i=1}^{n}\dfrac{1}{\sigma_{i}^{2}}-\sum_{i=1}^{n}\dfrac{x_{i}}{\sigma_{i}^{2}}\sum_{i=1}^{n}\dfrac{y_{i}}{\sigma_{i}^{2}}\right)
+        \end{align}
+        \item 행렬로 계산하면 쉽다.
+        \begin{align}
+          \mathrm{E}\left(\widehat{\beta}^{\text{WLSE}}\right) &= \mathrm{E}\left(\left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)^{-1}\mathbf{X}'\mathbf{W}^{-1}Y\right)\\
+          &= \left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)^{-1}\mathbf{X}'\mathbf{W}^{-1}\mathrm{E}\left(Y\right)\\
+          &= \left(\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\right)^{-1}\mathbf{X}'\mathbf{W}^{-1}\mathbf{X}\beta\\
+          &= \beta
+        \end{align}
+        따라서 비편향 추정량이다.
+      \end{enumerate}
+    \end{solution}
+\end{questions}
+\end{document}
